@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Matches | CATTALOG</title>
+    <title>Favorites | CATTALOG</title>
 </head>
 
 <body>
@@ -26,89 +26,44 @@
 
 <main>
 
-    <section class="results-section">
+    <section class="favorites-section">
 
-        <header class="results-header">
+        <header class="section-header">
 
             <p class="section-label">
-                Your Results
+                Saved
             </p>
 
             <h1>
-                Your Purrfect Matches.
+                Your Favorites.
             </h1>
 
             <p>
-                Based on your answers, these characters
-                might be your kind of cats.
+                The characters that caught your eye.
             </p>
 
         </header>
 
 
-        <!-- BEST MATCH -->
-        <article class="best-match">
+        <!--
+            JavaScript reads Local Storage and
+            creates the saved breed cards here.
+        -->
+        <div
+                class="breed-grid"
+                id="favorites-grid">
 
-            <p class="match-label">
-                Best Match
+            <p class="empty-favorites">
+                You haven't saved any favorites yet.
             </p>
 
-            <div class="match-image">
-                <!-- Image later -->
-            </div>
-
-            <h2>
-                Ragdoll
-            </h2>
-
-            <p>
-                Gentle · Social · Affectionate
-            </p>
-
-            <p class="match-score">
-                93% Match
-            </p>
+        </div>
 
 
-            <a
-                    href="breed.html?id=ragdoll"
-                    class="button">
-                View Breed
-            </a>
-
-
-            <button
-                    type="button"
-                    class="favorite-button">
-                ♡ Save to Favorites
-            </button>
-
-        </article>
-
-
-        <!-- OTHER MATCHES -->
-        <section class="more-matches">
-
-            <h2>
-                More Matches.
-            </h2>
-
-            <div
-                    class="breed-grid"
-                    id="match-results">
-
-                <!--
-                    JavaScript creates the remaining
-                    quiz matches here.
-                -->
-
-            </div>
-
-        </section>
-
-
-        <a href="match.html">
-            Retake Quiz →
+        <a
+                href="breeds.html"
+                class="button">
+            Explore Breeds
         </a>
 
     </section>
