@@ -9,15 +9,245 @@
 
 <body>
 
-<header>
+<header class="site-header">
+    <a href="index.html" class="logo">CATTALOG</a>
 
+    <nav class="main-nav" aria-label="Main navigation">
+        <a href="breeds.html">Breeds</a>
+        <a href="match.html">Find Your Match</a>
+        <a href="favorites.html">♡ Favorites</a>
+    </nav>
 </header>
+
 
 <main>
 
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="hero-content">
+            <p class="section-label">The modern cat breed index</p>
+
+            <h1>
+                Cats with
+                <span>character.</span>
+            </h1>
+
+            <p class="hero-description">
+                Discover cat breeds, explore their personalities
+                and find the characters that fit your lifestyle.
+            </p>
+
+            <a href="#explore" class="button">
+                Browse Breeds
+            </a>
+        </div>
+
+        <div class="hero-image">
+            <!-- Hero image later -->
+        </div>
+
+    </section>
+
+
+    <!-- EXPLORE -->
+    <section class="breed-discovery" id="explore">
+
+        <header class="section-header">
+            <p class="section-label">Explore</p>
+
+            <h2>Find your kind of character.</h2>
+
+            <p>
+                Search for a breed or narrow things down
+                by coat, energy, size and personality.
+            </p>
+        </header>
+
+
+        <!-- SEARCH -->
+        <div class="breed-search">
+            <label for="home-breed-search">
+                Search breeds
+            </label>
+
+            <input
+                    type="search"
+                    id="home-breed-search"
+                    placeholder="Search breeds..."
+            >
+        </div>
+
+
+        <!-- FILTERS -->
+        <div class="breed-filters">
+
+            <div class="filter-group">
+                <label for="home-coat-filter">Coat type</label>
+
+                <select id="home-coat-filter">
+                    <option value="all">All</option>
+                    <option value="short">Short hair</option>
+                    <option value="medium">Medium hair</option>
+                    <option value="long">Long hair</option>
+                    <option value="hairless">Hairless</option>
+                </select>
+            </div>
+
+
+            <div class="filter-group">
+                <label for="home-energy-filter">Energy level</label>
+
+                <select id="home-energy-filter">
+                    <option value="all">All</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+
+
+            <div class="filter-group">
+                <label for="home-size-filter">Size</label>
+
+                <select id="home-size-filter">
+                    <option value="all">All</option>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+            </div>
+
+
+            <div class="filter-group">
+                <label for="home-personality-filter">Personality</label>
+
+                <select id="home-personality-filter">
+                    <option value="all">All</option>
+                    <option value="social">Social</option>
+                    <option value="independent">Independent</option>
+                    <option value="affectionate">Affectionate</option>
+                    <option value="playful">Playful</option>
+                    <option value="calm">Calm</option>
+                </select>
+            </div>
+
+        </div>
+
+
+        <!--
+            Later JavaScript fetches breeds.json
+            and creates breed cards here.
+        -->
+        <div class="breed-grid" id="home-breed-results">
+
+            <!-- Temporary example -->
+            <article class="breed-card">
+
+                <div class="breed-image">
+                    <!-- Image later -->
+                </div>
+
+                <div class="breed-info">
+
+                    <div class="breed-card-header">
+                        <h3>Ragdoll</h3>
+
+                        <button
+                                type="button"
+                                class="favorite-button"
+                                aria-label="Add Ragdoll to favorites">
+                            ♡
+                        </button>
+                    </div>
+
+                    <p>
+                        Long hair · Low energy · Social
+                    </p>
+
+                    <a href="breed.html?id=ragdoll">
+                        View Breed →
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <a href="breeds.html" class="button">
+            View All Breeds
+        </a>
+
+    </section>
+
+
+    <!-- MATCH -->
+    <section class="match-section">
+
+        <div class="match-content">
+
+            <p class="section-label">
+                Find Your Match
+            </p>
+
+            <h2>
+                Which character fits yours?
+            </h2>
+
+            <p>
+                Answer a few questions about your lifestyle
+                and discover your purrfect matches.
+            </p>
+
+            <a href="match.html" class="button">
+                Start the Quiz
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FAVORITES PREVIEW -->
+    <section class="favorites-preview">
+
+        <header class="section-header">
+            <p class="section-label">Saved</p>
+
+            <h2>Your Favorites.</h2>
+
+            <p>
+                Your saved characters will appear here.
+            </p>
+        </header>
+
+
+        <div class="breed-grid" id="favorites-preview">
+            <p>You haven't saved any favorites yet.</p>
+        </div>
+
+
+        <a href="favorites.html">
+            View All Favorites →
+        </a>
+
+    </section>
+
 </main>
 
-<footer>
+
+<footer class="site-footer">
+
+    <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="breeds.html">Breeds</a>
+        <a href="match.html">Find Your Match</a>
+        <a href="favorites.html">Favorites</a>
+    </nav>
+
+    <p>&copy; 2026 CATTALOG</p>
 
 </footer>
 
