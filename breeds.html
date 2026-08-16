@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breeds | CATTALOG</title>
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <a href="index.html" class="logo">
+        CATTALOG
+    </a>
+
+    <nav class="main-nav" aria-label="Main navigation">
+        <a href="breeds.html">Breeds</a>
+        <a href="match.html">Find Your Match</a>
+        <a href="favorites.html">♡ Favorites</a>
+    </nav>
+
+</header>
+
+
+<main>
+
+    <!-- INTRO -->
+    <section class="page-intro">
+
+        <p class="section-label">
+            The Cattalog
+        </p>
+
+        <h1>All Breeds.</h1>
+
+        <p>
+            Every breed has a character.
+            Explore them all and find your favorites.
+        </p>
+
+    </section>
+
+
+    <!-- BREED BROWSER -->
+    <section class="breed-browser">
+
+        <!-- SEARCH -->
+        <div class="breed-search">
+
+            <label for="breed-search">
+                Search breeds
+            </label>
+
+            <input
+                    type="search"
+                    id="breed-search"
+                    placeholder="Search breeds..."
+            >
+
+        </div>
+
+
+        <!-- FILTERS -->
+        <div class="breed-filters">
+
+            <div class="filter-group">
+
+                <label for="coat-filter">
+                    Coat type
+                </label>
+
+                <select id="coat-filter">
+                    <option value="all">All</option>
+                    <option value="short">Short hair</option>
+                    <option value="medium">Medium hair</option>
+                    <option value="long">Long hair</option>
+                    <option value="hairless">Hairless</option>
+                </select>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label for="energy-filter">
+                    Energy level
+                </label>
+
+                <select id="energy-filter">
+                    <option value="all">All</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label for="size-filter">
+                    Size
+                </label>
+
+                <select id="size-filter">
+                    <option value="all">All</option>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </select>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label for="personality-filter">
+                    Personality
+                </label>
+
+                <select id="personality-filter">
+                    <option value="all">All</option>
+                    <option value="social">Social</option>
+                    <option value="independent">Independent</option>
+                    <option value="affectionate">Affectionate</option>
+                    <option value="playful">Playful</option>
+                    <option value="calm">Calm</option>
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!--
+            JavaScript will create ALL breed cards
+            from breeds.json here.
+        -->
+        <div class="breed-grid" id="breed-grid">
+
+            <!-- Temporary example -->
+            <article class="breed-card">
+
+                <div class="breed-image">
+                    <!-- Image later -->
+                </div>
+
+                <div class="breed-info">
+
+                    <div class="breed-card-header">
+
+                        <h2>Ragdoll</h2>
+
+                        <button
+                                type="button"
+                                class="favorite-button"
+                                aria-label="Add Ragdoll to favorites">
+                            ♡
+                        </button>
+
+                    </div>
+
+                    <p>
+                        Long hair · Low energy · Social
+                    </p>
+
+                    <a href="breed.html?id=ragdoll">
+                        View Breed →
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="breeds.html">Breeds</a>
+        <a href="match.html">Find Your Match</a>
+        <a href="favorites.html">♡ Favorites</a>
+    </nav>
+
+    <p>&copy; 2026 CATTALOG</p>
+
+</footer>
+
+</body>
+
+</html>
