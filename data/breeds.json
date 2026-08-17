@@ -17,7 +17,7 @@
     "lifespan": "12–17 years",
     "description": "A gentle and affectionate breed that enjoys being close to people.",
     "vibe": "Soft looks. Zero personal space.",
-    "image": "images/ragdoll.jpg"
+    "image": "images/ragdoll.png"
   },
 
   {
@@ -38,7 +38,7 @@
     "lifespan": "12–15 years",
     "description": "A large, friendly and playful breed known for its social personality.",
     "vibe": "Big cat. Bigger personality.",
-    "image": "images/maine-coon.jpg"
+    "image": "images/maine-coon.png"
   },
 
   {
@@ -59,7 +59,7 @@
     "lifespan": "15–20 years",
     "description": "A vocal and social breed that loves attention and interaction.",
     "vibe": "Has opinions. Will share them.",
-    "image": "images/siamese.jpg"
+    "image": "images/siamese.png"
   },
 
   {
@@ -80,7 +80,7 @@
     "lifespan": "12–16 years",
     "description": "An energetic and curious breed that loves climbing, exploring and playing.",
     "vibe": "Chaos, but make it elegant.",
-    "image": "images/bengal.jpg"
+    "image": "images/bengal.png"
   },
 
   {
@@ -100,7 +100,7 @@
     "lifespan": "12–20 years",
     "description": "A calm and independent breed that enjoys company without demanding constant attention.",
     "vibe": "Unbothered. Always.",
-    "image": "images/british-shorthair.jpg"
+    "image": "images/british-shorthair.png"
   },
 
   {
@@ -121,7 +121,7 @@
     "lifespan": "8–14 years",
     "description": "An affectionate and outgoing breed that enjoys warmth, attention and company.",
     "vibe": "No fur. No boundaries.",
-    "image": "images/sphynx.jpg"
+    "image": "images/sphynx.png"
   },
 
   {
@@ -141,7 +141,7 @@
     "lifespan": "12–17 years",
     "description": "A quiet and affectionate breed that prefers a calm and comfortable environment.",
     "vibe": "High maintenance. Worth it.",
-    "image": "images/persian.jpg"
+    "image": "images/persian.png"
   },
 
   {
@@ -162,6 +162,6 @@
     "lifespan": "9–15 years",
     "description": "An intelligent and energetic breed that loves exploring and staying active.",
     "vibe": "Curiosity with four legs.",
-    "image": "images/abyssinian.jpg"
+    "image": "images/abyssinian.png"
   }
 ]
