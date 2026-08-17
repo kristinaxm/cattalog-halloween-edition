@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="css/style.css">
+
     <title>Breed | CATTALOG</title>
 </head>
 
@@ -32,11 +34,11 @@
     </a>
 
 
-    <!-- MAIN BREED INFORMATION -->
+    <!-- BREED HERO -->
     <section class="breed-detail">
 
         <div class="breed-detail-image">
-            <!-- Breed image later -->
+            <!-- JavaScript adds breed image here -->
         </div>
 
 
@@ -46,21 +48,22 @@
                 Breed Profile
             </p>
 
-            <h1>Ragdoll</h1>
+            <h1 id="breed-name">
+                Loading...
+            </h1>
 
-            <p class="breed-traits">
-                Gentle · Social · Affectionate
+            <p class="breed-traits" id="breed-traits">
+                Loading traits...
             </p>
 
-            <p>
-                Ragdolls are known for their calm,
-                affectionate and people-oriented personalities.
+            <p class="breed-description" id="breed-description">
+                Loading breed information...
             </p>
-
 
             <button
                     type="button"
-                    class="favorite-button">
+                    class="favorite-button"
+                    id="favorite-button">
                 ♡ Add to Favorites
             </button>
 
@@ -72,29 +75,30 @@
     <!-- BASICS -->
     <section class="breed-basics">
 
-        <h2>The Basics.</h2>
-
+        <h2>
+            The Basics.
+        </h2>
 
         <div class="basics-grid">
 
             <article>
                 <h3>Origin</h3>
-                <p>United States</p>
+                <p id="breed-origin">—</p>
             </article>
 
             <article>
                 <h3>Size</h3>
-                <p>Large</p>
+                <p id="breed-size">—</p>
             </article>
 
             <article>
                 <h3>Coat</h3>
-                <p>Long hair</p>
+                <p id="breed-coat">—</p>
             </article>
 
             <article>
                 <h3>Lifespan</h3>
-                <p>12–17 years</p>
+                <p id="breed-lifespan">—</p>
             </article>
 
         </div>
@@ -105,18 +109,14 @@
     <!-- PERSONALITY -->
     <section class="personality-section">
 
-        <h2>Personality.</h2>
+        <h2>
+            Personality.
+        </h2>
 
-        <div class="personality-traits">
-
-            <p>Energy: 2 / 5</p>
-
-            <p>Social: 5 / 5</p>
-
-            <p>Affection: 5 / 5</p>
-
-            <p>Playfulness: 3 / 5</p>
-
+        <div
+                class="personality-traits"
+                id="personality-traits">
+            <!-- JavaScript adds scores here -->
         </div>
 
     </section>
@@ -129,15 +129,9 @@
             The Vibe
         </p>
 
-        <h2>
-            Soft looks.<br>
-            Zero personal space.
+        <h2 id="breed-vibe">
+            Loading...
         </h2>
-
-        <p>
-            Calm, affectionate and happiest
-            somewhere close to their people.
-        </p>
 
     </section>
 
@@ -167,11 +161,15 @@
         <a href="favorites.html">♡ Favorites</a>
     </nav>
 
-    <p>&copy; 2026 CATTALOG</p>
+    <p>
+        &copy; 2026 CATTALOG
+    </p>
 
 </footer>
 
+
 <script src="js/breed.js"></script>
+
 </body>
 
 </html>
