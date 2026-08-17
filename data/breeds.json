@@ -1,0 +1,167 @@
+[
+  {
+    "id": "ragdoll",
+    "name": "Ragdoll",
+    "origin": "United States",
+    "size": "large",
+    "coat": "long",
+    "energy": 2,
+    "social": 5,
+    "affection": 5,
+    "playfulness": 3,
+    "personality": [
+      "social",
+      "affectionate",
+      "calm"
+    ],
+    "lifespan": "12–17 years",
+    "description": "A gentle and affectionate breed that enjoys being close to people.",
+    "vibe": "Soft looks. Zero personal space.",
+    "image": "images/ragdoll.jpg"
+  },
+
+  {
+    "id": "maine-coon",
+    "name": "Maine Coon",
+    "origin": "United States",
+    "size": "large",
+    "coat": "long",
+    "energy": 3,
+    "social": 5,
+    "affection": 4,
+    "playfulness": 4,
+    "personality": [
+      "social",
+      "playful",
+      "affectionate"
+    ],
+    "lifespan": "12–15 years",
+    "description": "A large, friendly and playful breed known for its social personality.",
+    "vibe": "Big cat. Bigger personality.",
+    "image": "images/maine-coon.jpg"
+  },
+
+  {
+    "id": "siamese",
+    "name": "Siamese",
+    "origin": "Thailand",
+    "size": "medium",
+    "coat": "short",
+    "energy": 4,
+    "social": 5,
+    "affection": 5,
+    "playfulness": 4,
+    "personality": [
+      "social",
+      "affectionate",
+      "playful"
+    ],
+    "lifespan": "15–20 years",
+    "description": "A vocal and social breed that loves attention and interaction.",
+    "vibe": "Has opinions. Will share them.",
+    "image": "images/siamese.jpg"
+  },
+
+  {
+    "id": "bengal",
+    "name": "Bengal",
+    "origin": "United States",
+    "size": "medium",
+    "coat": "short",
+    "energy": 5,
+    "social": 4,
+    "affection": 3,
+    "playfulness": 5,
+    "personality": [
+      "playful",
+      "social",
+      "active"
+    ],
+    "lifespan": "12–16 years",
+    "description": "An energetic and curious breed that loves climbing, exploring and playing.",
+    "vibe": "Chaos, but make it elegant.",
+    "image": "images/bengal.jpg"
+  },
+
+  {
+    "id": "british-shorthair",
+    "name": "British Shorthair",
+    "origin": "United Kingdom",
+    "size": "medium",
+    "coat": "short",
+    "energy": 2,
+    "social": 3,
+    "affection": 3,
+    "playfulness": 2,
+    "personality": [
+      "calm",
+      "independent"
+    ],
+    "lifespan": "12–20 years",
+    "description": "A calm and independent breed that enjoys company without demanding constant attention.",
+    "vibe": "Unbothered. Always.",
+    "image": "images/british-shorthair.jpg"
+  },
+
+  {
+    "id": "sphynx",
+    "name": "Sphynx",
+    "origin": "Canada",
+    "size": "medium",
+    "coat": "hairless",
+    "energy": 4,
+    "social": 5,
+    "affection": 5,
+    "playfulness": 4,
+    "personality": [
+      "social",
+      "affectionate",
+      "playful"
+    ],
+    "lifespan": "8–14 years",
+    "description": "An affectionate and outgoing breed that enjoys warmth, attention and company.",
+    "vibe": "No fur. No boundaries.",
+    "image": "images/sphynx.jpg"
+  },
+
+  {
+    "id": "persian",
+    "name": "Persian",
+    "origin": "Iran",
+    "size": "medium",
+    "coat": "long",
+    "energy": 1,
+    "social": 3,
+    "affection": 4,
+    "playfulness": 2,
+    "personality": [
+      "calm",
+      "affectionate"
+    ],
+    "lifespan": "12–17 years",
+    "description": "A quiet and affectionate breed that prefers a calm and comfortable environment.",
+    "vibe": "High maintenance. Worth it.",
+    "image": "images/persian.jpg"
+  },
+
+  {
+    "id": "abyssinian",
+    "name": "Abyssinian",
+    "origin": "Southeast Asia",
+    "size": "medium",
+    "coat": "short",
+    "energy": 5,
+    "social": 4,
+    "affection": 3,
+    "playfulness": 5,
+    "personality": [
+      "playful",
+      "active",
+      "independent"
+    ],
+    "lifespan": "9–15 years",
+    "description": "An intelligent and energetic breed that loves exploring and staying active.",
+    "vibe": "Curiosity with four legs.",
+    "image": "images/abyssinian.jpg"
+  }
+]
