@@ -268,6 +268,9 @@ function renderResults(matches) {
             );
 
 
+            const favorites = getFavorites();
+            const isFavorite = favorites.includes(breed.id);
+
             article.innerHTML = `
 
                 <div class="breed-image">
@@ -281,9 +284,21 @@ function renderResults(matches) {
 
                 <div class="breed-info">
 
-                    <h3>
-                        ${breed.name}
-                    </h3>
+                    <div class="breed-card-header">
+
+                        <h3>
+                            ${breed.name}
+                        </h3>
+
+                        <button
+                            type="button"
+                            class="favorite-button"
+                            data-id="${breed.id}"
+                            aria-label="${isFavorite ? "Remove" : "Add"} ${breed.name} ${isFavorite ? "from" : "to"} favorites">
+                            ${isFavorite ? "♥" : "♡"}
+                        </button>
+
+                    </div>
 
                     <p>
                         ${breed.match}% Match
@@ -299,6 +314,24 @@ function renderResults(matches) {
                 </div>
 
             `;
+
+
+            const favoriteButton =
+                article.querySelector(".favorite-button");
+
+            favoriteButton.addEventListener("click", () => {
+
+                toggleFavorite(breed.id);
+
+                favoriteButton.textContent =
+                    getFavorites().includes(breed.id) ? "♥" : "♡";
+
+                favoriteButton.setAttribute(
+                    "aria-label",
+                    `${getFavorites().includes(breed.id) ? "Remove" : "Add"} ${breed.name} ${getFavorites().includes(breed.id) ? "from" : "to"} favorites`
+                );
+
+            });
 
 
             resultsContainer

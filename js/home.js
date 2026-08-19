@@ -1,4 +1,5 @@
 let breeds = [];
+let displayedBreeds = [];
 
 const breedResults = document.querySelector("#home-breed-results");
 const searchInput = document.querySelector("#home-breed-search");
@@ -25,6 +26,7 @@ fetch("data/breeds.json")
 
 
 function renderBreeds(breedList) {
+    displayedBreeds = breedList;
     breedResults.innerHTML = "";
 
     breedList.forEach(breed => {
@@ -55,7 +57,7 @@ function createBreedCard(breed) {
                     type="button"
                     class="favorite-button"
                     data-id="${breed.id}"
-                    aria-label="Add ${breed.name} to favorites">
+                    aria-label="${isFavorite ? "Remove" : "Add"} ${breed.name} ${isFavorite ? "from" : "to"} favorites">
                     ${isFavorite ? "♥" : "♡"}
                 </button>
             </div>
@@ -63,7 +65,7 @@ function createBreedCard(breed) {
             <p>
                 ${formatCoat(breed.coat)} ·
                 ${formatEnergy(breed.energy)} ·
-                ${breed.personality[0]}
+                ${capitalize(breed.personality[0])}
             </p>
 
             <a href="breed.html?id=${breed.id}">
@@ -77,7 +79,7 @@ function createBreedCard(breed) {
 
     favoriteButton.addEventListener("click", () => {
         toggleFavorite(breed.id);
-        renderBreeds(getFilteredBreeds());
+        renderBreeds(displayedBreeds);
         renderFavoritesPreview();
     });
 
@@ -178,6 +180,15 @@ function formatCoat(coat) {
     }
 
     return "Hairless";
+}
+
+
+function capitalize(text) {
+    if (!text) {
+        return "";
+    }
+
+    return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
 

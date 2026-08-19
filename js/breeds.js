@@ -52,7 +52,8 @@ function renderBreeds(breedList) {
                     <button
                         type="button"
                         class="favorite-button"
-                        data-id="${breed.id}">
+                        data-id="${breed.id}"
+                        aria-label="${isFavorite ? "Remove" : "Add"} ${breed.name} ${isFavorite ? "from" : "to"} favorites">
                         ${isFavorite ? "♥" : "♡"}
                     </button>
                 </div>
@@ -60,7 +61,7 @@ function renderBreeds(breedList) {
                 <p>
                     ${formatCoat(breed.coat)} ·
                     ${formatEnergy(breed.energy)} ·
-                    ${breed.personality[0]}
+                    ${capitalize(breed.personality[0])}
                 </p>
 
                 <a href="breed.html?id=${breed.id}">
@@ -179,6 +180,15 @@ function getFavorites() {
     const favorites = localStorage.getItem("favorites");
 
     return favorites ? JSON.parse(favorites) : [];
+}
+
+
+function capitalize(text) {
+    if (!text) {
+        return "";
+    }
+
+    return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
 
