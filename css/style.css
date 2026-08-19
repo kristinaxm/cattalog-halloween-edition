@@ -105,10 +105,11 @@ h3 {
 h1 {
     margin-bottom: 24px;
 
-    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-size: clamp(1.75rem, 12.5cqw, 5.5rem);
     line-height: 0.95;
 
     text-transform: uppercase;
+    overflow-wrap: break-word;
 }
 
 h2 {
@@ -301,6 +302,8 @@ section {
 
 .hero-content {
     max-width: 580px;
+
+    container-type: inline-size;
 }
 
 .hero-description {
@@ -316,7 +319,11 @@ section {
 .hero-images {
     position: relative;
 
-    min-height: 500px;
+    width: 100%;
+    max-width: 580px;
+    aspect-ratio: 580 / 500;
+
+    margin-left: auto;
 }
 
 .hero-image {
@@ -336,21 +343,21 @@ section {
 .hero-image-main {
     position: absolute;
 
-    top: 20px;
-    right: 30px;
+    top: 4%;
+    right: 5.2%;
 
     width: 65%;
-    height: 430px;
+    aspect-ratio: 1145 / 1374;
 }
 
 .hero-image-secondary {
     position: absolute;
 
     left: 0;
-    bottom: 20px;
+    bottom: 4%;
 
     width: 38%;
-    height: 220px;
+    aspect-ratio: 1448 / 1086;
 }
 
 .hero-image-small {
@@ -360,7 +367,7 @@ section {
     bottom: 0;
 
     width: 28%;
-    height: 170px;
+    aspect-ratio: 1 / 1;
 }
 
 
@@ -957,12 +964,11 @@ fieldset input[type="radio"] {
     }
 
     .hero-images {
-        min-height: 400px;
+        aspect-ratio: 378 / 400;
     }
 
     .hero-image-main {
         width: 75%;
-        height: 340px;
     }
 
 
@@ -1013,10 +1019,6 @@ fieldset input[type="radio"] {
 
 
     /* Typography */
-
-    h1 {
-        font-size: 3rem;
-    }
 
     h2 {
         font-size: 2rem;
@@ -1071,7 +1073,7 @@ fieldset input[type="radio"] {
     }
 
     .hero-images {
-        min-height: 420px;
+        aspect-ratio: 333 / 420;
     }
 
     .hero-image-main {
@@ -1079,17 +1081,14 @@ fieldset input[type="radio"] {
         right: 0;
 
         width: 80%;
-        height: 320px;
     }
 
     .hero-image-secondary {
         width: 42%;
-        height: 160px;
     }
 
     .hero-image-small {
         width: 32%;
-        height: 130px;
     }
 
 
