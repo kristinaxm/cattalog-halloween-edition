@@ -15,6 +15,13 @@
       "calm"
     ],
     "lifespan": "12–17 years",
+    "grooming": "medium",
+    "shedding": "medium",
+    "vocality": "low",
+    "goodWith": ["Families", "Kids", "Other pets"],
+    "funFact": "Ragdolls tend to go limp and relaxed when picked up, which is how the breed got its name.",
+    "healthNote": "Ragdolls are sometimes screened for hypertrophic cardiomyopathy, a heart condition worth discussing with a vet.",
+    "about": "Ragdolls were developed in California in the 1960s and are prized for their striking blue eyes and plush semi-long coat. They're famously docile, often following their owners from room to room and settling happily into a lap for hours.",
     "description": "A gentle and affectionate breed that enjoys being close to people.",
     "vibe": "Soft looks. Zero personal space.",
     "image": "images/ragdoll.png"
@@ -36,6 +43,13 @@
       "affectionate"
     ],
     "lifespan": "12–15 years",
+    "grooming": "medium",
+    "shedding": "high",
+    "vocality": "medium",
+    "goodWith": ["Families", "Kids", "Dogs"],
+    "funFact": "Maine Coons are one of the largest domesticated cat breeds, with males often reaching 8–9 kg.",
+    "healthNote": "Maine Coons are commonly screened for hypertrophic cardiomyopathy and hip dysplasia given their size.",
+    "about": "Native to the United States and one of the oldest natural breeds in North America, the Maine Coon is built for cold climates with a shaggy, water-resistant coat and tufted paws. Despite their imposing size, they're known as gentle giants with a playful, dog-like temperament.",
     "description": "A large, friendly and playful breed known for its social personality.",
     "vibe": "Big cat. Bigger personality.",
     "image": "images/maine-coon.png"
@@ -57,6 +71,13 @@
       "playful"
     ],
     "lifespan": "15–20 years",
+    "grooming": "low",
+    "shedding": "low",
+    "vocality": "high",
+    "goodWith": ["Singles", "Families", "Attention-seekers"],
+    "funFact": "Siamese cats are famously vocal and will happily hold a conversation with you.",
+    "healthNote": "Siamese cats can be prone to dental issues and certain respiratory sensitivities, so regular checkups are recommended.",
+    "about": "One of the oldest and most recognizable Asian cat breeds, the Siamese originated in Thailand (formerly Siam) and became popular worldwide for its striking color-point coat and piercing blue eyes. They form intense bonds with their people and aren't shy about voicing their opinions.",
     "description": "A vocal and social breed that loves attention and interaction.",
     "vibe": "Has opinions. Will share them.",
     "image": "images/siamese.png"
@@ -78,6 +99,13 @@
       "independent"
     ],
     "lifespan": "12–16 years",
+    "grooming": "low",
+    "shedding": "low",
+    "vocality": "medium",
+    "goodWith": ["Active owners", "Experienced owners"],
+    "funFact": "Bengals descend from crosses with the Asian leopard cat, which gives them their wild-looking coat.",
+    "healthNote": "Bengals are sometimes monitored for hypertrophic cardiomyopathy and progressive retinal atrophy.",
+    "about": "Bred by crossing domestic cats with the Asian leopard cat, Bengals carry a wild look with a distinctly domestic temperament. They're highly intelligent and athletic, and often enjoy water, climbing and interactive play more than the average housecat.",
     "description": "An energetic and curious breed that loves climbing, exploring and playing.",
     "vibe": "Chaos, but make it elegant.",
     "image": "images/bengal.png"
@@ -98,6 +126,13 @@
       "independent"
     ],
     "lifespan": "12–20 years",
+    "grooming": "medium",
+    "shedding": "medium",
+    "vocality": "low",
+    "goodWith": ["Apartments", "Families", "First-time owners"],
+    "funFact": "Their round face and calm grin are often credited as the inspiration for the Cheshire Cat.",
+    "healthNote": "This breed can be prone to weight gain, so portion control and regular activity are worth keeping an eye on.",
+    "about": "A classic English breed with roots tracing back to Roman times, the British Shorthair is known for its dense, plush coat and round, teddy-bear face. They're easygoing and independent, content to relax nearby rather than demand constant attention.",
     "description": "A calm and independent breed that enjoys company without demanding constant attention.",
     "vibe": "Unbothered. Always.",
     "image": "images/british-shorthair.png"
@@ -119,6 +154,13 @@
       "playful"
     ],
     "lifespan": "8–14 years",
+    "grooming": "high",
+    "shedding": "low",
+    "vocality": "medium",
+    "goodWith": ["Warm homes", "Attention-seekers", "Dedicated groomers"],
+    "funFact": "Despite having no fur, Sphynx cats still need regular baths to manage oil buildup on their skin.",
+    "healthNote": "Sphynx cats are sometimes screened for hypertrophic cardiomyopathy and need extra care to protect their exposed skin from sunburn and cold.",
+    "about": "Developed in Canada in the 1960s from a natural hairless mutation, the Sphynx is anything but low-maintenance — their bare skin means they crave warmth, sunlight and close physical contact. They're playful and people-oriented, often described as more dog-like than cat-like.",
     "description": "An affectionate and outgoing breed that enjoys warmth, attention and company.",
     "vibe": "No fur. No boundaries.",
     "image": "images/sphynx.png"
@@ -139,6 +181,13 @@
       "affectionate"
     ],
     "lifespan": "12–17 years",
+    "grooming": "high",
+    "shedding": "high",
+    "vocality": "low",
+    "goodWith": ["Calm households", "Apartments", "Experienced owners"],
+    "funFact": "Their long, thick coat needs daily brushing to prevent mats and tangles.",
+    "healthNote": "Their flat facial structure can be linked to breathing and eye-tearing issues, and they're sometimes screened for polycystic kidney disease.",
+    "about": "One of the oldest cat breeds, the Persian has been prized for centuries for its luxurious long coat and sweet, gentle expression. They favor a calm, predictable routine and are happiest curled up in a quiet corner of the home.",
     "description": "A quiet and affectionate breed that prefers a calm and comfortable environment.",
     "vibe": "High maintenance. Worth it.",
     "image": "images/persian.png"
@@ -159,6 +208,13 @@
       "independent"
     ],
     "lifespan": "9–15 years",
+    "grooming": "low",
+    "shedding": "low",
+    "vocality": "medium",
+    "goodWith": ["Active owners", "Experienced owners", "Multi-cat homes"],
+    "funFact": "One of the oldest known cat breeds, with a look believed to resemble cats depicted in ancient Egyptian art.",
+    "healthNote": "Abyssinians are sometimes screened for pyruvate kinase deficiency, a hereditary condition affecting red blood cells.",
+    "about": "With a lineage often linked to ancient Egypt, the Abyssinian has a distinctive ticked coat that gives it a wild, foxlike appearance. They're endlessly curious and athletic, happiest when given plenty of space to climb, explore and investigate.",
     "description": "An intelligent and energetic breed that loves exploring and staying active.",
     "vibe": "Curiosity with four legs.",
     "image": "images/abyssinian.png"

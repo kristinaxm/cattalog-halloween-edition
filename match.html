@@ -38,28 +38,31 @@
         </header>
 
 
-        <form id="match-form">
+        <div class="quiz-body">
 
-            <p class="quiz-progress">
-                Loading question...
-            </p>
+            <div class="quiz-progress-track" aria-hidden="true">
+                <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+            </div>
 
-            <fieldset>
+            <div class="quiz-nav">
+                <p class="quiz-progress" id="quiz-progress">
+                    Loading question...
+                </p>
+
+                <button
+                        type="button"
+                        class="quiz-back"
+                        id="quiz-back"
+                        hidden>
+                    ← Back
+                </button>
+            </div>
+
+            <fieldset id="quiz-fieldset">
                 <!-- JavaScript adds the current question here -->
             </fieldset>
 
-            <p
-                    class="form-error"
-                    id="form-error">
-            </p>
-
-            <button
-                    type="submit"
-                    class="button">
-                Next →
-            </button>
-
-        </form>
+        </div>
 
     </section>
 
