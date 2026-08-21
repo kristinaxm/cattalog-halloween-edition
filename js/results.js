@@ -209,23 +209,27 @@ function renderResults(matches) {
         </p>
 
 
-        <a
-            href="breed.html?id=${bestMatch.id}"
-            class="button">
+        <div class="match-actions">
 
-            View Breed
+            <a
+                href="breed.html?id=${bestMatch.id}"
+                class="button">
 
-        </a>
+                View Breed
+
+            </a>
 
 
-        <button
-            type="button"
-            class="favorite-button"
-            data-id="${bestMatch.id}">
+            <button
+                type="button"
+                class="favorite-button"
+                data-id="${bestMatch.id}">
 
-            ♡ Save to Favorites
+                ♡
 
-        </button>
+            </button>
+
+        </div>
 
     `;
 
@@ -239,9 +243,7 @@ function renderResults(matches) {
     updateFavoriteButton(
         bestFavoriteButton,
         bestMatch.id,
-        bestMatch.name,
-        "♥ Saved",
-        "♡ Save to Favorites"
+        bestMatch.name
     );
 
 
@@ -258,9 +260,7 @@ function renderResults(matches) {
                 updateFavoriteButton(
                     bestFavoriteButton,
                     bestMatch.id,
-                    bestMatch.name,
-                    "♥ Saved",
-                    "♡ Save to Favorites"
+                    bestMatch.name
                 );
 
             }
