@@ -27,6 +27,56 @@ function loadBreeds(onSuccess, onError) {
 
 
 /* =========================
+   FORMATTING
+========================= */
+
+function capitalize(text) {
+    if (!text) {
+        return "";
+    }
+
+    return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+
+const COAT_LABELS = {
+    short: "Short hair",
+    medium: "Medium hair",
+    long: "Long hair",
+    hairless: "Hairless"
+};
+
+const ENERGY_LABELS = {
+    low: "Low energy",
+    medium: "Medium energy",
+    high: "High energy"
+};
+
+
+function formatCoat(coat) {
+    return COAT_LABELS[coat] ?? "Unknown coat";
+}
+
+
+function getEnergyCategory(energy) {
+    if (energy <= 2) {
+        return "low";
+    }
+
+    if (energy === 3) {
+        return "medium";
+    }
+
+    return "high";
+}
+
+
+function formatEnergy(energy) {
+    return ENERGY_LABELS[getEnergyCategory(energy)];
+}
+
+
+/* =========================
    FILTERING
 ========================= */
 
@@ -75,6 +125,92 @@ function filterBreeds(breeds, filters = {}) {
 /* =========================
    FILTER UI
 ========================= */
+
+const FILTER_DEFINITIONS = [
+    {
+        key: "coat",
+        label: "Coat type",
+        options: [
+            { value: "all", label: "All" },
+            ...Object.entries(COAT_LABELS).map(([value, label]) => ({ value, label }))
+        ]
+    },
+    {
+        key: "energy",
+        label: "Energy level",
+        options: [
+            { value: "all", label: "All" },
+            { value: "low", label: "Low" },
+            { value: "medium", label: "Medium" },
+            { value: "high", label: "High" }
+        ]
+    },
+    {
+        key: "size",
+        label: "Size",
+        options: [
+            { value: "all", label: "All" },
+            { value: "small", label: "Small" },
+            { value: "medium", label: "Medium" },
+            { value: "large", label: "Large" }
+        ]
+    },
+    {
+        key: "personality",
+        label: "Personality",
+        options: [
+            { value: "all", label: "All" },
+            { value: "social", label: "Social" },
+            { value: "independent", label: "Independent" },
+            { value: "affectionate", label: "Affectionate" },
+            { value: "playful", label: "Playful" },
+            { value: "calm", label: "Calm" }
+        ]
+    }
+];
+
+
+function renderBreedFilterUI(container, idPrefix = "") {
+    const id = name => idPrefix ? `${idPrefix}-${name}` : name;
+
+    container.innerHTML = `
+        <div class="breed-search">
+            <label for="${id("breed-search")}">
+                Search breeds
+            </label>
+
+            <input
+                type="search"
+                id="${id("breed-search")}"
+                placeholder="Search breeds...">
+        </div>
+
+        <div class="breed-filters">
+            ${FILTER_DEFINITIONS.map(filter => `
+                <div class="filter-group">
+                    <label for="${id(`${filter.key}-filter`)}">
+                        ${filter.label}
+                    </label>
+
+                    <select id="${id(`${filter.key}-filter`)}">
+                        ${filter.options
+                            .map(option => `<option value="${option.value}">${option.label}</option>`)
+                            .join("")}
+                    </select>
+                </div>
+            `).join("")}
+        </div>
+    `;
+
+    return {
+        searchInput: container.querySelector(`#${id("breed-search")}`),
+        coatFilter: container.querySelector(`#${id("coat-filter")}`),
+        energyFilter: container.querySelector(`#${id("energy-filter")}`),
+        sizeFilter: container.querySelector(`#${id("size-filter")}`),
+        personalityFilter: container.querySelector(`#${id("personality-filter")}`)
+    };
+}
+
 
 function setupBreedFilterUI(elements, onChange) {
     const {
@@ -272,64 +408,4 @@ function renderBreedGrid(container, breeds, { emptyMessage, emptyClassName, getC
         const card = createBreedCard(breed, getCardOptions ? getCardOptions(breed) : undefined);
         container.appendChild(card);
     });
-}
-
-
-/* =========================
-   FORMATTING
-========================= */
-
-function capitalize(text) {
-    if (!text) {
-        return "";
-    }
-
-    return text.charAt(0).toUpperCase() + text.slice(1);
-}
-
-
-function formatCoat(coat) {
-    if (coat === "short") {
-        return "Short hair";
-    }
-
-    if (coat === "medium") {
-        return "Medium hair";
-    }
-
-    if (coat === "long") {
-        return "Long hair";
-    }
-
-    if (coat === "hairless") {
-        return "Hairless";
-    }
-
-    return "Unknown coat";
-}
-
-
-function getEnergyCategory(energy) {
-    if (energy <= 2) {
-        return "low";
-    }
-
-    if (energy === 3) {
-        return "medium";
-    }
-
-    return "high";
-}
-
-
-function formatEnergy(energy) {
-    if (energy <= 2) {
-        return "Low energy";
-    }
-
-    if (energy === 3) {
-        return "Medium energy";
-    }
-
-    return "High energy";
 }

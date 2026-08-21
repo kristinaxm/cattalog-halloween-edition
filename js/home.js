@@ -27,14 +27,10 @@ function renderBreeds(breedList) {
 }
 
 
+const filterElements = renderBreedFilterUI(document.querySelector("#home-filter-ui"), "home");
+
 setupBreedFilterUI(
-    {
-        searchInput: document.querySelector("#home-breed-search"),
-        coatFilter: document.querySelector("#home-coat-filter"),
-        energyFilter: document.querySelector("#home-energy-filter"),
-        sizeFilter: document.querySelector("#home-size-filter"),
-        personalityFilter: document.querySelector("#home-personality-filter")
-    },
+    filterElements,
     filters => renderBreeds(filterBreeds(breeds, filters).slice(0, 6))
 );
 
