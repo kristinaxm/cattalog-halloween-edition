@@ -18,27 +18,14 @@ loadBreeds(
 
 function renderFavorites(breeds) {
     const favorites = getFavorites();
-
-    favoritesGrid.innerHTML = "";
-
-    if (favorites.length === 0) {
-        favoritesGrid.innerHTML = `
-            <p class="empty-favorites">
-                You haven't saved any favorites yet.
-            </p>
-        `;
-
-        return;
-    }
-
     const favoriteBreeds =
         breeds.filter(breed => favorites.includes(breed.id));
 
-    favoriteBreeds.forEach(breed => {
-        const card = createBreedCard(breed, {
+    renderBreedGrid(favoritesGrid, favoriteBreeds, {
+        emptyMessage: "You haven't saved any favorites yet.",
+        emptyClassName: "empty-favorites",
+        getCardOptions: () => ({
             onFavoriteToggle: () => renderFavorites(breeds)
-        });
-
-        favoritesGrid.appendChild(card);
+        })
     });
 }
