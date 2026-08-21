@@ -1,13 +1,6 @@
 let breeds = [];
 
 const breedResults = document.querySelector("#home-breed-results");
-const searchInput = document.querySelector("#home-breed-search");
-
-const coatFilter = document.querySelector("#home-coat-filter");
-const energyFilter = document.querySelector("#home-energy-filter");
-const sizeFilter = document.querySelector("#home-size-filter");
-const personalityFilter = document.querySelector("#home-personality-filter");
-
 const favoritesPreview = document.querySelector("#favorites-preview");
 
 
@@ -39,29 +32,16 @@ function renderBreeds(breedList) {
 }
 
 
-function getFilteredBreeds() {
-    return filterBreeds(breeds, {
-        searchTerm: searchInput.value,
-        coat: coatFilter.value,
-        energy: energyFilter.value,
-        size: sizeFilter.value,
-        personality: personalityFilter.value
-    });
-}
-
-
-function updateFilters() {
-    const filteredBreeds = getFilteredBreeds();
-
-    renderBreeds(filteredBreeds.slice(0, 6));
-}
-
-
-searchInput.addEventListener("input", updateFilters);
-coatFilter.addEventListener("change", updateFilters);
-energyFilter.addEventListener("change", updateFilters);
-sizeFilter.addEventListener("change", updateFilters);
-personalityFilter.addEventListener("change", updateFilters);
+setupBreedFilterUI(
+    {
+        searchInput: document.querySelector("#home-breed-search"),
+        coatFilter: document.querySelector("#home-coat-filter"),
+        energyFilter: document.querySelector("#home-energy-filter"),
+        sizeFilter: document.querySelector("#home-size-filter"),
+        personalityFilter: document.querySelector("#home-personality-filter")
+    },
+    filters => renderBreeds(filterBreeds(breeds, filters).slice(0, 6))
+);
 
 
 function renderFavoritesPreview() {

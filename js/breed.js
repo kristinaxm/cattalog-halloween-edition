@@ -4,14 +4,9 @@ const breedId = params.get("id");
 
 loadBreeds(
     breeds => {
-
-        const breed = breeds.find(
-            item => item.id === breedId
-        );
-
+        const breed = breeds.find(item => item.id === breedId);
 
         if (!breed) {
-
             document.querySelector("main").innerHTML = `
                 <section>
                     <h1>Breed not found.</h1>
@@ -29,13 +24,9 @@ loadBreeds(
             return;
         }
 
-
         renderBreed(breed);
-
     },
-
     () => {
-
         document.querySelector("main").innerHTML = `
             <section>
                 <h1>Something went wrong.</h1>
@@ -45,133 +36,44 @@ loadBreeds(
                 </p>
             </section>
         `;
-
     }
 );
 
 
 function renderBreed(breed) {
+    document.title = `${breed.name} | CATTALOG`;
 
-    /* PAGE TITLE */
+    document.querySelector("#breed-name").textContent = breed.name;
 
-    document.title =
-        `${breed.name} | CATTALOG`;
+    document.querySelector("#breed-traits").textContent =
+        breed.personality.map(capitalize).join(" · ");
 
+    document.querySelector("#breed-description").textContent = breed.description;
 
-    /* NAME */
-
-    const nameElement =
-        document.querySelector("#breed-name");
-
-    nameElement.textContent =
-        breed.name;
-
-
-    /* TRAITS */
-
-    const traitsElement =
-        document.querySelector("#breed-traits");
-
-    traitsElement.textContent =
-        breed.personality
-            .map(capitalize)
-            .join(" · ");
-
-
-    /* DESCRIPTION */
-
-    const descriptionElement =
-        document.querySelector("#breed-description");
-
-    descriptionElement.textContent =
-        breed.description;
-
-
-    /* IMAGE */
-
-    const imageContainer =
-        document.querySelector(".breed-detail-image");
-
-    imageContainer.innerHTML = `
+    document.querySelector(".breed-detail-image").innerHTML = `
         <img
             src="${breed.image}"
             alt="${breed.name}"
             decoding="async">
     `;
 
+    document.querySelector("#breed-origin").textContent = breed.origin;
+    document.querySelector("#breed-size").textContent = capitalize(breed.size);
+    document.querySelector("#breed-coat").textContent = formatCoat(breed.coat);
+    document.querySelector("#breed-lifespan").textContent = breed.lifespan;
 
-    /* BASICS */
-
-    document.querySelector("#breed-origin")
-        .textContent =
-        breed.origin;
-
-
-    document.querySelector("#breed-size")
-        .textContent =
-        capitalize(breed.size);
-
-
-    document.querySelector("#breed-coat")
-        .textContent =
-        formatCoat(breed.coat);
-
-
-    document.querySelector("#breed-lifespan")
-        .textContent =
-        breed.lifespan;
-
-
-    /* PERSONALITY */
-
-    const personalityContainer =
-        document.querySelector("#personality-traits");
-
-    personalityContainer.innerHTML = `
+    document.querySelector("#personality-traits").innerHTML = `
         <p>Energy: ${breed.energy} / 5</p>
         <p>Social: ${breed.social} / 5</p>
         <p>Affection: ${breed.affection} / 5</p>
         <p>Playfulness: ${breed.playfulness} / 5</p>
     `;
 
+    document.querySelector("#breed-vibe").textContent = breed.vibe;
 
-    /* VIBE */
-
-    const vibeElement =
-        document.querySelector("#breed-vibe");
-
-    vibeElement.textContent =
-        breed.vibe;
-
-
-    /* FAVORITES */
-
-    setupFavoriteButton(breed.id, breed.name);
-}
-
-
-function setupFavoriteButton(id, name) {
-
-    const button =
-        document.querySelector("#favorite-button");
-
-
-    updateFavoriteButton(button, id, name);
-
-
-    button.addEventListener(
-        "click",
-        () => {
-
-            toggleFavorite(id);
-
-            updateFavoriteButton(
-                button,
-                id,
-                name
-            );
-
-        }
+    bindFavoriteButton(
+        document.querySelector("#favorite-button"),
+        breed.id,
+        breed.name
     );
-
 }
