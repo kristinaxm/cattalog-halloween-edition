@@ -52,9 +52,42 @@ const ENERGY_LABELS = {
     high: "High energy"
 };
 
+const GROOMING_LABELS = {
+    low: "Low maintenance",
+    medium: "Moderate care",
+    high: "High maintenance"
+};
+
+const SHEDDING_LABELS = {
+    low: "Low shedding",
+    medium: "Moderate shedding",
+    high: "Heavy shedding"
+};
+
+const VOCALITY_LABELS = {
+    low: "Quiet",
+    medium: "Occasionally vocal",
+    high: "Very vocal"
+};
+
 
 function formatCoat(coat) {
     return COAT_LABELS[coat] ?? "Unknown coat";
+}
+
+
+function formatGrooming(grooming) {
+    return GROOMING_LABELS[grooming] ?? "Unknown";
+}
+
+
+function formatShedding(shedding) {
+    return SHEDDING_LABELS[shedding] ?? "Unknown";
+}
+
+
+function formatVocality(vocality) {
+    return VOCALITY_LABELS[vocality] ?? "Unknown";
 }
 
 
@@ -172,6 +205,8 @@ const FILTER_DEFINITIONS = [
 
 function renderBreedFilterUI(container, idPrefix = "") {
     const id = name => idPrefix ? `${idPrefix}-${name}` : name;
+
+    container.classList.add("breed-filter-bar");
 
     container.innerHTML = `
         <div class="breed-search">
@@ -348,9 +383,17 @@ function createBreedCard(breed, { subtitle, onFavoriteToggle } = {}) {
     article.classList.add("breed-card");
 
     article.innerHTML = `
-        <div class="breed-image">
-            <img src="${breed.image}" alt="${breed.name}" loading="lazy" decoding="async">
-        </div>
+        <button
+            type="button"
+            class="breed-image breed-image-button"
+            aria-label="Quick look: ${breed.name}">
+            <img src="${breed.image}" alt="" loading="lazy" decoding="async">
+            <span class="breed-image-hint">
+                <span class="hint-description">${breed.description}</span>
+
+                <span class="hint-vibe">${breed.vibe}</span>
+            </span>
+        </button>
 
         <div class="breed-info">
 
@@ -387,7 +430,143 @@ function createBreedCard(breed, { subtitle, onFavoriteToggle } = {}) {
         }
     });
 
+    const previewButton = article.querySelector(".breed-image-button");
+
+    previewButton.addEventListener("click", () => openBreedPreview(breed));
+
     return article;
+}
+
+
+/* =========================
+   STAT BARS
+========================= */
+
+function renderStatBar(label, value, max = 5) {
+    const percent = Math.round((value / max) * 100);
+
+    return `
+        <div class="stat-row">
+            <p class="stat-label">${label}</p>
+
+            <div class="stat-track">
+                <div class="stat-fill" style="width: ${percent}%"></div>
+            </div>
+        </div>
+    `;
+}
+
+
+function renderStatBars(stats) {
+    return Object.entries(stats)
+        .map(([label, value]) => renderStatBar(label, value))
+        .join("");
+}
+
+
+/* =========================
+   BREED QUICK PREVIEW
+========================= */
+
+let breedPreviewModal = null;
+
+function getBreedPreviewModal() {
+    if (breedPreviewModal) {
+        return breedPreviewModal;
+    }
+
+    const dialog = document.createElement("dialog");
+    dialog.className = "breed-preview";
+
+    dialog.innerHTML = `
+        <button type="button" class="preview-close" aria-label="Close quick look">
+            ×
+        </button>
+
+        <div class="preview-image">
+            <img alt="">
+        </div>
+
+        <div class="preview-body">
+            <p class="section-label">Quick Look</p>
+
+            <h3 class="preview-name"></h3>
+
+            <p class="preview-vibe"></p>
+
+            <div class="preview-basics">
+                <div class="preview-basic">
+                    <p class="preview-basic-label">Origin</p>
+                    <p class="preview-basic-value" data-field="origin"></p>
+                </div>
+
+                <div class="preview-basic">
+                    <p class="preview-basic-label">Size</p>
+                    <p class="preview-basic-value" data-field="size"></p>
+                </div>
+
+                <div class="preview-basic">
+                    <p class="preview-basic-label">Coat</p>
+                    <p class="preview-basic-value" data-field="coat"></p>
+                </div>
+
+                <div class="preview-basic">
+                    <p class="preview-basic-label">Lifespan</p>
+                    <p class="preview-basic-value" data-field="lifespan"></p>
+                </div>
+            </div>
+
+            <div class="preview-personality"></div>
+
+            <a class="button preview-link">
+                View Breed →
+            </a>
+        </div>
+    `;
+
+    document.body.appendChild(dialog);
+
+    dialog
+        .querySelector(".preview-close")
+        .addEventListener("click", () => dialog.close());
+
+    dialog.addEventListener("click", event => {
+        if (event.target === dialog) {
+            dialog.close();
+        }
+    });
+
+    breedPreviewModal = dialog;
+
+    return dialog;
+}
+
+
+function openBreedPreview(breed) {
+    const dialog = getBreedPreviewModal();
+
+    const image = dialog.querySelector(".preview-image img");
+    image.src = breed.image;
+    image.alt = breed.name;
+
+    dialog.querySelector(".preview-name").textContent = breed.name;
+    dialog.querySelector(".preview-vibe").textContent = breed.vibe;
+
+    dialog.querySelector('[data-field="origin"]').textContent = breed.origin;
+    dialog.querySelector('[data-field="size"]').textContent = capitalize(breed.size);
+    dialog.querySelector('[data-field="coat"]').textContent = formatCoat(breed.coat);
+    dialog.querySelector('[data-field="lifespan"]').textContent = breed.lifespan;
+
+    dialog.querySelector(".preview-personality").innerHTML = renderStatBars({
+        Energy: breed.energy,
+        Social: breed.social,
+        Affection: breed.affection,
+        Playfulness: breed.playfulness
+    });
+
+    dialog.querySelector(".preview-link").href = `breed.html?id=${breed.id}`;
+
+    dialog.showModal();
 }
 
 

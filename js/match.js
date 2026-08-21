@@ -56,11 +56,10 @@ const questions = [
 let currentQuestion = 0;
 const answers = {};
 
-const form = document.querySelector("#match-form");
-const progress = document.querySelector(".quiz-progress");
-const fieldset = form.querySelector("fieldset");
-const errorMessage = document.querySelector("#form-error");
-const submitButton = form.querySelector("button[type='submit']");
+const progress = document.querySelector("#quiz-progress");
+const progressFill = document.querySelector("#quiz-progress-fill");
+const backButton = document.querySelector("#quiz-back");
+const fieldset = document.querySelector("#quiz-fieldset");
 
 
 renderQuestion();
@@ -68,8 +67,12 @@ renderQuestion();
 
 function renderQuestion() {
     const question = questions[currentQuestion];
+    const savedAnswer = answers[question.key];
 
     progress.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+    progressFill.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+    backButton.hidden = currentQuestion === 0;
 
     fieldset.innerHTML = `
         <legend>
@@ -86,35 +89,26 @@ function renderQuestion() {
                     <input
                         type="radio"
                         name="quiz-answer"
-                        value="${answer.value}">
+                        value="${answer.value}"
+                        ${savedAnswer !== undefined && String(savedAnswer) === String(answer.value) ? "checked" : ""}>
 
                     ${answer.label}
                 </label>
             `)
             .join("")}
     `;
-
-    submitButton.textContent =
-        currentQuestion === questions.length - 1 ? "See My Matches →" : "Next →";
-
-    errorMessage.textContent = "";
 }
 
 
-form.addEventListener("submit", event => {
-    event.preventDefault();
-
-    const selected = form.querySelector("input[name='quiz-answer']:checked");
-
-    if (!selected) {
-        errorMessage.textContent = "Please choose an option before continuing.";
+fieldset.addEventListener("click", event => {
+    if (event.target.name !== "quiz-answer") {
         return;
     }
 
     const question = questions[currentQuestion];
 
     answers[question.key] =
-        question.key === "coat" ? selected.value : Number(selected.value);
+        question.key === "coat" ? event.target.value : Number(event.target.value);
 
     if (currentQuestion < questions.length - 1) {
         currentQuestion++;
@@ -122,5 +116,13 @@ form.addEventListener("submit", event => {
     } else {
         saveQuizAnswers(answers);
         window.location.href = "results.html";
+    }
+});
+
+
+backButton.addEventListener("click", () => {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        renderQuestion();
     }
 });

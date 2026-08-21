@@ -50,6 +50,8 @@ function renderBreed(breed) {
 
     document.querySelector("#breed-description").textContent = breed.description;
 
+    document.querySelector("#breed-about").textContent = breed.about;
+
     document.querySelector(".breed-detail-image").innerHTML = `
         <img
             src="${breed.image}"
@@ -61,13 +63,23 @@ function renderBreed(breed) {
     document.querySelector("#breed-size").textContent = capitalize(breed.size);
     document.querySelector("#breed-coat").textContent = formatCoat(breed.coat);
     document.querySelector("#breed-lifespan").textContent = breed.lifespan;
+    document.querySelector("#breed-grooming").textContent = formatGrooming(breed.grooming);
+    document.querySelector("#breed-shedding").textContent = formatShedding(breed.shedding);
+    document.querySelector("#breed-vocality").textContent = formatVocality(breed.vocality);
 
-    document.querySelector("#personality-traits").innerHTML = `
-        <p>Energy: ${breed.energy} / 5</p>
-        <p>Social: ${breed.social} / 5</p>
-        <p>Affection: ${breed.affection} / 5</p>
-        <p>Playfulness: ${breed.playfulness} / 5</p>
-    `;
+    document.querySelector("#breed-fun-fact").textContent = breed.funFact;
+    document.querySelector("#breed-health-note").textContent = breed.healthNote;
+
+    document.querySelector("#personality-traits").innerHTML = renderStatBars({
+        Energy: breed.energy,
+        Social: breed.social,
+        Affection: breed.affection,
+        Playfulness: breed.playfulness
+    });
+
+    document.querySelector("#breed-good-with").innerHTML = breed.goodWith
+        .map(item => `<span class="tag">${item}</span>`)
+        .join("");
 
     document.querySelector("#breed-vibe").textContent = breed.vibe;
 
