@@ -13,7 +13,13 @@ const favoritesPreview = document.querySelector("#favorites-preview");
 
 
 fetch("data/breeds.json")
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Could not load breeds.json");
+        }
+
+        return response.json();
+    })
     .then(data => {
         breeds = data;
 
@@ -22,6 +28,10 @@ fetch("data/breeds.json")
     })
     .catch(error => {
         console.error("Could not load breeds:", error);
+
+        breedResults.innerHTML = `
+            <p>Something went wrong loading the breeds.</p>
+        `;
     });
 
 

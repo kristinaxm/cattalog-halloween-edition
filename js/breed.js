@@ -158,17 +158,17 @@ function renderBreed(breed) {
 
     /* FAVORITES */
 
-    setupFavoriteButton(breed.id);
+    setupFavoriteButton(breed.id, breed.name);
 }
 
 
-function setupFavoriteButton(id) {
+function setupFavoriteButton(id, name) {
 
     const button =
         document.querySelector("#favorite-button");
 
 
-    updateFavoriteButton(button, id);
+    updateFavoriteButton(button, id, name);
 
 
     button.addEventListener(
@@ -179,7 +179,8 @@ function setupFavoriteButton(id) {
 
             updateFavoriteButton(
                 button,
-                id
+                id,
+                name
             );
 
         }
@@ -190,14 +191,18 @@ function setupFavoriteButton(id) {
 
 function updateFavoriteButton(
     button,
-    id
+    id,
+    name
 ) {
 
     const favorites =
         getFavorites();
 
+    const isFavorite =
+        favorites.includes(id);
 
-    if (favorites.includes(id)) {
+
+    if (isFavorite) {
 
         button.textContent =
             "♥ Saved to Favorites";
@@ -208,6 +213,11 @@ function updateFavoriteButton(
             "♡ Add to Favorites";
 
     }
+
+    button.setAttribute(
+        "aria-label",
+        `${isFavorite ? "Remove" : "Add"} ${name} ${isFavorite ? "from" : "to"} favorites`
+    );
 
 }
 
