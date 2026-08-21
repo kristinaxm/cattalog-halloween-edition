@@ -9,18 +9,17 @@ const sizeFilter = document.querySelector("#size-filter");
 const personalityFilter = document.querySelector("#personality-filter");
 
 
-getBreeds()
-    .then(data => {
+loadBreeds(
+    data => {
         breeds = data;
         renderBreeds(breeds);
-    })
-    .catch(error => {
-        console.error("Could not load breeds:", error);
-
+    },
+    () => {
         breedGrid.innerHTML = `
             <p>Something went wrong loading the breeds.</p>
         `;
-    });
+    }
+);
 
 
 function renderBreeds(breedList) {

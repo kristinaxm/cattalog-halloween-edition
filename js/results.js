@@ -23,8 +23,8 @@ if (!answers) {
 
 } else {
 
-    getBreeds()
-        .then(breeds => {
+    loadBreeds(
+        breeds => {
 
             const matches =
                 calculateMatches(
@@ -35,13 +35,8 @@ if (!answers) {
 
             renderResults(matches);
 
-        })
-        .catch(error => {
-
-            console.error(
-                "Could not calculate matches:",
-                error
-            );
+        },
+        () => {
 
             bestMatchContainer.innerHTML = `
                 <p>
@@ -49,7 +44,8 @@ if (!answers) {
                 </p>
             `;
 
-        });
+        }
+    );
 
 }
 
@@ -175,7 +171,8 @@ function renderResults(matches) {
 
             <img
                 src="${bestMatch.image}"
-                alt="${bestMatch.name}">
+                alt="${bestMatch.name}"
+                decoding="async">
 
         </div>
 

@@ -11,20 +11,19 @@ const personalityFilter = document.querySelector("#home-personality-filter");
 const favoritesPreview = document.querySelector("#favorites-preview");
 
 
-getBreeds()
-    .then(data => {
+loadBreeds(
+    data => {
         breeds = data;
 
         renderBreeds(breeds.slice(0, 3));
         renderFavoritesPreview();
-    })
-    .catch(error => {
-        console.error("Could not load breeds:", error);
-
+    },
+    () => {
         breedResults.innerHTML = `
             <p>Something went wrong loading the breeds.</p>
         `;
-    });
+    }
+);
 
 
 function renderBreeds(breedList) {

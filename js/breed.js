@@ -2,8 +2,8 @@ const params = new URLSearchParams(window.location.search);
 const breedId = params.get("id");
 
 
-getBreeds()
-    .then(breeds => {
+loadBreeds(
+    breeds => {
 
         const breed = breeds.find(
             item => item.id === breedId
@@ -32,14 +32,9 @@ getBreeds()
 
         renderBreed(breed);
 
-    })
+    },
 
-    .catch(error => {
-
-        console.error(
-            "Could not load breed:",
-            error
-        );
+    () => {
 
         document.querySelector("main").innerHTML = `
             <section>
@@ -51,7 +46,8 @@ getBreeds()
             </section>
         `;
 
-    });
+    }
+);
 
 
 function renderBreed(breed) {
@@ -99,7 +95,8 @@ function renderBreed(breed) {
     imageContainer.innerHTML = `
         <img
             src="${breed.image}"
-            alt="${breed.name}">
+            alt="${breed.name}"
+            decoding="async">
     `;
 
 
