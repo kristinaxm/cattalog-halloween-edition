@@ -239,7 +239,9 @@ function renderResults(matches) {
     updateFavoriteButton(
         bestFavoriteButton,
         bestMatch.id,
-        bestMatch.name
+        bestMatch.name,
+        "♥ Saved",
+        "♡ Save to Favorites"
     );
 
 
@@ -256,7 +258,9 @@ function renderResults(matches) {
                 updateFavoriteButton(
                     bestFavoriteButton,
                     bestMatch.id,
-                    bestMatch.name
+                    bestMatch.name,
+                    "♥ Saved",
+                    "♡ Save to Favorites"
                 );
 
             }
@@ -351,85 +355,5 @@ function renderResults(matches) {
                 .appendChild(article);
 
         });
-
-}
-
-
-function getFavorites() {
-
-    const favorites =
-        localStorage.getItem(
-            "favorites"
-        );
-
-
-    return favorites
-        ? JSON.parse(favorites)
-        : [];
-
-}
-
-
-function toggleFavorite(id) {
-
-    let favorites =
-        getFavorites();
-
-
-    if (favorites.includes(id)) {
-
-        favorites =
-            favorites.filter(
-                item => item !== id
-            );
-
-    } else {
-
-        favorites.push(id);
-
-    }
-
-
-    localStorage.setItem(
-        "favorites",
-        JSON.stringify(favorites)
-    );
-
-}
-
-
-function updateFavoriteButton(
-    button,
-    id,
-    name
-) {
-
-    const favorites =
-        getFavorites();
-
-    const isFavorite =
-        favorites.includes(id);
-
-
-    button.textContent =
-        isFavorite
-            ? "♥ Saved"
-            : "♡ Save to Favorites";
-
-    button.setAttribute(
-        "aria-label",
-        `${isFavorite ? "Remove" : "Add"} ${name} ${isFavorite ? "from" : "to"} favorites`
-    );
-
-}
-
-
-function capitalize(text) {
-
-    return (
-        text.charAt(0)
-            .toUpperCase() +
-        text.slice(1)
-    );
 
 }
