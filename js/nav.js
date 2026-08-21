@@ -1,3 +1,85 @@
+/* =========================
+   SITE HEADER / FOOTER
+========================= */
+
+const NAV_LINKS = [
+    { href: "breeds.html", label: "Breeds" },
+    { href: "match.html", label: "Find Your Match" },
+    { href: "favorites.html", label: "♡ Favorites" }
+];
+
+const FOOTER_LINKS = [
+    { href: "index.html", label: "Home" },
+    ...NAV_LINKS
+];
+
+const currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+
+function renderNavLinks(links) {
+    return links
+        .map(link => {
+            const current = link.href === currentPage ? ` aria-current="page"` : "";
+            return `<a href="${link.href}"${current}>${link.label}</a>`;
+        })
+        .join("");
+}
+
+
+function renderSiteHeader() {
+    const header = document.querySelector("#site-header");
+
+    if (!header) {
+        return;
+    }
+
+    header.innerHTML = `
+        <a href="index.html" class="logo">
+            CATTALOG
+        </a>
+
+        <button
+            type="button"
+            class="nav-toggle"
+            id="nav-toggle"
+            aria-expanded="false"
+            aria-controls="main-nav"
+            aria-label="Open menu">
+            ☰
+        </button>
+
+        <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+            ${renderNavLinks(NAV_LINKS)}
+        </nav>
+    `;
+}
+
+
+function renderSiteFooter() {
+    const footer = document.querySelector("#site-footer");
+
+    if (!footer) {
+        return;
+    }
+
+    footer.innerHTML = `
+        <nav class="footer-nav" aria-label="Footer navigation">
+            ${renderNavLinks(FOOTER_LINKS)}
+        </nav>
+
+        <p>&copy; 2026 CATTALOG</p>
+    `;
+}
+
+
+renderSiteHeader();
+renderSiteFooter();
+
+
+/* =========================
+   NAV TOGGLE
+========================= */
+
 const navToggle = document.querySelector("#nav-toggle");
 const mainNav = document.querySelector("#main-nav");
 

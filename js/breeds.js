@@ -23,13 +23,9 @@ function renderBreeds(breedList) {
 }
 
 
+const filterElements = renderBreedFilterUI(document.querySelector("#breed-filter-ui"));
+
 setupBreedFilterUI(
-    {
-        searchInput: document.querySelector("#breed-search"),
-        coatFilter: document.querySelector("#coat-filter"),
-        energyFilter: document.querySelector("#energy-filter"),
-        sizeFilter: document.querySelector("#size-filter"),
-        personalityFilter: document.querySelector("#personality-filter")
-    },
+    filterElements,
     filters => renderBreeds(filterBreeds(breeds, filters))
 );
