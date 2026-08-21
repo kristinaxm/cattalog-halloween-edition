@@ -922,6 +922,13 @@ fieldset input[type="radio"] {
     font-weight: 700;
 }
 
+.match-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
 .more-matches {
     padding-left: 0;
     padding-right: 0;

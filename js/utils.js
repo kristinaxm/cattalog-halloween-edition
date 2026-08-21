@@ -30,13 +30,11 @@ function toggleFavorite(id) {
 function updateFavoriteButton(
     button,
     id,
-    name,
-    savedText = "♥ Saved to Favorites",
-    unsavedText = "♡ Add to Favorites"
+    name
 ) {
     const favorited = isFavorite(id);
 
-    button.textContent = favorited ? savedText : unsavedText;
+    button.textContent = favorited ? "♥" : "♡";
 
     button.setAttribute(
         "aria-label",
