@@ -10,13 +10,23 @@ const personalityFilter = document.querySelector("#personality-filter");
 
 
 fetch("data/breeds.json")
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Could not load breeds.json");
+        }
+
+        return response.json();
+    })
     .then(data => {
         breeds = data;
         renderBreeds(breeds);
     })
     .catch(error => {
         console.error("Could not load breeds:", error);
+
+        breedGrid.innerHTML = `
+            <p>Something went wrong loading the breeds.</p>
+        `;
     });
 
 
@@ -47,7 +57,7 @@ function renderBreeds(breedList) {
             <div class="breed-info">
 
                 <div class="breed-card-header">
-                    <h2>${breed.name}</h2>
+                    <h3>${breed.name}</h3>
 
                     <button
                         type="button"

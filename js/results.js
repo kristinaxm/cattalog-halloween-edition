@@ -28,9 +28,14 @@ if (!savedAnswers) {
 
 
     fetch("data/breeds.json")
-        .then(response =>
-            response.json()
-        )
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error("Could not load breeds.json");
+            }
+
+            return response.json();
+        })
         .then(breeds => {
 
             const matches =
@@ -49,6 +54,12 @@ if (!savedAnswers) {
                 "Could not calculate matches:",
                 error
             );
+
+            bestMatchContainer.innerHTML = `
+                <p>
+                    Something went wrong loading your matches.
+                </p>
+            `;
 
         });
 
@@ -227,7 +238,8 @@ function renderResults(matches) {
 
     updateFavoriteButton(
         bestFavoriteButton,
-        bestMatch.id
+        bestMatch.id,
+        bestMatch.name
     );
 
 
@@ -243,7 +255,8 @@ function renderResults(matches) {
 
                 updateFavoriteButton(
                     bestFavoriteButton,
-                    bestMatch.id
+                    bestMatch.id,
+                    bestMatch.name
                 );
 
             }
@@ -387,17 +400,26 @@ function toggleFavorite(id) {
 
 function updateFavoriteButton(
     button,
-    id
+    id,
+    name
 ) {
 
     const favorites =
         getFavorites();
 
+    const isFavorite =
+        favorites.includes(id);
+
 
     button.textContent =
-        favorites.includes(id)
+        isFavorite
             ? "♥ Saved"
             : "♡ Save to Favorites";
+
+    button.setAttribute(
+        "aria-label",
+        `${isFavorite ? "Remove" : "Add"} ${name} ${isFavorite ? "from" : "to"} favorites`
+    );
 
 }
 
