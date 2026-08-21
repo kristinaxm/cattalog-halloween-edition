@@ -73,6 +73,41 @@ function filterBreeds(breeds, filters = {}) {
 
 
 /* =========================
+   FILTER UI
+========================= */
+
+function setupBreedFilterUI(elements, onChange) {
+    const {
+        searchInput,
+        coatFilter,
+        energyFilter,
+        sizeFilter,
+        personalityFilter
+    } = elements;
+
+    function getFilters() {
+        return {
+            searchTerm: searchInput.value,
+            coat: coatFilter.value,
+            energy: energyFilter.value,
+            size: sizeFilter.value,
+            personality: personalityFilter.value
+        };
+    }
+
+    function handleChange() {
+        onChange(getFilters());
+    }
+
+    searchInput.addEventListener("input", handleChange);
+    coatFilter.addEventListener("change", handleChange);
+    energyFilter.addEventListener("change", handleChange);
+    sizeFilter.addEventListener("change", handleChange);
+    personalityFilter.addEventListener("change", handleChange);
+}
+
+
+/* =========================
    FAVORITES
 ========================= */
 
@@ -125,6 +160,20 @@ function updateFavoriteButton(
         "aria-label",
         `${favorited ? "Remove" : "Add"} ${name} ${favorited ? "from" : "to"} favorites`
     );
+}
+
+
+function bindFavoriteButton(button, id, name, onToggle) {
+    updateFavoriteButton(button, id, name);
+
+    button.addEventListener("click", () => {
+        toggleFavorite(id);
+        updateFavoriteButton(button, id, name);
+
+        if (onToggle) {
+            onToggle();
+        }
+    });
 }
 
 
@@ -196,12 +245,7 @@ function createBreedCard(breed, { subtitle, onFavoriteToggle } = {}) {
 
     const favoriteButton = article.querySelector(".favorite-button");
 
-    updateFavoriteButton(favoriteButton, breed.id, breed.name);
-
-    favoriteButton.addEventListener("click", () => {
-        toggleFavorite(breed.id);
-        updateFavoriteButton(favoriteButton, breed.id, breed.name);
-
+    bindFavoriteButton(favoriteButton, breed.id, breed.name, () => {
         if (onFavoriteToggle) {
             onFavoriteToggle(breed);
         }

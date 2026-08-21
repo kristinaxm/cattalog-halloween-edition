@@ -1,12 +1,6 @@
 let breeds = [];
 
 const breedGrid = document.querySelector("#breed-grid");
-const searchInput = document.querySelector("#breed-search");
-
-const coatFilter = document.querySelector("#coat-filter");
-const energyFilter = document.querySelector("#energy-filter");
-const sizeFilter = document.querySelector("#size-filter");
-const personalityFilter = document.querySelector("#personality-filter");
 
 
 loadBreeds(
@@ -40,21 +34,13 @@ function renderBreeds(breedList) {
 }
 
 
-function applyFilters() {
-    const filteredBreeds = filterBreeds(breeds, {
-        searchTerm: searchInput.value,
-        coat: coatFilter.value,
-        energy: energyFilter.value,
-        size: sizeFilter.value,
-        personality: personalityFilter.value
-    });
-
-    renderBreeds(filteredBreeds);
-}
-
-
-searchInput.addEventListener("input", applyFilters);
-coatFilter.addEventListener("change", applyFilters);
-energyFilter.addEventListener("change", applyFilters);
-sizeFilter.addEventListener("change", applyFilters);
-personalityFilter.addEventListener("change", applyFilters);
+setupBreedFilterUI(
+    {
+        searchInput: document.querySelector("#breed-search"),
+        coatFilter: document.querySelector("#coat-filter"),
+        energyFilter: document.querySelector("#energy-filter"),
+        sizeFilter: document.querySelector("#size-filter"),
+        personalityFilter: document.querySelector("#personality-filter")
+    },
+    filters => renderBreeds(filterBreeds(breeds, filters))
+);
