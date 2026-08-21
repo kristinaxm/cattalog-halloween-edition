@@ -99,6 +99,10 @@ const questions = [
                 value: "long"
             },
             {
+                label: "Hairless",
+                value: "hairless"
+            },
+            {
                 label: "No preference",
                 value: "all"
             }
@@ -246,10 +250,7 @@ form.addEventListener(
 
         } else {
 
-            localStorage.setItem(
-                "quizAnswers",
-                JSON.stringify(answers)
-            );
+            saveQuizAnswers(answers);
 
 
             window.location.href =
