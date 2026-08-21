@@ -111,13 +111,7 @@ function renderResults(matches) {
         bestMatch.name
     );
 
-    resultsContainer.innerHTML = "";
-
-    matches.slice(1, 4).forEach(breed => {
-        const card = createBreedCard(breed, {
-            subtitle: `${breed.match}% Match`
-        });
-
-        resultsContainer.appendChild(card);
+    renderBreedGrid(resultsContainer, matches.slice(1, 4), {
+        getCardOptions: breed => ({ subtitle: `${breed.match}% Match` })
     });
 }

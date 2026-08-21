@@ -255,6 +255,26 @@ function createBreedCard(breed, { subtitle, onFavoriteToggle } = {}) {
 }
 
 
+function renderBreedGrid(container, breeds, { emptyMessage, emptyClassName, getCardOptions } = {}) {
+    container.innerHTML = "";
+
+    if (breeds.length === 0) {
+        if (emptyMessage) {
+            container.innerHTML = emptyClassName
+                ? `<p class="${emptyClassName}">${emptyMessage}</p>`
+                : `<p>${emptyMessage}</p>`;
+        }
+
+        return;
+    }
+
+    breeds.forEach(breed => {
+        const card = createBreedCard(breed, getCardOptions ? getCardOptions(breed) : undefined);
+        container.appendChild(card);
+    });
+}
+
+
 /* =========================
    FORMATTING
 ========================= */

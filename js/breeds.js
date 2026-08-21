@@ -17,19 +17,8 @@ loadBreeds(
 
 
 function renderBreeds(breedList) {
-    breedGrid.innerHTML = "";
-
-    if (breedList.length === 0) {
-        breedGrid.innerHTML = `
-            <p>No breeds match your filters.</p>
-        `;
-
-        return;
-    }
-
-    breedList.forEach(breed => {
-        const card = createBreedCard(breed);
-        breedGrid.appendChild(card);
+    renderBreedGrid(breedGrid, breedList, {
+        emptyMessage: "No breeds match your filters."
     });
 }
 

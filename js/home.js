@@ -20,14 +20,9 @@ loadBreeds(
 
 
 function renderBreeds(breedList) {
-    breedResults.innerHTML = "";
-
-    breedList.forEach(breed => {
-        const card = createBreedCard(breed, {
-            onFavoriteToggle: renderFavoritesPreview
-        });
-
-        breedResults.appendChild(card);
+    renderBreedGrid(breedResults, breedList, {
+        emptyMessage: "No breeds match your filters.",
+        getCardOptions: () => ({ onFavoriteToggle: renderFavoritesPreview })
     });
 }
 
@@ -46,26 +41,12 @@ setupBreedFilterUI(
 
 function renderFavoritesPreview() {
     const favorites = getFavorites();
-
-    favoritesPreview.innerHTML = "";
-
-    if (favorites.length === 0) {
-        favoritesPreview.innerHTML = `
-            <p>You haven't saved any favorites yet.</p>
-        `;
-
-        return;
-    }
-
     const favoriteBreeds = breeds
         .filter(breed => favorites.includes(breed.id))
         .slice(0, 3);
 
-    favoriteBreeds.forEach(breed => {
-        const card = createBreedCard(breed, {
-            onFavoriteToggle: renderFavoritesPreview
-        });
-
-        favoritesPreview.appendChild(card);
+    renderBreedGrid(favoritesPreview, favoriteBreeds, {
+        emptyMessage: "You haven't saved any favorites yet.",
+        getCardOptions: () => ({ onFavoriteToggle: renderFavoritesPreview })
     });
 }
