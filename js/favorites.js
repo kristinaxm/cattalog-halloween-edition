@@ -2,19 +2,18 @@ const favoritesGrid =
     document.querySelector("#favorites-grid");
 
 
-getBreeds()
-    .then(breeds => {
+loadBreeds(
+    breeds => {
         renderFavorites(breeds);
-    })
-    .catch(error => {
-        console.error("Could not load favorites:", error);
-
+    },
+    () => {
         favoritesGrid.innerHTML = `
             <p class="empty-favorites">
                 Something went wrong loading your favorites.
             </p>
         `;
-    });
+    }
+);
 
 
 function renderFavorites(breeds) {

@@ -13,6 +13,19 @@ async function getBreeds() {
 }
 
 
+function loadBreeds(onSuccess, onError) {
+    getBreeds()
+        .then(onSuccess)
+        .catch(error => {
+            console.error("Could not load breeds:", error);
+
+            if (onError) {
+                onError(error);
+            }
+        });
+}
+
+
 /* =========================
    FILTERING
 ========================= */
@@ -151,7 +164,7 @@ function createBreedCard(breed, { subtitle, onFavoriteToggle } = {}) {
 
     article.innerHTML = `
         <div class="breed-image">
-            <img src="${breed.image}" alt="${breed.name}">
+            <img src="${breed.image}" alt="${breed.name}" loading="lazy" decoding="async">
         </div>
 
         <div class="breed-info">
