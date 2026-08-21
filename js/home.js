@@ -1,5 +1,4 @@
 let breeds = [];
-let displayedBreeds = [];
 
 const breedResults = document.querySelector("#home-breed-results");
 const searchInput = document.querySelector("#home-breed-search");
@@ -12,14 +11,7 @@ const personalityFilter = document.querySelector("#home-personality-filter");
 const favoritesPreview = document.querySelector("#favorites-preview");
 
 
-fetch("data/breeds.json")
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("Could not load breeds.json");
-        }
-
-        return response.json();
-    })
+getBreeds()
     .then(data => {
         breeds = data;
 
@@ -36,102 +28,25 @@ fetch("data/breeds.json")
 
 
 function renderBreeds(breedList) {
-    displayedBreeds = breedList;
     breedResults.innerHTML = "";
 
     breedList.forEach(breed => {
-        const card = createBreedCard(breed);
+        const card = createBreedCard(breed, {
+            onFavoriteToggle: renderFavoritesPreview
+        });
+
         breedResults.appendChild(card);
     });
 }
 
 
-function createBreedCard(breed) {
-    const article = document.createElement("article");
-    article.classList.add("breed-card");
-
-    const favorites = getFavorites();
-    const isFavorite = favorites.includes(breed.id);
-
-    article.innerHTML = `
-        <div class="breed-image">
-            <img src="${breed.image}" alt="${breed.name}">
-        </div>
-
-        <div class="breed-info">
-
-            <div class="breed-card-header">
-                <h3>${breed.name}</h3>
-
-                <button
-                    type="button"
-                    class="favorite-button"
-                    data-id="${breed.id}"
-                    aria-label="${isFavorite ? "Remove" : "Add"} ${breed.name} ${isFavorite ? "from" : "to"} favorites">
-                    ${isFavorite ? "♥" : "♡"}
-                </button>
-            </div>
-
-            <p>
-                ${formatCoat(breed.coat)} ·
-                ${formatEnergy(breed.energy)} ·
-                ${capitalize(breed.personality[0])}
-            </p>
-
-            <a href="breed.html?id=${breed.id}">
-                View Breed →
-            </a>
-
-        </div>
-    `;
-
-    const favoriteButton = article.querySelector(".favorite-button");
-
-    favoriteButton.addEventListener("click", () => {
-        toggleFavorite(breed.id);
-        renderBreeds(displayedBreeds);
-        renderFavoritesPreview();
-    });
-
-    return article;
-}
-
-
 function getFilteredBreeds() {
-    const searchTerm = searchInput.value.toLowerCase();
-
-    const selectedCoat = coatFilter.value;
-    const selectedEnergy = energyFilter.value;
-    const selectedSize = sizeFilter.value;
-    const selectedPersonality = personalityFilter.value;
-
-    return breeds.filter(breed => {
-        const matchesSearch =
-            breed.name.toLowerCase().includes(searchTerm);
-
-        const matchesCoat =
-            selectedCoat === "all" ||
-            breed.coat === selectedCoat;
-
-        const matchesEnergy =
-            selectedEnergy === "all" ||
-            getEnergyCategory(breed.energy) === selectedEnergy;
-
-        const matchesSize =
-            selectedSize === "all" ||
-            breed.size === selectedSize;
-
-        const matchesPersonality =
-            selectedPersonality === "all" ||
-            breed.personality.includes(selectedPersonality);
-
-        return (
-            matchesSearch &&
-            matchesCoat &&
-            matchesEnergy &&
-            matchesSize &&
-            matchesPersonality
-        );
+    return filterBreeds(breeds, {
+        searchTerm: searchInput.value,
+        coat: coatFilter.value,
+        energy: energyFilter.value,
+        size: sizeFilter.value,
+        personality: personalityFilter.value
     });
 }
 
@@ -168,7 +83,10 @@ function renderFavoritesPreview() {
         .slice(0, 3);
 
     favoriteBreeds.forEach(breed => {
-        const card = createBreedCard(breed);
+        const card = createBreedCard(breed, {
+            onFavoriteToggle: renderFavoritesPreview
+        });
+
         favoritesPreview.appendChild(card);
     });
 }

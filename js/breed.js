@@ -2,16 +2,7 @@ const params = new URLSearchParams(window.location.search);
 const breedId = params.get("id");
 
 
-fetch("data/breeds.json")
-    .then(response => {
-
-        if (!response.ok) {
-            throw new Error("Could not load breeds.json");
-        }
-
-        return response.json();
-    })
-
+getBreeds()
     .then(breeds => {
 
         const breed = breeds.find(

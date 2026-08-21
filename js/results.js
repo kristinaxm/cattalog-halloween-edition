@@ -5,11 +5,11 @@ const bestMatchContainer =
     document.querySelector(".best-match");
 
 
-const savedAnswers =
-    localStorage.getItem("quizAnswers");
+const answers =
+    getQuizAnswers();
 
 
-if (!savedAnswers) {
+if (!answers) {
 
     bestMatchContainer.innerHTML = `
         <p>
@@ -23,19 +23,7 @@ if (!savedAnswers) {
 
 } else {
 
-    const answers =
-        JSON.parse(savedAnswers);
-
-
-    fetch("data/breeds.json")
-        .then(response => {
-
-            if (!response.ok) {
-                throw new Error("Could not load breeds.json");
-            }
-
-            return response.json();
-        })
+    getBreeds()
         .then(breeds => {
 
             const matches =
@@ -274,85 +262,12 @@ function renderResults(matches) {
         .slice(1, 4)
         .forEach(breed => {
 
-            const article =
-                document.createElement(
-                    "article"
-                );
-
-
-            article.classList.add(
-                "breed-card"
-            );
-
-
-            const favorites = getFavorites();
-            const isFavorite = favorites.includes(breed.id);
-
-            article.innerHTML = `
-
-                <div class="breed-image">
-
-                    <img
-                        src="${breed.image}"
-                        alt="${breed.name}">
-
-                </div>
-
-
-                <div class="breed-info">
-
-                    <div class="breed-card-header">
-
-                        <h3>
-                            ${breed.name}
-                        </h3>
-
-                        <button
-                            type="button"
-                            class="favorite-button"
-                            data-id="${breed.id}"
-                            aria-label="${isFavorite ? "Remove" : "Add"} ${breed.name} ${isFavorite ? "from" : "to"} favorites">
-                            ${isFavorite ? "♥" : "♡"}
-                        </button>
-
-                    </div>
-
-                    <p>
-                        ${breed.match}% Match
-                    </p>
-
-                    <a
-                        href="breed.html?id=${breed.id}">
-
-                        View Breed →
-
-                    </a>
-
-                </div>
-
-            `;
-
-
-            const favoriteButton =
-                article.querySelector(".favorite-button");
-
-            favoriteButton.addEventListener("click", () => {
-
-                toggleFavorite(breed.id);
-
-                favoriteButton.textContent =
-                    getFavorites().includes(breed.id) ? "♥" : "♡";
-
-                favoriteButton.setAttribute(
-                    "aria-label",
-                    `${getFavorites().includes(breed.id) ? "Remove" : "Add"} ${breed.name} ${getFavorites().includes(breed.id) ? "from" : "to"} favorites`
-                );
-
+            const card = createBreedCard(breed, {
+                subtitle: `${breed.match}% Match`
             });
 
-
             resultsContainer
-                .appendChild(article);
+                .appendChild(card);
 
         });
 
