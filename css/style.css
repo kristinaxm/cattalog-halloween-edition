@@ -17,7 +17,7 @@
     /* Text */
     --color-text: #151515;
     --color-text-soft: #4f4a47;
-    --color-muted: #77706b;
+    --color-muted: #6c655f;
 
     /* Accent */
     --color-accent: #cf5b78;
@@ -257,6 +257,8 @@ section {
 .section-header {
     max-width: 700px;
     margin-bottom: 40px;
+
+    container-type: inline-size;
 }
 
 .section-header > p:last-child {
@@ -559,7 +561,7 @@ section {
 }
 
 .breed-info a:hover {
-    color: var(--color-accent);
+    color: var(--color-accent-dark);
 }
 
 
@@ -630,6 +632,8 @@ section {
 
     padding-top: 100px;
     padding-bottom: 60px;
+
+    container-type: inline-size;
 }
 
 .page-intro p {
@@ -654,7 +658,7 @@ section {
 }
 
 .back-link:hover {
-    color: var(--color-accent);
+    color: var(--color-accent-dark);
 }
 
 .breed-detail {
@@ -688,6 +692,8 @@ section {
 
 .breed-detail-content {
     max-width: 520px;
+
+    container-type: inline-size;
 }
 
 .breed-traits {
@@ -785,6 +791,8 @@ section {
     margin-bottom: 50px;
 
     text-align: center;
+
+    container-type: inline-size;
 }
 
 .quiz-header p {
@@ -797,7 +805,7 @@ section {
 .quiz-progress {
     margin-bottom: 30px;
 
-    color: var(--color-accent);
+    color: var(--color-accent-dark);
 
     font-size: 0.75rem;
     font-weight: 700;
@@ -872,6 +880,8 @@ fieldset input[type="radio"] {
     margin-bottom: 50px;
 
     text-align: center;
+
+    container-type: inline-size;
 }
 
 .best-match {
@@ -884,7 +894,7 @@ fieldset input[type="radio"] {
 }
 
 .match-label {
-    color: var(--color-accent);
+    color: var(--color-accent-dark);
 
     font-size: 0.75rem;
     font-weight: 700;
