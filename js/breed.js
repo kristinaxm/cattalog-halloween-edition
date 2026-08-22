@@ -88,4 +88,148 @@ function renderBreed(breed) {
         breed.id,
         breed.name
     );
+
+    renderComments(breed.id);
+    setupCommentForm(breed.id);
+}
+
+
+/* =========================
+   COMMENTS
+========================= */
+
+const COMMENT_NAME_MIN_LENGTH = 2;
+const COMMENT_TEXT_MIN_LENGTH = 10;
+const COMMENT_TEXT_MAX_LENGTH = 300;
+const COMMENTS_VISIBLE_COUNT = 3;
+
+
+function createCommentArticle(comment) {
+    const article = document.createElement("article");
+    article.className = "comment";
+
+    const author = document.createElement("p");
+    author.className = "comment-author";
+    author.textContent = comment.name;
+
+    const text = document.createElement("p");
+    text.className = "comment-text";
+    text.textContent = comment.text;
+
+    article.append(author, text);
+
+    return article;
+}
+
+
+function renderComments(breedId) {
+    const commentList = document.querySelector("#comment-list");
+    const comments = getComments(breedId);
+
+    commentList.innerHTML = "";
+
+    if (comments.length === 0) {
+        commentList.innerHTML = `
+            <p class="comment-empty">
+                No comments yet. Be the first to share your thoughts!
+            </p>
+        `;
+
+        return;
+    }
+
+    comments.forEach((comment, index) => {
+        const article = createCommentArticle(comment);
+
+        if (index >= COMMENTS_VISIBLE_COUNT) {
+            article.hidden = true;
+            article.classList.add("comment-extra");
+        }
+
+        commentList.appendChild(article);
+    });
+
+    if (comments.length > COMMENTS_VISIBLE_COUNT) {
+        const toggleButton = document.createElement("button");
+        toggleButton.type = "button";
+        toggleButton.className = "comment-toggle";
+        toggleButton.textContent = `Show all ${comments.length} comments`;
+
+        toggleButton.addEventListener("click", () => {
+            const expanding = toggleButton.dataset.expanded !== "true";
+
+            commentList
+                .querySelectorAll(".comment-extra")
+                .forEach(comment => {
+                    comment.hidden = !expanding;
+                });
+
+            toggleButton.textContent = expanding
+                ? "Show fewer comments"
+                : `Show all ${comments.length} comments`;
+
+            toggleButton.dataset.expanded = String(expanding);
+        });
+
+        commentList.appendChild(toggleButton);
+    }
+}
+
+
+function setupCommentForm(breedId) {
+    const form = document.querySelector("#comment-form");
+    const nameInput = document.querySelector("#comment-name");
+    const textInput = document.querySelector("#comment-text");
+    const charCount = document.querySelector("#comment-char-count");
+    const errorMessage = document.querySelector("#comment-error");
+
+    function updateCharCount() {
+        charCount.textContent = `${textInput.value.length} / ${COMMENT_TEXT_MAX_LENGTH}`;
+    }
+
+    function showError(message) {
+        errorMessage.textContent = message;
+        errorMessage.hidden = false;
+    }
+
+    function hideError() {
+        errorMessage.hidden = true;
+    }
+
+    textInput.addEventListener("input", updateCharCount);
+    updateCharCount();
+
+    form.addEventListener("submit", event => {
+        event.preventDefault();
+
+        const name = nameInput.value.trim();
+        const text = textInput.value.trim();
+
+        if (name.length < COMMENT_NAME_MIN_LENGTH) {
+            showError(`Please enter a name with at least ${COMMENT_NAME_MIN_LENGTH} characters.`);
+            nameInput.focus();
+            return;
+        }
+
+        if (text.length < COMMENT_TEXT_MIN_LENGTH) {
+            showError(`Your comment needs to be at least ${COMMENT_TEXT_MIN_LENGTH} characters long.`);
+            textInput.focus();
+            return;
+        }
+
+        if (text.length > COMMENT_TEXT_MAX_LENGTH) {
+            showError(`Your comment can be at most ${COMMENT_TEXT_MAX_LENGTH} characters long.`);
+            textInput.focus();
+            return;
+        }
+
+        hideError();
+
+        addComment(breedId, { name, text });
+        renderComments(breedId);
+
+        form.reset();
+        updateCharCount();
+        nameInput.focus();
+    });
 }
