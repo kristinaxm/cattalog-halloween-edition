@@ -375,6 +375,46 @@ function getQuizAnswers() {
 
 
 /* =========================
+   COMMENTS
+========================= */
+
+function getAllComments() {
+    try {
+        const comments = localStorage.getItem("comments");
+        const parsed = comments ? JSON.parse(comments) : {};
+
+        return typeof parsed === "object" && parsed !== null ? parsed : {};
+    } catch (error) {
+        console.error("Could not read comments:", error);
+
+        return {};
+    }
+}
+
+
+function getComments(breedId) {
+    const allComments = getAllComments();
+
+    return Array.isArray(allComments[breedId]) ? allComments[breedId] : [];
+}
+
+
+function addComment(breedId, comment) {
+    const allComments = getAllComments();
+    const breedComments = getComments(breedId);
+
+    breedComments.push(comment);
+    allComments[breedId] = breedComments;
+
+    try {
+        localStorage.setItem("comments", JSON.stringify(allComments));
+    } catch (error) {
+        console.error("Could not save comment:", error);
+    }
+}
+
+
+/* =========================
    BREED CARDS
 ========================= */
 

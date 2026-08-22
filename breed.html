@@ -181,6 +181,72 @@
     </section>
 
 
+    <!-- COMMENTS -->
+    <section class="breed-comments">
+
+        <h2>
+            Comments.
+        </h2>
+
+        <p>
+            Have you met this breed? Share your experience.
+        </p>
+
+        <form
+                class="comment-form"
+                id="comment-form"
+                novalidate>
+
+            <div class="comment-field">
+                <label for="comment-name">Your name</label>
+
+                <input
+                        type="text"
+                        id="comment-name"
+                        name="name"
+                        placeholder="e.g. Alex"
+                        required
+                        minlength="2"
+                        maxlength="40">
+            </div>
+
+            <div class="comment-field">
+                <label for="comment-text">Your comment</label>
+
+                <textarea
+                        id="comment-text"
+                        name="text"
+                        rows="4"
+                        placeholder="What's this breed's character like? (min. 10 characters)"
+                        required
+                        minlength="10"
+                        maxlength="300"></textarea>
+
+                <p class="comment-char-count" id="comment-char-count">
+                    0 / 300
+                </p>
+            </div>
+
+            <p
+                    class="comment-error"
+                    id="comment-error"
+                    role="alert"
+                    hidden>
+            </p>
+
+            <button type="submit" class="button">
+                Post Comment
+            </button>
+
+        </form>
+
+        <div class="comment-list" id="comment-list">
+            <!-- JavaScript adds saved comments here -->
+        </div>
+
+    </section>
+
+
     <!-- QUIZ CTA -->
     <section class="match-cta">
 
