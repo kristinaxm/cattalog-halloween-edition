@@ -31,7 +31,7 @@ const filterElements = renderBreedFilterUI(document.querySelector("#home-filter-
 
 setupBreedFilterUI(
     filterElements,
-    filters => renderBreeds(filterBreeds(breeds, filters).slice(0, 6))
+    filters => renderBreeds(sortBreeds(filterBreeds(breeds, filters), filters.sort).slice(0, 6))
 );
 
 

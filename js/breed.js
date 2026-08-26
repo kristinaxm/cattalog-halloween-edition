@@ -89,8 +89,54 @@ function renderBreed(breed) {
         breed.name
     );
 
+    setupRatingWidget(breed.id);
+
     renderComments(breed.id);
     setupCommentForm(breed.id);
+}
+
+
+/* =========================
+   RATING
+========================= */
+
+function setupRatingWidget(breedId) {
+    const widget = document.querySelector("#rating-widget");
+    const summary = document.querySelector("#rating-summary");
+
+    function render() {
+        const rating = getRating(breedId);
+
+        widget.innerHTML = [1, 2, 3, 4, 5]
+            .map(value => `
+                <button
+                    type="button"
+                    class="rating-star"
+                    data-value="${value}"
+                    aria-label="Rate ${value} out of 5 stars"
+                    aria-pressed="${rating === value}">
+                    ${rating !== null && value <= rating ? "★" : "☆"}
+                </button>
+            `)
+            .join("");
+
+        summary.textContent = rating
+            ? `Your rating: ${rating} / 5`
+            : "You haven't rated this breed yet.";
+    }
+
+    widget.addEventListener("click", event => {
+        const button = event.target.closest(".rating-star");
+
+        if (!button) {
+            return;
+        }
+
+        setRating(breedId, Number(button.dataset.value));
+        render();
+    });
+
+    render();
 }
 
 

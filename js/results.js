@@ -1,5 +1,9 @@
 const resultsContainer = document.querySelector("#match-results");
 const bestMatchContainer = document.querySelector(".best-match");
+const historyToggle = document.querySelector("#history-toggle");
+const historyPanel = document.querySelector("#match-history-panel");
+const historyList = document.querySelector("#match-history-list");
+const clearHistoryButton = document.querySelector("#clear-history-button");
 
 const answers = getQuizAnswers();
 
@@ -31,37 +35,7 @@ if (!answers) {
 }
 
 
-function calculateMatches(breeds, answers) {
-    return breeds
-        .map(breed => {
-            let score = 0;
-            let maximumScore = 0;
-
-            score += compareNumber(breed.energy, answers.energy);
-            score += compareNumber(breed.social, answers.social);
-            score += compareNumber(breed.affection, answers.affection);
-            score += compareNumber(breed.playfulness, answers.playfulness);
-            maximumScore += 16;
-
-            if (answers.coat === "all" || breed.coat === answers.coat) {
-                score += 2;
-            }
-
-            maximumScore += 2;
-
-            const percentage = Math.round((score / maximumScore) * 100);
-
-            return { ...breed, match: percentage };
-        })
-        .sort((a, b) => b.match - a.match);
-}
-
-
-function compareNumber(breedValue, answerValue) {
-    const difference = Math.abs(breedValue - answerValue);
-
-    return Math.max(0, 4 - difference);
-}
+setupMatchHistoryToggle(historyToggle, historyPanel, historyList, clearHistoryButton);
 
 
 function renderResults(matches) {
@@ -115,3 +89,4 @@ function renderResults(matches) {
         getCardOptions: breed => ({ subtitle: `${breed.match}% Match` })
     });
 }
+

@@ -421,15 +421,15 @@ section {
 /* Search */
 
 .breed-search {
-    flex: 0 1 420px;
-    min-width: 240px;
-    max-width: 460px;
+    flex: 0 1 260px;
+    min-width: 160px;
+    max-width: 280px;
 }
 
 .breed-search label {
     display: block;
 
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 
     font-size: 0.75rem;
     font-weight: 700;
@@ -440,7 +440,7 @@ section {
 .breed-search input {
     width: 100%;
 
-    padding: 13px 16px;
+    padding: 10px 12px;
 
     background-color: var(--color-surface);
 
@@ -448,7 +448,7 @@ section {
     border-radius: var(--radius-small);
 
     color: var(--color-text);
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     line-height: 1.2;
 
     outline: none;
@@ -465,8 +465,8 @@ section {
 
 .breed-filters {
     display: grid;
-    grid-template-columns: repeat(4, minmax(90px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(5, minmax(70px, 1fr));
+    gap: 8px;
 
     flex: 1 1 0;
     min-width: 300px;
@@ -475,9 +475,9 @@ section {
 .filter-group label {
     display: block;
 
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
 
     text-transform: uppercase;
@@ -486,7 +486,7 @@ section {
 .filter-group select {
     width: 100%;
 
-    padding: 13px 12px;
+    padding: 10px 8px;
 
     background-color: var(--color-surface);
     color: var(--color-text);
@@ -494,7 +494,7 @@ section {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-small);
 
-    font-size: 0.9rem;
+    font-size: 0.78rem;
     line-height: 1.2;
 
     outline: none;
@@ -1124,6 +1124,45 @@ section {
 
 
 /* ==================================================
+   RATING
+   ================================================== */
+
+.breed-rating {
+    max-width: 700px;
+}
+
+.rating-widget {
+    display: flex;
+    gap: 6px;
+
+    margin: 20px 0 12px;
+}
+
+.rating-star {
+    padding: 4px;
+
+    background: transparent;
+    color: var(--color-accent);
+
+    border: 0;
+
+    font-size: 1.8rem;
+    line-height: 1;
+
+    transition: transform 0.15s ease;
+}
+
+.rating-star:hover {
+    transform: scale(1.15);
+}
+
+.rating-summary {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+}
+
+
+/* ==================================================
    COMMENTS
    ================================================== */
 
@@ -1511,6 +1550,128 @@ fieldset label:has(input:focus-visible) {
     gap: 16px;
 }
 
+
+/* ==================================================
+   MATCH HISTORY
+   ================================================== */
+
+.quiz-history {
+    display: flex;
+    justify-content: flex-end;
+
+    margin: 30px 0 12px;
+}
+
+.history-toggle {
+    padding: 0;
+
+    background: none;
+    color: var(--color-muted);
+
+    border: 0;
+
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+
+    transition: color 0.2s ease;
+}
+
+.history-toggle:hover {
+    color: var(--color-accent-dark);
+}
+
+.history-toggle[hidden] {
+    display: none;
+}
+
+.match-history {
+    margin-top: 8px;
+}
+
+.match-history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    margin-bottom: 20px;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    margin-bottom: 40px;
+}
+
+.history-entry {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    padding: 16px 20px;
+
+    background-color: var(--color-surface);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+}
+
+.history-entry-info {
+    flex: 1 1 auto;
+}
+
+.history-entry-name {
+    font-weight: 700;
+}
+
+.history-entry-date {
+    color: var(--color-muted);
+    font-size: 0.8rem;
+}
+
+.history-entry-score {
+    color: var(--color-accent-dark);
+    font-weight: 700;
+}
+
+.history-empty {
+    color: var(--color-muted);
+
+    margin-bottom: 40px;
+}
+
+.clear-history-button {
+    padding: 0;
+
+    background: none;
+    color: var(--color-muted);
+
+    border: 0;
+
+    font-size: 0.85rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+
+    transition: color 0.2s ease;
+}
+
+.clear-history-button:hover {
+    color: var(--color-accent-dark);
+}
+
+.clear-history-button[hidden] {
+    display: none;
+}
+
 .more-matches {
     padding-left: 0;
     padding-right: 0;
@@ -1525,6 +1686,38 @@ fieldset label:has(input:focus-visible) {
     max-width: var(--max-width);
 
     margin: 0 auto;
+}
+
+.favorites-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.clear-favorites-button {
+    padding: 0;
+
+    background: none;
+    color: var(--color-muted);
+
+    border: 0;
+
+    font-size: 0.85rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+
+    transition: color 0.2s ease;
+}
+
+.clear-favorites-button:hover {
+    color: var(--color-accent-dark);
+}
+
+.clear-favorites-button[hidden] {
+    display: none;
 }
 
 
