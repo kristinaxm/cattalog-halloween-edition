@@ -61,8 +61,14 @@ const progressFill = document.querySelector("#quiz-progress-fill");
 const backButton = document.querySelector("#quiz-back");
 const fieldset = document.querySelector("#quiz-fieldset");
 
+const historyToggle = document.querySelector("#history-toggle");
+const historyPanel = document.querySelector("#match-history-panel");
+const historyList = document.querySelector("#match-history-list");
+const clearHistoryButton = document.querySelector("#clear-history-button");
+
 
 renderQuestion();
+setupMatchHistoryToggle(historyToggle, historyPanel, historyList, clearHistoryButton);
 
 
 function renderQuestion() {
@@ -115,9 +121,30 @@ fieldset.addEventListener("click", event => {
         renderQuestion();
     } else {
         saveQuizAnswers(answers);
-        window.location.href = "results.html";
+        finishQuiz(answers);
     }
 });
+
+
+function finishQuiz(answers) {
+    loadBreeds(
+        breeds => {
+            const bestMatch = calculateMatches(breeds, answers)[0];
+
+            addMatchHistoryEntry({
+                breedId: bestMatch.id,
+                breedName: bestMatch.name,
+                match: bestMatch.match,
+                date: new Date().toISOString()
+            });
+
+            window.location.href = "results.html";
+        },
+        () => {
+            window.location.href = "results.html";
+        }
+    );
+}
 
 
 backButton.addEventListener("click", () => {

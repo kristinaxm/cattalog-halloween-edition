@@ -156,6 +156,47 @@ function filterBreeds(breeds, filters = {}) {
 
 
 /* =========================
+   SORTING
+========================= */
+
+const SORT_OPTIONS = [
+    { value: "featured", label: "Featured" },
+    { value: "name-asc", label: "Name (A–Z)" },
+    { value: "name-desc", label: "Name (Z–A)" },
+    { value: "energy-asc", label: "Energy (Low to High)" },
+    { value: "energy-desc", label: "Energy (High to Low)" }
+];
+
+
+function sortBreeds(breeds, sortKey = "featured") {
+    const sorted = [...breeds];
+
+    switch (sortKey) {
+        case "name-asc":
+            sorted.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+
+        case "name-desc":
+            sorted.sort((a, b) => b.name.localeCompare(a.name));
+            break;
+
+        case "energy-asc":
+            sorted.sort((a, b) => a.energy - b.energy);
+            break;
+
+        case "energy-desc":
+            sorted.sort((a, b) => b.energy - a.energy);
+            break;
+
+        default:
+            break;
+    }
+
+    return sorted;
+}
+
+
+/* =========================
    FILTER UI
 ========================= */
 
@@ -234,6 +275,18 @@ function renderBreedFilterUI(container, idPrefix = "") {
                     </select>
                 </div>
             `).join("")}
+
+            <div class="filter-group">
+                <label for="${id("sort")}">
+                    Sort by
+                </label>
+
+                <select id="${id("sort")}">
+                    ${SORT_OPTIONS
+                        .map(option => `<option value="${option.value}">${option.label}</option>`)
+                        .join("")}
+                </select>
+            </div>
         </div>
     `;
 
@@ -242,7 +295,8 @@ function renderBreedFilterUI(container, idPrefix = "") {
         coatFilter: container.querySelector(`#${id("coat-filter")}`),
         energyFilter: container.querySelector(`#${id("energy-filter")}`),
         sizeFilter: container.querySelector(`#${id("size-filter")}`),
-        personalityFilter: container.querySelector(`#${id("personality-filter")}`)
+        personalityFilter: container.querySelector(`#${id("personality-filter")}`),
+        sortSelect: container.querySelector(`#${id("sort")}`)
     };
 }
 
@@ -253,7 +307,8 @@ function setupBreedFilterUI(elements, onChange) {
         coatFilter,
         energyFilter,
         sizeFilter,
-        personalityFilter
+        personalityFilter,
+        sortSelect
     } = elements;
 
     function getFilters() {
@@ -262,7 +317,8 @@ function setupBreedFilterUI(elements, onChange) {
             coat: coatFilter.value,
             energy: energyFilter.value,
             size: sizeFilter.value,
-            personality: personalityFilter.value
+            personality: personalityFilter.value,
+            sort: sortSelect.value
         };
     }
 
@@ -275,6 +331,7 @@ function setupBreedFilterUI(elements, onChange) {
     energyFilter.addEventListener("change", handleChange);
     sizeFilter.addEventListener("change", handleChange);
     personalityFilter.addEventListener("change", handleChange);
+    sortSelect.addEventListener("change", handleChange);
 }
 
 
@@ -314,6 +371,15 @@ function toggleFavorite(id) {
         localStorage.setItem("favorites", JSON.stringify(favorites));
     } catch (error) {
         console.error("Could not save favorites:", error);
+    }
+}
+
+
+function clearFavorites() {
+    try {
+        localStorage.setItem("favorites", JSON.stringify([]));
+    } catch (error) {
+        console.error("Could not clear favorites:", error);
     }
 }
 
@@ -370,6 +436,214 @@ function getQuizAnswers() {
         console.error("Could not read quiz answers:", error);
 
         return null;
+    }
+}
+
+
+/* =========================
+   QUIZ MATCHING
+========================= */
+
+function compareNumber(breedValue, answerValue) {
+    const difference = Math.abs(breedValue - answerValue);
+
+    return Math.max(0, 4 - difference);
+}
+
+
+function calculateMatches(breeds, answers) {
+    return breeds
+        .map(breed => {
+            let score = 0;
+            let maximumScore = 0;
+
+            score += compareNumber(breed.energy, answers.energy);
+            score += compareNumber(breed.social, answers.social);
+            score += compareNumber(breed.affection, answers.affection);
+            score += compareNumber(breed.playfulness, answers.playfulness);
+            maximumScore += 16;
+
+            if (answers.coat === "all" || breed.coat === answers.coat) {
+                score += 2;
+            }
+
+            maximumScore += 2;
+
+            const percentage = Math.round((score / maximumScore) * 100);
+
+            return { ...breed, match: percentage };
+        })
+        .sort((a, b) => b.match - a.match);
+}
+
+
+/* =========================
+   MATCH HISTORY
+========================= */
+
+const MATCH_HISTORY_LIMIT = 10;
+
+
+function getMatchHistory() {
+    try {
+        const history = localStorage.getItem("matchHistory");
+        const parsed = history ? JSON.parse(history) : [];
+
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+        console.error("Could not read match history:", error);
+
+        return [];
+    }
+}
+
+
+function addMatchHistoryEntry(entry) {
+    const history = getMatchHistory();
+    history.unshift(entry);
+
+    try {
+        localStorage.setItem(
+            "matchHistory",
+            JSON.stringify(history.slice(0, MATCH_HISTORY_LIMIT))
+        );
+    } catch (error) {
+        console.error("Could not save match history:", error);
+    }
+}
+
+
+function clearMatchHistory() {
+    try {
+        localStorage.setItem("matchHistory", JSON.stringify([]));
+    } catch (error) {
+        console.error("Could not clear match history:", error);
+    }
+}
+
+
+function formatHistoryDate(isoDate) {
+    return new Date(isoDate).toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+    });
+}
+
+
+function setupMatchHistoryToggle(toggle, panel, historyListEl, clearButton) {
+    function render() {
+        const history = getMatchHistory();
+
+        if (history.length === 0) {
+            toggle.hidden = true;
+            panel.hidden = true;
+
+            return;
+        }
+
+        toggle.hidden = false;
+
+        const expanded = toggle.getAttribute("aria-expanded") === "true";
+        toggle.textContent = expanded
+            ? "Hide Past Matches"
+            : `View Past Matches (${history.length})`;
+
+        renderMatchHistoryEntries(historyListEl, clearButton, history);
+    }
+
+    toggle.addEventListener("click", () => {
+        const expanded = toggle.getAttribute("aria-expanded") === "true";
+
+        panel.hidden = expanded;
+        toggle.setAttribute("aria-expanded", String(!expanded));
+
+        render();
+    });
+
+    clearButton.addEventListener("click", () => {
+        if (!confirm("Clear your match history? This can't be undone.")) {
+            return;
+        }
+
+        clearMatchHistory();
+        panel.hidden = true;
+        toggle.setAttribute("aria-expanded", "false");
+
+        render();
+    });
+
+    render();
+}
+
+
+function renderMatchHistoryEntries(historyListEl, clearButton, history) {
+    if (history.length === 0) {
+        historyListEl.innerHTML = `
+            <p class="history-empty">
+                No past matches yet. Take the quiz to start your history.
+            </p>
+        `;
+
+        clearButton.hidden = true;
+
+        return;
+    }
+
+    historyListEl.innerHTML = history
+        .map(entry => `
+            <article class="history-entry">
+                <div class="history-entry-info">
+                    <p class="history-entry-name">${entry.breedName}</p>
+                    <p class="history-entry-date">${formatHistoryDate(entry.date)}</p>
+                </div>
+
+                <p class="history-entry-score">${entry.match}%</p>
+
+                <a href="breed.html?id=${entry.breedId}">
+                    View →
+                </a>
+            </article>
+        `)
+        .join("");
+
+    clearButton.hidden = false;
+}
+
+
+/* =========================
+   RATINGS
+========================= */
+
+function getAllRatings() {
+    try {
+        const ratings = localStorage.getItem("ratings");
+        const parsed = ratings ? JSON.parse(ratings) : {};
+
+        return typeof parsed === "object" && parsed !== null ? parsed : {};
+    } catch (error) {
+        console.error("Could not read ratings:", error);
+
+        return {};
+    }
+}
+
+
+function getRating(breedId) {
+    const ratings = getAllRatings();
+
+    return typeof ratings[breedId] === "number" ? ratings[breedId] : null;
+}
+
+
+function setRating(breedId, value) {
+    const ratings = getAllRatings();
+    ratings[breedId] = value;
+
+    try {
+        localStorage.setItem("ratings", JSON.stringify(ratings));
+    } catch (error) {
+        console.error("Could not save rating:", error);
     }
 }
 

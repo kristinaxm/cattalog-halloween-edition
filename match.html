@@ -64,6 +64,49 @@
 
         </div>
 
+
+        <!-- MATCH HISTORY -->
+        <div class="quiz-history">
+
+            <button
+                    type="button"
+                    class="history-toggle"
+                    id="history-toggle"
+                    aria-expanded="false"
+                    aria-controls="match-history-panel"
+                    hidden>
+                View Past Matches
+            </button>
+
+        </div>
+
+        <div
+                class="match-history"
+                id="match-history-panel"
+                hidden>
+
+            <div class="match-history-header">
+
+                <h2>
+                    Your Past Matches.
+                </h2>
+
+                <button
+                        type="button"
+                        class="clear-history-button"
+                        id="clear-history-button"
+                        hidden>
+                    Clear History
+                </button>
+
+            </div>
+
+            <div class="history-list" id="match-history-list">
+                <!-- JavaScript adds past match entries here -->
+            </div>
+
+        </div>
+
     </section>
 
 </main>
