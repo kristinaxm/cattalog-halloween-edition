@@ -3,6 +3,8 @@
    Global stylesheet
    ================================================== */
 
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap");
+
 
 /* ==================================================
    COLOR SYSTEM
@@ -15,20 +17,26 @@
     --color-surface-soft: #f1ece7;
 
     /* Text */
-    --color-text: #151515;
-    --color-text-soft: #4f4a47;
-    --color-muted: #6c655f;
+    --color-text: #171515;
+    --color-text-soft: #4a3a36;
+    --color-muted: #6b5a52;
 
-    /* Accent */
-    --color-accent: #cf5b78;
-    --color-accent-dark: #b94663;
-    --color-accent-light: #f1d3dc;
+    /* Accent (muted blood red) */
+    --color-accent: #8f3038;
+    --color-accent-dark: #6f242b;
+    --color-accent-light: #f0d9d6;
+    --color-accent-bright: #d6423b;
+
+    /* Halloween accents */
+    --color-purple: #6c526d;
+    --color-pumpkin: #d48a32;
+    --color-brown: #3b2925;
 
     /* Borders */
-    --color-border: #d9d2cc;
+    --color-border: #ddd0c8;
 
     /* Dark sections */
-    --color-dark: #15191a;
+    --color-dark: #171515;
     --color-dark-text: #f8f5f1;
 
     /* Layout */
@@ -63,7 +71,7 @@ body {
     background-color: var(--color-background);
     color: var(--color-text);
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "EB Garamond", Georgia, "Times New Roman", serif;
     line-height: 1.6;
 }
 
@@ -108,7 +116,7 @@ p {
 h1,
 h2,
 h3 {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: "Cinzel", Georgia, "Times New Roman", serif;
 }
 
 h1 {
@@ -116,6 +124,7 @@ h1 {
 
     font-size: clamp(1.75rem, 12.5cqw, 5.5rem);
     line-height: 0.95;
+    letter-spacing: 0.02em;
 
     text-transform: uppercase;
     overflow-wrap: break-word;
@@ -144,7 +153,7 @@ p {
 
     color: var(--color-muted);
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "EB Garamond", Georgia, "Times New Roman", serif;
     font-size: 0.75rem;
     font-weight: 700;
 
@@ -181,21 +190,12 @@ h1 span,
 .logo {
     color: var(--color-text);
 
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.5rem;
+    font-family: "Cinzel", Georgia, "Times New Roman", serif;
+    font-size: 1.4rem;
     font-weight: 700;
 
-    letter-spacing: -0.02em;
+    letter-spacing: 0.02em;
     text-decoration: none;
-}
-
-.logo::after {
-    content: " 🐾";
-
-    color: var(--color-accent);
-
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.8em;
 }
 
 .main-nav {
@@ -264,6 +264,8 @@ section {
 }
 
 .section-header {
+    position: relative;
+
     max-width: 700px;
     margin-bottom: 40px;
 
@@ -316,6 +318,8 @@ section {
    ================================================== */
 
 .hero {
+    position: relative;
+
     min-height: 650px;
 
     display: grid;
@@ -326,10 +330,49 @@ section {
     border-bottom: 1px solid var(--color-border);
 }
 
+.hero-decor {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 110px;
+    height: 110px;
+
+    opacity: 0.4;
+    pointer-events: none;
+}
+
 .hero-content {
     max-width: 580px;
 
     container-type: inline-size;
+}
+
+.halloween-badge {
+    display: inline-block;
+    margin-bottom: 16px;
+
+    padding: 6px 14px;
+
+    color: var(--color-accent-dark);
+
+    border: 1px solid var(--color-accent);
+    border-radius: 999px;
+
+    font-size: 0.7rem;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.hero-subtitle {
+    margin: -18px 0 20px;
+
+    color: var(--color-purple);
+
+    font-size: 0.95rem;
+    font-style: italic;
 }
 
 .hero-description {
@@ -356,7 +399,13 @@ section {
     overflow: hidden;
 
     background-color: var(--color-surface-soft);
-    border: 1px solid var(--color-border);
+
+    transition: box-shadow 0.4s ease;
+}
+
+.hero-image:hover {
+    z-index: 5;
+    box-shadow: 0 0 44px rgb(212 138 50 / 40%);
 }
 
 .hero-image img {
@@ -364,6 +413,13 @@ section {
     height: 100%;
 
     object-fit: cover;
+
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.hero-image:hover img {
+    filter: brightness(1.08) saturate(1.15);
+    transform: scale(1.06);
 }
 
 .hero-image-main {
@@ -374,6 +430,8 @@ section {
 
     width: 65%;
     aspect-ratio: 1145 / 1374;
+
+    animation: hero-float-a 6.5s ease-in-out infinite;
 }
 
 .hero-image-secondary {
@@ -384,6 +442,9 @@ section {
 
     width: 38%;
     aspect-ratio: 1448 / 1086;
+
+    animation: hero-float-b 7.5s ease-in-out infinite;
+    animation-delay: -2.5s;
 }
 
 .hero-image-small {
@@ -394,6 +455,32 @@ section {
 
     width: 28%;
     aspect-ratio: 1 / 1;
+
+    animation: hero-float-c 5.5s ease-in-out infinite;
+    animation-delay: -1.2s;
+}
+
+@keyframes hero-float-a {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(-0.7deg); }
+}
+
+@keyframes hero-float-b {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(9px) rotate(0.9deg); }
+}
+
+@keyframes hero-float-c {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(1.1deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-image-main,
+    .hero-image-secondary,
+    .hero-image-small {
+        animation: none;
+    }
 }
 
 
@@ -403,6 +490,8 @@ section {
 
 .breed-discovery,
 .breed-browser {
+    position: relative;
+
     background-color: var(--color-background);
 }
 
@@ -613,7 +702,7 @@ section {
 }
 
 .hint-vibe {
-    color: var(--color-accent-light);
+    color: var(--color-accent-bright);
 
     font-size: 0.8rem;
     font-style: italic;
@@ -640,6 +729,15 @@ section {
     justify-content: space-between;
     align-items: flex-start;
     gap: 20px;
+}
+
+.breed-halloween-role {
+    margin: 2px 0 10px;
+
+    color: var(--color-purple);
+
+    font-size: 0.78rem;
+    font-style: italic;
 }
 
 .breed-info p {
@@ -871,10 +969,98 @@ section {
 
 
 /* ==================================================
+   TONIGHT'S CAT
+   ================================================== */
+
+.tonight-cat {
+    position: relative;
+
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.tonight-cat-card {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 44px;
+    align-items: center;
+
+    padding: 48px;
+
+    background:
+        radial-gradient(1.5px 1.5px at 18% 25%, rgb(255 255 255 / 45%) 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 68% 15%, rgb(255 255 255 / 35%) 50%, transparent 51%),
+        radial-gradient(1px 1px at 40% 65%, rgb(255 255 255 / 25%) 50%, transparent 51%),
+        radial-gradient(1px 1px at 88% 55%, rgb(255 255 255 / 30%) 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 55% 88%, rgb(255 255 255 / 20%) 50%, transparent 51%),
+        radial-gradient(circle at 85% 10%, rgb(108 82 109 / 40%), transparent 55%),
+        radial-gradient(circle at 8% 95%, rgb(212 138 50 / 22%), transparent 50%),
+        linear-gradient(160deg, var(--color-brown), #1a1210);
+    color: var(--color-dark-text);
+
+    border: 1px solid rgb(212 138 50 / 20%);
+    border-radius: var(--radius-large);
+    box-shadow: 0 24px 60px rgb(0 0 0 / 35%);
+}
+
+.tonight-cat-image {
+    border-radius: var(--radius-large);
+
+    overflow: hidden;
+}
+
+.tonight-cat-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.tonight-cat-label {
+    margin-bottom: 10px;
+
+    color: var(--color-pumpkin);
+
+    font-size: 0.75rem;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.tonight-cat-card h2 {
+    margin-bottom: 4px;
+
+    color: var(--color-dark-text);
+}
+
+.tonight-cat-role {
+    margin-bottom: 14px;
+
+    color: var(--color-accent-bright);
+    text-shadow: 0 0 16px rgb(214 66 59 / 50%);
+
+    font-size: 0.95rem;
+    font-style: italic;
+}
+
+.tonight-cat-card p:not(.tonight-cat-label):not(.tonight-cat-role) {
+    max-width: 460px;
+    margin-bottom: 22px;
+
+    color: var(--color-dark-text);
+    opacity: 0.85;
+}
+
+
+/* ==================================================
    MATCH SECTION
    ================================================== */
 
 .match-section {
+    position: relative;
+
     background-color: var(--color-surface-soft);
 
     border-top: 1px solid var(--color-border);
@@ -896,6 +1082,8 @@ section {
    ================================================== */
 
 .favorites-preview {
+    position: relative;
+
     background-color: var(--color-background);
 }
 
@@ -909,6 +1097,8 @@ section {
    ================================================== */
 
 .page-intro {
+    position: relative;
+
     max-width: var(--max-width);
 
     margin: 0 auto;
@@ -916,11 +1106,34 @@ section {
     padding-top: 100px;
     padding-bottom: 60px;
 
+    border-bottom: 1px solid var(--color-border);
+
     container-type: inline-size;
 }
 
 .page-intro p {
     max-width: 600px;
+}
+
+.breed-count-summary {
+    margin-top: 20px;
+    margin-bottom: 0;
+
+    color: var(--color-pumpkin);
+
+    font-size: 0.75rem;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.breed-results-count {
+    margin-bottom: 20px;
+
+    color: var(--color-muted);
+
+    font-size: 0.85rem;
 }
 
 
@@ -964,6 +1177,8 @@ section {
 }
 
 .breed-detail-content {
+    position: relative;
+
     max-width: 520px;
 
     container-type: inline-size;
@@ -972,7 +1187,7 @@ section {
 .breed-traits {
     color: var(--color-text);
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: "Cinzel", Georgia, "Times New Roman", serif;
     font-size: 1.4rem;
     font-weight: 700;
 }
@@ -1128,6 +1343,8 @@ section {
    ================================================== */
 
 .breed-rating {
+    position: relative;
+
     max-width: 700px;
 }
 
@@ -1291,7 +1508,7 @@ section {
 }
 
 .comment-toggle:hover {
-    color: var(--color-dark);
+    color: var(--color-text);
 }
 
 
@@ -1300,6 +1517,8 @@ section {
    ================================================== */
 
 .match-cta {
+    position: relative;
+
     background-color: var(--color-surface-soft);
 
     border-top: 1px solid var(--color-border);
@@ -1311,12 +1530,16 @@ section {
    ================================================== */
 
 .quiz-section {
+    position: relative;
+
     max-width: 900px;
 
     margin: 0 auto;
 }
 
 .quiz-header {
+    position: relative;
+
     margin-bottom: 50px;
 
     text-align: center;
@@ -1411,7 +1634,7 @@ legend {
     width: 100%;
     margin-bottom: 12px;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: "Cinzel", Georgia, "Times New Roman", serif;
     font-size: 2rem;
     font-weight: 700;
     text-align: center;
@@ -1498,6 +1721,8 @@ fieldset label:has(input:focus-visible) {
 }
 
 .results-header {
+    position: relative;
+
     margin-bottom: 50px;
 
     text-align: center;
@@ -1506,6 +1731,8 @@ fieldset label:has(input:focus-visible) {
 }
 
 .best-match {
+    position: relative;
+
     padding: 40px;
 
     background-color: var(--color-surface);
@@ -1538,7 +1765,7 @@ fieldset label:has(input:focus-visible) {
 .match-score {
     color: var(--color-accent);
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: "Cinzel", Georgia, "Times New Roman", serif;
     font-size: 3.5rem;
     font-weight: 700;
 }
@@ -1673,6 +1900,8 @@ fieldset label:has(input:focus-visible) {
 }
 
 .more-matches {
+    position: relative;
+
     padding-left: 0;
     padding-right: 0;
 }
@@ -1683,6 +1912,8 @@ fieldset label:has(input:focus-visible) {
    ================================================== */
 
 .favorites-section {
+    position: relative;
+
     max-width: var(--max-width);
 
     margin: 0 auto;
@@ -1762,6 +1993,274 @@ fieldset label:has(input:focus-visible) {
     color: var(--color-dark-text);
 
     font-size: 0.75rem;
+}
+
+
+/* ==================================================
+   PAGE DECORATIONS (bats, spiders & co.)
+   ================================================== */
+
+.page-decor {
+    position: absolute;
+    z-index: 0;
+
+    width: 70px;
+
+    opacity: 0.5;
+    filter: sepia(1) saturate(2) hue-rotate(325deg) brightness(0.6);
+
+    pointer-events: none;
+    user-select: none;
+}
+
+.decor-hero-bat {
+    top: 6%;
+    left: 45%;
+
+    width: 60px;
+
+    animation: decor-bob 7s ease-in-out infinite;
+}
+
+.decor-hero-spider {
+    top: 0;
+    left: 8%;
+
+    width: 46px;
+
+    transform-origin: top center;
+
+    animation: decor-sway 4.2s ease-in-out infinite;
+}
+
+.decor-explore-spider {
+    top: 0;
+    right: 7%;
+
+    width: 56px;
+
+    transform-origin: top center;
+
+    animation: decor-sway 4.8s ease-in-out infinite;
+    animation-delay: -1.5s;
+}
+
+.decor-tonight-bat {
+    top: 110px;
+    right: 8%;
+
+    width: 52px;
+
+    opacity: 0.22;
+    filter: invert(1) brightness(1.4);
+
+    animation: decor-bob 6.5s ease-in-out infinite;
+    animation-delay: -3s;
+}
+
+.decor-match-skeleton {
+    right: 4%;
+    bottom: 0;
+
+    width: 110px;
+
+    animation: decor-bob 5.5s ease-in-out infinite;
+    animation-delay: -2s;
+}
+
+.decor-favorites-ghost {
+    right: 4%;
+    bottom: 10px;
+
+    width: 90px;
+
+    opacity: 0.85;
+    filter: none;
+
+    animation: decor-bob 6s ease-in-out infinite;
+    animation-delay: -2.4s;
+}
+
+.decor-breeds-bat {
+    top: 8%;
+    right: 6%;
+
+    width: 56px;
+
+    animation: decor-bob 6.8s ease-in-out infinite;
+    animation-delay: -1s;
+}
+
+.decor-grid-spider {
+    top: 0;
+    left: 55%;
+
+    width: 50px;
+
+    transform-origin: top center;
+
+    animation: decor-sway 4.5s ease-in-out infinite;
+    animation-delay: -0.8s;
+}
+
+.decor-intro-spider {
+    top: 0;
+    left: 8%;
+
+    width: 44px;
+
+    transform-origin: top center;
+
+    animation: decor-sway 4.1s ease-in-out infinite;
+    animation-delay: -1.3s;
+}
+
+.decor-cta-spider2 {
+    top: 0;
+    left: 6%;
+
+    width: 48px;
+
+    transform-origin: top center;
+
+    animation: decor-sway 4.6s ease-in-out infinite;
+    animation-delay: -0.5s;
+}
+
+.decor-detail-bat {
+    top: -20px;
+    right: 0;
+
+    width: 50px;
+
+    animation: decor-bob 6.2s ease-in-out infinite;
+}
+
+.decor-rating-skeleton {
+    right: 0;
+    bottom: 0;
+
+    width: 70px;
+
+    opacity: 0.6;
+    filter: none;
+
+    animation: decor-bob 5.8s ease-in-out infinite;
+    animation-delay: -1.6s;
+}
+
+.decor-cta-spider {
+    top: 0;
+    right: 6%;
+
+    width: 50px;
+
+    transform-origin: top center;
+
+    animation: decor-sway 4.4s ease-in-out infinite;
+}
+
+.decor-quiz-bat {
+    top: -10px;
+    right: 2%;
+
+    width: 54px;
+
+    opacity: 0.5;
+
+    animation: decor-bob 6.6s ease-in-out infinite;
+    animation-delay: -2s;
+}
+
+.decor-quiz-skeleton {
+    left: 2%;
+    bottom: 0;
+
+    width: 90px;
+
+    animation: decor-bob 5.4s ease-in-out infinite;
+    animation-delay: -0.6s;
+}
+
+.decor-results-ghost {
+    top: -55px;
+    right: 4%;
+
+    width: 64px;
+
+    opacity: 0.85;
+    filter: none;
+
+    animation: decor-bob 6.4s ease-in-out infinite;
+}
+
+.decor-more-matches-spider {
+    top: 0;
+    left: 4%;
+
+    width: 48px;
+
+    transform-origin: top center;
+
+    animation: decor-sway 4.7s ease-in-out infinite;
+    animation-delay: -2.2s;
+}
+
+.decor-favorites-bitemarks {
+    top: 0;
+    right: 0;
+
+    width: 64px;
+
+    opacity: 0.85;
+    filter: none;
+    transform: rotate(6deg);
+}
+
+.decor-match-bitemarks {
+    top: 20px;
+    right: 20px;
+
+    width: 64px;
+
+    opacity: 0.9;
+    filter: none;
+    transform: rotate(10deg);
+}
+
+.decor-favorites-skeleton {
+    right: 4%;
+    bottom: 0;
+
+    width: 80px;
+
+    opacity: 0.6;
+    filter: none;
+
+    animation: decor-bob 5.6s ease-in-out infinite;
+    animation-delay: -1.2s;
+}
+
+@keyframes decor-bob {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(3deg); }
+}
+
+@keyframes decor-sway {
+    0%, 100% { transform: rotate(-7deg); }
+    50% { transform: rotate(7deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-decor {
+        animation: none;
+    }
+}
+
+@media (max-width: 900px) {
+    .page-decor {
+        display: none;
+    }
 }
 
 
@@ -1955,6 +2454,22 @@ fieldset label:has(input:focus-visible) {
 
     .breed-filters {
         grid-template-columns: 1fr;
+    }
+
+
+    /* Tonight's cat */
+
+    .tonight-cat-card {
+        grid-template-columns: 1fr;
+        gap: 28px;
+
+        padding: 28px;
+        text-align: center;
+    }
+
+    .tonight-cat-image {
+        max-width: 260px;
+        margin: 0 auto;
     }
 
 
