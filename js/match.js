@@ -1,38 +1,38 @@
 const questions = [
     {
         key: "energy",
-        question: "What's your energy?",
-        description: "How active do you want your cat to be?",
+        question: "When the moon is out, what's your energy?",
+        description: "How active do you want your familiar to be?",
         answers: [
-            { label: "Low — Professional napper.", value: 1 },
-            { label: "Medium — Play now. Nap later.", value: 3 },
+            { label: "Low — Curled up in a quiet corner.", value: 1 },
+            { label: "Medium — A little mischief, then rest.", value: 3 },
             { label: "High — Chaos is a lifestyle.", value: 5 }
         ]
     },
     {
         key: "social",
-        question: "How social should your cat be?",
-        description: "How much company should your cat want?",
+        question: "Where would you rather be after dark?",
+        description: "How much company should your familiar want?",
         answers: [
-            { label: "Independent", value: 1 },
-            { label: "Balanced", value: 3 },
-            { label: "Very social", value: 5 }
+            { label: "Alone in my mysterious lair", value: 1 },
+            { label: "Somewhere cozy with one person", value: 3 },
+            { label: "At a party with everyone", value: 5 }
         ]
     },
     {
         key: "affection",
-        question: "How affectionate?",
+        question: "How affectionate is your familiar?",
         description: "How much cuddling are you looking for?",
         answers: [
-            { label: "A little", value: 1 },
-            { label: "Some affection", value: 3 },
-            { label: "Maximum cuddles", value: 5 }
+            { label: "A little — keeps its distance.", value: 1 },
+            { label: "Some affection, on its own terms.", value: 3 },
+            { label: "Maximum cuddles.", value: 5 }
         ]
     },
     {
         key: "playfulness",
-        question: "How playful?",
-        description: "How much playtime fits your lifestyle?",
+        question: "How playful is your familiar?",
+        description: "How much mischief fits your lifestyle?",
         answers: [
             { label: "Low", value: 1 },
             { label: "Medium", value: 3 },
@@ -41,7 +41,7 @@ const questions = [
     },
     {
         key: "coat",
-        question: "What coat do you prefer?",
+        question: "What coat suits your familiar?",
         description: "Choose your preferred coat type.",
         answers: [
             { label: "Short hair", value: "short" },

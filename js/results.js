@@ -41,9 +41,11 @@ setupMatchHistoryToggle(historyToggle, historyPanel, historyList, clearHistoryBu
 function renderResults(matches) {
     const bestMatch = matches[0];
 
+    const role = bestMatch.halloweenRole;
+
     bestMatchContainer.innerHTML = `
         <p class="match-label">
-            Best Match
+            Your Halloween Familiar
         </p>
 
         <div class="match-image">
@@ -53,12 +55,16 @@ function renderResults(matches) {
                 decoding="async">
         </div>
 
+        <img src="images/bite-marks.png" alt="" aria-hidden="true" class="page-decor decor-match-bitemarks" loading="lazy">
+
         <h2>
             ${bestMatch.name}
         </h2>
 
+        ${role ? `<p class="breed-halloween-role">${role.title}</p>` : ""}
+
         <p>
-            ${bestMatch.personality.map(capitalize).join(" · ")}
+            ${role ? role.tagline : bestMatch.personality.map(capitalize).join(" · ")}
         </p>
 
         <p class="match-score">
@@ -67,7 +73,7 @@ function renderResults(matches) {
 
         <div class="match-actions">
             <a href="breed.html?id=${bestMatch.id}" class="button">
-                View Breed
+                Discover ${bestMatch.name}
             </a>
 
             <button

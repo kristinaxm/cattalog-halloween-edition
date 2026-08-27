@@ -721,6 +721,12 @@ function createBreedCard(breed, { subtitle, onFavoriteToggle } = {}) {
                 </button>
             </div>
 
+            ${breed.halloweenRole ? `
+                <p class="breed-halloween-role">
+                    ${breed.halloweenRole.title}
+                </p>
+            ` : ""}
+
             <p>
                 ${subtitle ?? `
                     ${formatCoat(breed.coat)} ·

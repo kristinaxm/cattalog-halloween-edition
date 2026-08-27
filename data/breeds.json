@@ -24,6 +24,10 @@
     "about": "Ragdolls were developed in California in the 1960s and are prized for their striking blue eyes and plush semi-long coat. They're famously docile, often following their owners from room to room and settling happily into a lap for hours.",
     "description": "A gentle and affectionate breed that enjoys being close to people.",
     "vibe": "Soft looks. Zero personal space.",
+    "halloweenRole": {
+      "title": "The Gentle Ghost",
+      "tagline": "Drifts from room to room and haunts your lap."
+    },
     "image": "images/ragdoll.png"
   },
 
@@ -52,6 +56,10 @@
     "about": "Native to the United States and one of the oldest natural breeds in North America, the Maine Coon is built for cold climates with a shaggy, water-resistant coat and tufted paws. Despite their imposing size, they're known as gentle giants with a playful, dog-like temperament.",
     "description": "A large, friendly and playful breed known for its social personality.",
     "vibe": "Big cat. Bigger personality.",
+    "halloweenRole": {
+      "title": "The Forest Witch",
+      "tagline": "Gentle, confident and quietly powerful."
+    },
     "image": "images/maine-coon.png"
   },
 
@@ -80,6 +88,10 @@
     "about": "One of the oldest and most recognizable Asian cat breeds, the Siamese originated in Thailand (formerly Siam) and became popular worldwide for its striking color-point coat and piercing blue eyes. They form intense bonds with their people and aren't shy about voicing their opinions.",
     "description": "A vocal and social breed that loves attention and interaction.",
     "vibe": "Has opinions. Will share them.",
+    "halloweenRole": {
+      "title": "The Fortune Teller",
+      "tagline": "Always has something to tell you."
+    },
     "image": "images/siamese.png"
   },
 
@@ -108,6 +120,10 @@
     "about": "Bred by crossing domestic cats with the Asian leopard cat, Bengals carry a wild look with a distinctly domestic temperament. They're highly intelligent and athletic, and often enjoy water, climbing and interactive play more than the average housecat.",
     "description": "An energetic and curious breed that loves climbing, exploring and playing.",
     "vibe": "Chaos, but make it elegant.",
+    "halloweenRole": {
+      "title": "The Night Hunter",
+      "tagline": "Wild by moonlight, elegant by nature."
+    },
     "image": "images/bengal.png"
   },
 
@@ -135,6 +151,10 @@
     "about": "A classic English breed with roots tracing back to Roman times, the British Shorthair is known for its dense, plush coat and round, teddy-bear face. They're easygoing and independent, content to relax nearby rather than demand constant attention.",
     "description": "A calm and independent breed that enjoys company without demanding constant attention.",
     "vibe": "Unbothered. Always.",
+    "halloweenRole": {
+      "title": "The Cheshire Cat",
+      "tagline": "Unbothered, even by the supernatural."
+    },
     "image": "images/british-shorthair.png"
   },
 
@@ -163,6 +183,10 @@
     "about": "Developed in Canada in the 1960s from a natural hairless mutation, the Sphynx is anything but low-maintenance — their bare skin means they crave warmth, sunlight and close physical contact. They're playful and people-oriented, often described as more dog-like than cat-like.",
     "description": "An affectionate and outgoing breed that enjoys warmth, attention and company.",
     "vibe": "No fur. No boundaries.",
+    "halloweenRole": {
+      "title": "The Ancient Spirit",
+      "tagline": "No fur, no fear, endless warmth."
+    },
     "image": "images/sphynx.png"
   },
 
@@ -190,6 +214,10 @@
     "about": "One of the oldest cat breeds, the Persian has been prized for centuries for its luxurious long coat and sweet, gentle expression. They favor a calm, predictable routine and are happiest curled up in a quiet corner of the home.",
     "description": "A quiet and affectionate breed that prefers a calm and comfortable environment.",
     "vibe": "High maintenance. Worth it.",
+    "halloweenRole": {
+      "title": "The Vampire Countess",
+      "tagline": "High maintenance royalty. Worth it."
+    },
     "image": "images/persian.png"
   },
 
@@ -217,6 +245,10 @@
     "about": "With a lineage often linked to ancient Egypt, the Abyssinian has a distinctive ticked coat that gives it a wild, foxlike appearance. They're endlessly curious and athletic, happiest when given plenty of space to climb, explore and investigate.",
     "description": "An intelligent and energetic breed that loves exploring and staying active.",
     "vibe": "Curiosity with four legs.",
+    "halloweenRole": {
+      "title": "The Ancient Guardian",
+      "tagline": "Watchful, wild-eyed and ever curious."
+    },
     "image": "images/abyssinian.png"
   }
 ]

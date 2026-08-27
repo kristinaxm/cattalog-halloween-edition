@@ -45,6 +45,13 @@ function renderBreed(breed) {
 
     document.querySelector("#breed-name").textContent = breed.name;
 
+    const halloweenRoleEl = document.querySelector("#breed-halloween-role");
+
+    if (breed.halloweenRole) {
+        halloweenRoleEl.textContent = breed.halloweenRole.title;
+        halloweenRoleEl.hidden = false;
+    }
+
     document.querySelector("#breed-traits").textContent =
         breed.personality.map(capitalize).join(" · ");
 

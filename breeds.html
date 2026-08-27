@@ -21,6 +21,9 @@
     <!-- INTRO -->
     <section class="page-intro">
 
+        <img src="images/bat.png" alt="" aria-hidden="true" class="page-decor decor-breeds-bat" loading="lazy">
+        <img src="images/spider.png" alt="" aria-hidden="true" class="page-decor decor-intro-spider" loading="lazy">
+
         <p class="section-label">
             The Cattalog
         </p>
@@ -32,11 +35,15 @@
             Explore them all and find your favorites.
         </p>
 
+        <p class="breed-count-summary" id="breed-count-summary"></p>
+
     </section>
 
 
     <!-- BREED BROWSER -->
     <section class="breed-browser">
+
+        <img src="images/spider2.png" alt="" aria-hidden="true" class="page-decor decor-grid-spider" loading="lazy">
 
         <!--
             JavaScript builds the search input
@@ -46,11 +53,44 @@
         </div>
 
 
+        <p class="breed-results-count" id="breed-results-count"></p>
+
+
         <!--
             JavaScript will create ALL breed cards
             from breeds.json here.
         -->
         <div class="breed-grid" id="breed-grid">
+        </div>
+
+    </section>
+
+
+    <!-- QUIZ CTA -->
+    <section class="match-section">
+
+        <img src="images/cat-skeleton.png" alt="" aria-hidden="true" class="page-decor decor-match-skeleton" loading="lazy">
+        <img src="images/spider2.png" alt="" aria-hidden="true" class="page-decor decor-cta-spider2" loading="lazy">
+
+        <div class="match-content">
+
+            <p class="section-label">
+                Still Deciding?
+            </p>
+
+            <h2>
+                Let us find your match.
+            </h2>
+
+            <p>
+                Answer a few quick questions about your lifestyle
+                and we'll match you with your purrfect breed.
+            </p>
+
+            <a href="match.html" class="button">
+                Start the Quiz
+            </a>
+
         </div>
 
     </section>

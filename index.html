@@ -21,7 +21,26 @@
     <!-- HERO -->
     <section class="hero">
 
+        <svg class="hero-decor" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <g fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.9">
+                <path d="M0,0 L100,55" />
+                <path d="M0,0 L70,100" />
+                <path d="M0,0 L30,100" />
+                <path d="M0,0 L100,15" />
+                <path d="M0,0 Q10,10 8,22 Q20,20 26,32 Q14,34 14,46 Q28,42 34,54" />
+                <path d="M0,0 Q22,4 24,18 Q40,14 45,30 Q30,32 32,48" />
+                <path d="M0,0 Q38,2 42,12 Q58,10 62,24" />
+            </g>
+        </svg>
+
+        <img src="images/bat.png" alt="" aria-hidden="true" class="page-decor decor-hero-bat">
+        <img src="images/spider.png" alt="" aria-hidden="true" class="page-decor decor-hero-spider">
+
         <div class="hero-content">
+
+            <p class="halloween-badge">
+                Halloween Edition
+            </p>
 
             <p class="section-label">
                 The modern cat breed index
@@ -31,6 +50,10 @@
                 Cats with
                 <span>character.</span>
             </h1>
+
+            <p class="hero-subtitle">
+                A little more mysterious after dark.
+            </p>
 
             <p class="hero-description">
                 Discover cat breeds, explore their personalities
@@ -49,21 +72,21 @@
             <div class="hero-image hero-image-main">
                 <img
                         src="images/hero-main.png"
-                        alt="Ragdoll cat"
+                        alt="Siamese cat sitting among pumpkins, skulls and candles"
                         decoding="async">
             </div>
 
             <div class="hero-image hero-image-secondary">
                 <img
                         src="images/hero-secondary.png"
-                        alt="Grey cat"
+                        alt="Maine Coon cat resting among Halloween decorations"
                         decoding="async">
             </div>
 
             <div class="hero-image hero-image-small">
                 <img
                         src="images/hero-small.png"
-                        alt="Tabby cat"
+                        alt="Black cat under a full moon with bats"
                         decoding="async">
             </div>
 
@@ -74,6 +97,8 @@
 
     <!-- EXPLORE -->
     <section class="breed-discovery" id="explore">
+
+        <img src="images/spider2.png" alt="" aria-hidden="true" class="page-decor decor-explore-spider" loading="lazy">
 
         <header class="section-header">
             <p class="section-label">Explore</p>
@@ -110,8 +135,26 @@
     </section>
 
 
+    <!-- TONIGHT'S CAT -->
+    <section class="tonight-cat">
+
+        <!--
+            JavaScript picks a breed for today
+            and fills the card here.
+        -->
+        <div class="tonight-cat-card" id="tonight-cat-card">
+            <p>Loading tonight's cat...</p>
+        </div>
+
+        <img src="images/bat2.png" alt="" aria-hidden="true" class="page-decor decor-tonight-bat" loading="lazy">
+
+    </section>
+
+
     <!-- MATCH -->
     <section class="match-section">
+
+        <img src="images/cat-skeleton.png" alt="" aria-hidden="true" class="page-decor decor-match-skeleton" loading="lazy">
 
         <div class="match-content">
 
@@ -139,6 +182,8 @@
 
     <!-- FAVORITES PREVIEW -->
     <section class="favorites-preview">
+
+        <img src="images/cute-ghost.png" alt="" aria-hidden="true" class="page-decor decor-favorites-ghost" loading="lazy">
 
         <header class="section-header">
             <p class="section-label">Saved</p>

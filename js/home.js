@@ -2,6 +2,7 @@ let breeds = [];
 
 const breedResults = document.querySelector("#home-breed-results");
 const favoritesPreview = document.querySelector("#favorites-preview");
+const tonightsCatCard = document.querySelector("#tonight-cat-card");
 
 
 loadBreeds(
@@ -10,6 +11,7 @@ loadBreeds(
 
         renderBreeds(breeds.slice(0, 3));
         renderFavoritesPreview();
+        renderTonightsCat(breeds);
     },
     () => {
         breedResults.innerHTML = `
@@ -17,6 +19,38 @@ loadBreeds(
         `;
     }
 );
+
+
+function renderTonightsCat(breedList) {
+    if (!tonightsCatCard || breedList.length === 0) {
+        return;
+    }
+
+    const startOfYear = new Date(new Date().getFullYear(), 0, 0);
+    const dayOfYear = Math.floor((new Date() - startOfYear) / 86400000);
+    const breed = breedList[dayOfYear % breedList.length];
+    const role = breed.halloweenRole;
+
+    tonightsCatCard.innerHTML = `
+        <div class="tonight-cat-image">
+            <img src="${breed.image}" alt="${breed.name}" decoding="async">
+        </div>
+
+        <div>
+            <p class="tonight-cat-label">Tonight's Cat</p>
+
+            <h2>${breed.name}</h2>
+
+            ${role ? `<p class="tonight-cat-role">${role.title}</p>` : ""}
+
+            <p>${role ? role.tagline : breed.description}</p>
+
+            <a href="breed.html?id=${breed.id}" class="button">
+                Explore Breed →
+            </a>
+        </div>
+    `;
+}
 
 
 function renderBreeds(breedList) {
