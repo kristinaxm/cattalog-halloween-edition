@@ -2206,26 +2206,45 @@ fieldset label:has(input:focus-visible) {
     animation-delay: -2.2s;
 }
 
-.decor-favorites-bitemarks {
+.decor-favorites-spider {
     top: 0;
-    right: 0;
+    left: 9%;
 
-    width: 64px;
+    width: 44px;
 
-    opacity: 0.85;
-    filter: none;
-    transform: rotate(6deg);
+    transform-origin: top center;
+
+    animation: decor-sway 4.3s ease-in-out infinite;
+    animation-delay: -0.9s;
 }
 
-.decor-match-bitemarks {
-    top: 20px;
-    right: 20px;
+.decor-favorites-spider2 {
+    top: 0;
+    right: 12%;
 
-    width: 64px;
+    width: 52px;
+
+    transform-origin: top center;
+
+    animation: decor-sway 4.9s ease-in-out infinite;
+    animation-delay: -2.1s;
+}
+
+.breed-card-bitten {
+    position: relative;
+}
+
+.decor-card-bitemarks {
+    top: 8px;
+    right: 8px;
+
+    width: 56px;
 
     opacity: 0.9;
     filter: none;
-    transform: rotate(10deg);
+    transform: rotate(8deg);
+
+    z-index: 2;
 }
 
 .decor-favorites-skeleton {

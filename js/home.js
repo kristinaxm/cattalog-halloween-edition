@@ -58,6 +58,8 @@ function renderBreeds(breedList) {
         emptyMessage: "No breeds match your filters.",
         getCardOptions: () => ({ onFavoriteToggle: renderFavoritesPreview })
     });
+
+    placeBiteMarksOnRandomCard(breedResults);
 }
 
 

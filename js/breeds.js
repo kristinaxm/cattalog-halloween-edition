@@ -30,6 +30,8 @@ function renderBreeds(breedList) {
     renderBreedGrid(breedGrid, breedList, {
         emptyMessage: "No breeds match your filters."
     });
+
+    placeBiteMarksOnRandomCard(breedGrid);
 }
 
 

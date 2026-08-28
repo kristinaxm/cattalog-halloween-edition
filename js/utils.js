@@ -908,3 +908,28 @@ function renderBreedGrid(container, breeds, { emptyMessage, emptyClassName, getC
         container.appendChild(card);
     });
 }
+
+
+function placeBiteMarksOnRandomCard(container) {
+    if (!container) {
+        return;
+    }
+
+    const cards = container.querySelectorAll(".breed-card");
+
+    if (cards.length === 0) {
+        return;
+    }
+
+    const card = cards[Math.floor(Math.random() * cards.length)];
+    card.classList.add("breed-card-bitten");
+
+    const biteMarks = document.createElement("img");
+    biteMarks.src = "images/bite-marks.png";
+    biteMarks.alt = "";
+    biteMarks.setAttribute("aria-hidden", "true");
+    biteMarks.loading = "lazy";
+    biteMarks.className = "page-decor decor-card-bitemarks";
+
+    card.appendChild(biteMarks);
+}
