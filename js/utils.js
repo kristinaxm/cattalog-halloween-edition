@@ -288,6 +288,14 @@ function renderBreedFilterUI(container, idPrefix = "") {
                 </select>
             </div>
         </div>
+
+        <button
+            type="button"
+            class="clear-filters-button"
+            id="${id("clear-filters")}"
+            hidden>
+            Clear filters
+        </button>
     `;
 
     return {
@@ -296,42 +304,147 @@ function renderBreedFilterUI(container, idPrefix = "") {
         energyFilter: container.querySelector(`#${id("energy-filter")}`),
         sizeFilter: container.querySelector(`#${id("size-filter")}`),
         personalityFilter: container.querySelector(`#${id("personality-filter")}`),
-        sortSelect: container.querySelector(`#${id("sort")}`)
+        sortSelect: container.querySelector(`#${id("sort")}`),
+        clearButton: container.querySelector(`#${id("clear-filters")}`)
+    };
+}
+
+
+function getFilterValues(elements) {
+    return {
+        searchTerm: elements.searchInput.value,
+        coat: elements.coatFilter.value,
+        energy: elements.energyFilter.value,
+        size: elements.sizeFilter.value,
+        personality: elements.personalityFilter.value,
+        sort: elements.sortSelect.value
     };
 }
 
 
 function setupBreedFilterUI(elements, onChange) {
-    const {
-        searchInput,
-        coatFilter,
-        energyFilter,
-        sizeFilter,
-        personalityFilter,
-        sortSelect
-    } = elements;
-
-    function getFilters() {
-        return {
-            searchTerm: searchInput.value,
-            coat: coatFilter.value,
-            energy: energyFilter.value,
-            size: sizeFilter.value,
-            personality: personalityFilter.value,
-            sort: sortSelect.value
-        };
+    function syncClearButton(filters) {
+        if (elements.clearButton) {
+            elements.clearButton.hidden = filtersToQuery(filters) === "";
+        }
     }
 
     function handleChange() {
-        onChange(getFilters());
+        const filters = getFilterValues(elements);
+
+        syncClearButton(filters);
+        onChange(filters);
     }
 
-    searchInput.addEventListener("input", handleChange);
-    coatFilter.addEventListener("change", handleChange);
-    energyFilter.addEventListener("change", handleChange);
-    sizeFilter.addEventListener("change", handleChange);
-    personalityFilter.addEventListener("change", handleChange);
-    sortSelect.addEventListener("change", handleChange);
+    elements.searchInput.addEventListener("input", handleChange);
+    elements.coatFilter.addEventListener("change", handleChange);
+    elements.energyFilter.addEventListener("change", handleChange);
+    elements.sizeFilter.addEventListener("change", handleChange);
+    elements.personalityFilter.addEventListener("change", handleChange);
+    elements.sortSelect.addEventListener("change", handleChange);
+
+    if (elements.clearButton) {
+        elements.clearButton.addEventListener("click", () => {
+            applyFiltersToUI(elements, { searchTerm: "", ...FILTER_DEFAULTS });
+            handleChange();
+        });
+    }
+
+    // Filters may arrive pre-filled from the URL, so set the button's
+    // initial visibility without firing a render.
+    syncClearButton(getFilterValues(elements));
+}
+
+
+/* Filters that can travel in the URL (search + the selects, minus sort). */
+const URL_FILTER_KEYS = ["coat", "energy", "size", "personality"];
+
+const FILTER_DEFAULTS = {
+    coat: "all",
+    energy: "all",
+    size: "all",
+    personality: "all",
+    sort: "featured"
+};
+
+
+function hasActiveFilters(filters) {
+    if (filters.searchTerm && filters.searchTerm.trim() !== "") {
+        return true;
+    }
+
+    return URL_FILTER_KEYS.some(key => {
+        const value = filters[key];
+        return value && value !== FILTER_DEFAULTS[key];
+    });
+}
+
+
+function filtersToQuery(filters) {
+    const params = new URLSearchParams();
+
+    if (filters.searchTerm && filters.searchTerm.trim() !== "") {
+        params.set("search", filters.searchTerm.trim());
+    }
+
+    URL_FILTER_KEYS.forEach(key => {
+        const value = filters[key];
+
+        if (value && value !== FILTER_DEFAULTS[key]) {
+            params.set(key, value);
+        }
+    });
+
+    if (filters.sort && filters.sort !== FILTER_DEFAULTS.sort) {
+        params.set("sort", filters.sort);
+    }
+
+    return params.toString();
+}
+
+
+function readFiltersFromQuery() {
+    const params = new URLSearchParams(window.location.search);
+    const filters = {};
+
+    if (params.has("search")) {
+        filters.searchTerm = params.get("search");
+    }
+
+    [...URL_FILTER_KEYS, "sort"].forEach(key => {
+        if (params.has(key)) {
+            filters[key] = params.get(key);
+        }
+    });
+
+    return filters;
+}
+
+
+function applyFiltersToUI(elements, filters) {
+    if (typeof filters.searchTerm === "string") {
+        elements.searchInput.value = filters.searchTerm;
+    }
+
+    setSelectValue(elements.coatFilter, filters.coat);
+    setSelectValue(elements.energyFilter, filters.energy);
+    setSelectValue(elements.sizeFilter, filters.size);
+    setSelectValue(elements.personalityFilter, filters.personality);
+    setSelectValue(elements.sortSelect, filters.sort);
+}
+
+
+function setSelectValue(select, value) {
+    if (value === undefined) {
+        return;
+    }
+
+    const isValidOption = Array.from(select.options)
+        .some(option => option.value === value);
+
+    if (isValidOption) {
+        select.value = value;
+    }
 }
 
 
@@ -553,6 +666,17 @@ function formatHistoryDate(isoDate) {
 }
 
 
+function formatCommentDate(isoDate) {
+    return new Date(isoDate).toLocaleString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+}
+
+
 function setupMatchHistoryToggle(toggle, panel, historyListEl, clearButton) {
     function render() {
         const history = getMatchHistory();
@@ -670,6 +794,18 @@ function setRating(breedId, value) {
 }
 
 
+function clearRating(breedId) {
+    const ratings = getAllRatings();
+    delete ratings[breedId];
+
+    try {
+        localStorage.setItem("ratings", JSON.stringify(ratings));
+    } catch (error) {
+        console.error("Could not clear rating:", error);
+    }
+}
+
+
 /* =========================
    COMMENTS
 ========================= */
@@ -717,13 +853,14 @@ function addComment(breedId, comment) {
 function createBreedCard(breed, { subtitle, onFavoriteToggle } = {}) {
     const article = document.createElement("article");
     article.classList.add("breed-card");
+    article.dataset.breedId = breed.id;
 
     article.innerHTML = `
         <button
             type="button"
             class="breed-image breed-image-button"
             aria-label="Quick look: ${breed.name}">
-            <img src="${breed.image}" alt="" loading="lazy" decoding="async">
+            <img src="${breed.image}" alt="${breed.name}" loading="lazy" decoding="async">
             <span class="breed-image-hint">
                 <span class="hint-description">${breed.description}</span>
 
@@ -941,18 +1078,27 @@ function renderBreedGrid(container, breeds, { emptyMessage, emptyClassName, getC
 }
 
 
-function placeBiteMarksOnRandomCard(container) {
-    if (!container) {
+function pickRandomBreedId(breedList) {
+    if (!breedList || breedList.length === 0) {
+        return null;
+    }
+
+    return breedList[Math.floor(Math.random() * breedList.length)].id;
+}
+
+
+/* Marks one specific card so the bite stays put across re-renders. */
+function placeBiteMarks(container, breedId) {
+    if (!container || !breedId) {
         return;
     }
 
-    const cards = container.querySelectorAll(".breed-card");
+    const card = container.querySelector(`.breed-card[data-breed-id="${breedId}"]`);
 
-    if (cards.length === 0) {
+    if (!card) {
         return;
     }
 
-    const card = cards[Math.floor(Math.random() * cards.length)];
     card.classList.add("breed-card-bitten");
 
     const biteMarks = document.createElement("img");
@@ -964,3 +1110,112 @@ function placeBiteMarksOnRandomCard(container) {
 
     card.appendChild(biteMarks);
 }
+
+
+/* =========================
+   SCROLL
+========================= */
+
+function prefersReducedMotion() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+
+let activeScrollFrame = null;
+
+function cancelActiveScroll() {
+    if (activeScrollFrame !== null) {
+        cancelAnimationFrame(activeScrollFrame);
+        activeScrollFrame = null;
+    }
+}
+
+// Let a manual scroll (wheel / touch / keys) interrupt an animated one.
+["wheel", "touchmove", "keydown"].forEach(type => {
+    window.addEventListener(type, cancelActiveScroll, { passive: true });
+});
+
+
+/*
+   Gentle animated scroll to an absolute Y position. The pace is deliberately
+   a little slower than the browser default; duration scales with distance
+   and is capped. Reduced-motion jumps straight there.
+*/
+function animateScrollTo(targetY) {
+    cancelActiveScroll();
+
+    const startY = window.scrollY;
+    const maxY = document.documentElement.scrollHeight - window.innerHeight;
+    const endY = Math.max(0, Math.min(targetY, maxY));
+    const distance = endY - startY;
+
+    if (prefersReducedMotion() || Math.abs(distance) < 4) {
+        window.scrollTo(0, endY);
+        return;
+    }
+
+    const duration = Math.min(1100, Math.max(550, Math.abs(distance) * 1.1));
+    const ease = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+    let elapsed = 0;
+    let lastNow = null;
+
+    function step(now) {
+        if (lastNow === null) {
+            lastNow = now;
+        }
+
+        // Cap the per-frame step so a stutter during page load can't snap the
+        // scroll forward — it just stretches the animation a touch instead.
+        elapsed += Math.min(now - lastNow, 32);
+        lastNow = now;
+
+        const progress = Math.min(elapsed / duration, 1);
+
+        window.scrollTo(0, startY + distance * ease(progress));
+
+        activeScrollFrame = progress < 1 ? requestAnimationFrame(step) : null;
+    }
+
+    activeScrollFrame = requestAnimationFrame(step);
+}
+
+
+/*
+   Eases the viewport down to the main content on load / after an action.
+   Skips it if the visitor has already scrolled (e.g. used the back button).
+   Pass { force: true } to scroll regardless, e.g. when stepping through the quiz.
+*/
+function scrollToContent(target, offset = 40, { force = false } = {}) {
+    const element =
+        typeof target === "string" ? document.querySelector(target) : target;
+
+    if (!element || (!force && window.scrollY > 10)) {
+        return;
+    }
+
+    const top = element.getBoundingClientRect().top + window.scrollY - offset;
+
+    animateScrollTo(top);
+}
+
+
+/* In-page anchor links (e.g. "Browse Breeds" -> #explore) use the same pace. */
+document.addEventListener("click", event => {
+    const link = event.target.closest('a[href^="#"]');
+
+    if (!link) {
+        return;
+    }
+
+    const id = link.getAttribute("href").slice(1);
+    const target = id && document.getElementById(id);
+
+    if (!target) {
+        return;
+    }
+
+    event.preventDefault();
+    animateScrollTo(target.getBoundingClientRect().top + window.scrollY - 24);
+    history.pushState(null, "", `#${id}`);
+});

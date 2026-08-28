@@ -41,7 +41,7 @@ loadBreeds(
 
 
 function renderBreed(breed) {
-    document.title = `${breed.name} | CATTALOG`;
+    document.title = `${breed.name} | CATTALOG — Halloween Edition`;
 
     document.querySelector("#breed-name").textContent = breed.name;
 
@@ -100,6 +100,8 @@ function renderBreed(breed) {
 
     renderComments(breed.id);
     setupCommentForm(breed.id);
+
+    scrollToContent(".breed-detail", 64);
 }
 
 
@@ -110,33 +112,49 @@ function renderBreed(breed) {
 function setupRatingWidget(breedId) {
     const widget = document.querySelector("#rating-widget");
     const summary = document.querySelector("#rating-summary");
+    const clearButton = document.querySelector("#rating-clear");
+
+    // Build the five star buttons once; hovering/focus/clicking only repaints them.
+    widget.innerHTML = [1, 2, 3, 4, 5]
+        .map(value => `
+            <button
+                type="button"
+                class="rating-star"
+                data-value="${value}"
+                aria-label="Rate ${value} out of 5 stars">
+                ☆
+            </button>
+        `)
+        .join("");
+
+    const stars = [...widget.querySelectorAll(".rating-star")];
+
+    function paintStars(upTo) {
+        stars.forEach(star => {
+            star.textContent = Number(star.dataset.value) <= upTo ? "★" : "☆";
+        });
+    }
 
     function render() {
         const rating = getRating(breedId);
 
-        widget.innerHTML = [1, 2, 3, 4, 5]
-            .map(value => `
-                <button
-                    type="button"
-                    class="rating-star"
-                    data-value="${value}"
-                    aria-label="Rate ${value} out of 5 stars"
-                    aria-pressed="${rating === value}">
-                    ${rating !== null && value <= rating ? "★" : "☆"}
-                </button>
-            `)
-            .join("");
+        paintStars(rating ?? 0);
+
+        stars.forEach(star => {
+            star.setAttribute("aria-pressed", String(Number(star.dataset.value) === rating));
+        });
 
         summary.textContent = rating
             ? `Your rating: ${rating} / 5`
             : "You haven't rated this breed yet.";
+
+        clearButton.hidden = rating === null;
     }
 
-    function paintStars(upTo) {
-        widget.querySelectorAll(".rating-star").forEach(star => {
-            star.textContent = Number(star.dataset.value) <= upTo ? "★" : "☆";
-        });
-    }
+    clearButton.addEventListener("click", () => {
+        clearRating(breedId);
+        render();
+    });
 
     widget.addEventListener("click", event => {
         const button = event.target.closest(".rating-star");
@@ -146,6 +164,7 @@ function setupRatingWidget(breedId) {
         }
 
         setRating(breedId, Number(button.dataset.value));
+        widget.classList.remove("rating-missing");
         render();
     });
 
@@ -187,15 +206,37 @@ function createCommentArticle(comment) {
     const article = document.createElement("article");
     article.className = "comment";
 
+    const header = document.createElement("div");
+    header.className = "comment-header";
+
     const author = document.createElement("p");
     author.className = "comment-author";
     author.textContent = comment.name;
+    header.appendChild(author);
+
+    if (typeof comment.rating === "number") {
+        const rating = document.createElement("p");
+        rating.className = "comment-rating";
+        rating.textContent =
+            "★".repeat(comment.rating) + "☆".repeat(5 - comment.rating);
+        rating.setAttribute("aria-label", `Rated ${comment.rating} out of 5`);
+        header.appendChild(rating);
+    }
+
+    article.appendChild(header);
+
+    if (comment.date) {
+        const time = document.createElement("time");
+        time.className = "comment-date";
+        time.dateTime = comment.date;
+        time.textContent = formatCommentDate(comment.date);
+        article.appendChild(time);
+    }
 
     const text = document.createElement("p");
     text.className = "comment-text";
     text.textContent = comment.text;
-
-    article.append(author, text);
+    article.appendChild(text);
 
     return article;
 }
@@ -203,7 +244,9 @@ function createCommentArticle(comment) {
 
 function renderComments(breedId) {
     const commentList = document.querySelector("#comment-list");
-    const comments = getComments(breedId);
+
+    // Stored oldest-first; show newest first.
+    const comments = [...getComments(breedId)].reverse();
 
     commentList.innerHTML = "";
 
@@ -283,6 +326,21 @@ function setupCommentForm(breedId) {
 
         const name = nameInput.value.trim();
         const text = textInput.value.trim();
+        const rating = getRating(breedId);
+
+        if (rating === null) {
+            showError("Please rate this breed before posting your comment.");
+
+            const widget = document.querySelector("#rating-widget");
+            widget.classList.add("rating-missing");
+            widget.querySelector(".rating-star")?.focus({ preventScroll: true });
+
+            // The rating sits in its own block — bring it into view if it's off-screen.
+            if (widget.getBoundingClientRect().top < 80) {
+                animateScrollTo(widget.getBoundingClientRect().top + window.scrollY - 120);
+            }
+            return;
+        }
 
         if (name.length < COMMENT_NAME_MIN_LENGTH) {
             showError(`Please enter a name with at least ${COMMENT_NAME_MIN_LENGTH} characters.`);
@@ -304,7 +362,12 @@ function setupCommentForm(breedId) {
 
         hideError();
 
-        addComment(breedId, { name, text });
+        addComment(breedId, {
+            name,
+            text,
+            rating,
+            date: new Date().toISOString()
+        });
         renderComments(breedId);
 
         form.reset();

@@ -41,9 +41,11 @@
 
 
     <!-- BREED BROWSER -->
-    <section class="breed-browser">
+    <section class="breed-browser" aria-labelledby="breed-browser-heading">
 
         <img src="images/spider2.png" alt="" aria-hidden="true" class="page-decor decor-grid-spider" loading="lazy">
+
+        <h2 id="breed-browser-heading" class="visually-hidden">Browse breeds</h2>
 
         <!--
             JavaScript builds the search input
@@ -57,11 +59,20 @@
 
 
         <!--
-            JavaScript will create ALL breed cards
-            from breeds.json here.
+            JavaScript creates a page of breed cards
+            from breeds.json here, then reveals more
+            with the button below.
         -->
         <div class="breed-grid" id="breed-grid">
         </div>
+
+        <button
+                type="button"
+                class="button load-more-button"
+                id="load-more-button"
+                hidden>
+            Show More
+        </button>
 
     </section>
 
