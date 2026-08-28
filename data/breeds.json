@@ -4,7 +4,7 @@
     "name": "Ragdoll",
     "origin": "United States",
     "size": "large",
-    "coat": "long",
+    "coat": "medium",
     "energy": 2,
     "social": 5,
     "affection": 5,
@@ -250,5 +250,421 @@
       "tagline": "Watchful, wild-eyed and ever curious."
     },
     "image": "images/abyssinian.png"
+  },
+
+  {
+    "id": "american-shorthair",
+    "name": "American Shorthair",
+    "origin": "United States",
+    "size": "medium",
+    "coat": "short",
+    "energy": 3,
+    "social": 4,
+    "affection": 4,
+    "playfulness": 3,
+    "personality": [
+      "social",
+      "calm",
+      "affectionate"
+    ],
+    "lifespan": "15–20 years",
+    "grooming": "low",
+    "shedding": "medium",
+    "vocality": "low",
+    "goodWith": ["Families", "Kids", "Dogs", "First-time owners"],
+    "funFact": "American Shorthairs are descended from working cats that sailed with early European settlers to keep ships and barns free of rodents.",
+    "healthNote": "The breed is generally hardy, but is sometimes screened for hypertrophic cardiomyopathy and can be prone to weight gain without enough activity.",
+    "about": "Bred from the sturdy working cats of colonial America, the American Shorthair is an easygoing all-rounder with a dense coat and a broad, friendly face. They adapt to almost any household, staying playful into adulthood without ever being demanding.",
+    "description": "A relaxed and adaptable breed that fits comfortably into busy family life.",
+    "vibe": "Low drama. High tolerance.",
+    "halloweenRole": {
+      "title": "The Barn Watcher",
+      "tagline": "Keeps the mice — and the ghosts — in line."
+    },
+    "image": "images/american-shorthair.png"
+  },
+
+  {
+    "id": "birman",
+    "name": "Birman",
+    "origin": "Myanmar",
+    "size": "medium",
+    "coat": "medium",
+    "energy": 2,
+    "social": 5,
+    "affection": 5,
+    "playfulness": 3,
+    "personality": [
+      "social",
+      "affectionate",
+      "calm"
+    ],
+    "lifespan": "12–16 years",
+    "grooming": "medium",
+    "shedding": "medium",
+    "vocality": "low",
+    "goodWith": ["Families", "Kids", "Other pets", "Seniors"],
+    "funFact": "Every Birman has four white paws, often called \"gloves\", which are part of the breed standard.",
+    "healthNote": "Birmans are sometimes screened for hypertrophic cardiomyopathy and, in some lines, for a hereditary kidney condition.",
+    "about": "Wrapped in legend as the sacred temple cat of Burma, the Birman pairs a pale, silky colour-point coat with deep blue eyes and those signature white gloves. They are gentle, people-focused companions who follow you quietly from room to room.",
+    "description": "A soft-spoken and devoted breed that loves gentle company.",
+    "vibe": "Temple manners. Lap ambitions.",
+    "halloweenRole": {
+      "title": "The Temple Keeper",
+      "tagline": "Sacred, serene and always watching the door."
+    },
+    "image": "images/birman.png"
+  },
+
+  {
+    "id": "burmese",
+    "name": "Burmese",
+    "origin": "Myanmar",
+    "size": "medium",
+    "coat": "short",
+    "energy": 4,
+    "social": 5,
+    "affection": 5,
+    "playfulness": 4,
+    "personality": [
+      "social",
+      "affectionate",
+      "playful"
+    ],
+    "lifespan": "16–18 years",
+    "grooming": "low",
+    "shedding": "low",
+    "vocality": "medium",
+    "goodWith": ["Families", "Kids", "Attention-seekers", "Multi-pet homes"],
+    "funFact": "Nearly every modern Burmese traces back to a single brown cat named Wong Mau, brought to the United States in 1930.",
+    "healthNote": "Some Burmese lines are screened for hypokalaemia and, in flatter-faced show types, for cranial deformities and dental crowding.",
+    "about": "Descended from a temple cat of old Burma, the Burmese is heavier than it looks and utterly devoted to its people. They stay kitten-like for years, riding on shoulders, supervising chores and insisting on being part of every conversation.",
+    "description": "A warm and involved breed that wants to be part of everything you do.",
+    "vibe": "Velvet brick with separation anxiety.",
+    "halloweenRole": {
+      "title": "The Shadow That Follows",
+      "tagline": "Always one step behind you. On purpose."
+    },
+    "image": "images/burmese.png"
+  },
+
+  {
+    "id": "cornish-rex",
+    "name": "Cornish Rex",
+    "origin": "United Kingdom",
+    "size": "small",
+    "coat": "short",
+    "energy": 5,
+    "social": 5,
+    "affection": 4,
+    "playfulness": 5,
+    "personality": [
+      "playful",
+      "social",
+      "affectionate"
+    ],
+    "lifespan": "11–15 years",
+    "grooming": "low",
+    "shedding": "low",
+    "vocality": "medium",
+    "goodWith": ["Active owners", "Warm homes", "Families", "Attention-seekers"],
+    "funFact": "The Cornish Rex has only the soft, wavy undercoat, which makes its fur feel like crushed velvet.",
+    "healthNote": "Their thin coat offers little protection, so they need warmth and sun care, and some lines are screened for hypertrophic cardiomyopathy.",
+    "about": "Born from a single curly kitten on a Cornish farm in 1950, the Cornish Rex is a lean, arched acrobat with huge ears and a permanent look of mischief. They run hot, love a warm lap and rarely slow down.",
+    "description": "A high-energy acrobat that turns any room into a racetrack.",
+    "vibe": "Static cling with a heartbeat.",
+    "halloweenRole": {
+      "title": "The Restless Poltergeist",
+      "tagline": "Knocks things off shelves. Blames the wind."
+    },
+    "image": "images/cornish-rex.png"
+  },
+
+  {
+    "id": "devon-rex",
+    "name": "Devon Rex",
+    "origin": "United Kingdom",
+    "size": "small",
+    "coat": "short",
+    "energy": 5,
+    "social": 5,
+    "affection": 5,
+    "playfulness": 5,
+    "personality": [
+      "playful",
+      "social",
+      "affectionate"
+    ],
+    "lifespan": "9–15 years",
+    "grooming": "low",
+    "shedding": "low",
+    "vocality": "medium",
+    "goodWith": ["Families", "Kids", "Attention-seekers", "Warm homes"],
+    "funFact": "Devon Rex cats are often nicknamed \"pixie cats\" or \"alien cats\" for their huge ears, wide eyes and elfin faces.",
+    "healthNote": "The breed is sometimes screened for hereditary myopathy and hypertrophic cardiomyopathy, and its sparse coat needs protection from cold.",
+    "about": "Discovered in Devon in 1960, this impish breed has loose curls, a slender body and an appetite for climbing to the highest point in any room. Devons bond hard, perch on shoulders and expect to share your dinner.",
+    "description": "A mischievous shoulder-rider that never wants to be left out.",
+    "vibe": "Part cat, part bat, all trouble.",
+    "halloweenRole": {
+      "title": "The Little Gremlin",
+      "tagline": "Big ears, bigger schemes."
+    },
+    "image": "images/devon-rex.png"
+  },
+
+  {
+    "id": "exotic-shorthair",
+    "name": "Exotic Shorthair",
+    "origin": "United States",
+    "size": "medium",
+    "coat": "short",
+    "energy": 2,
+    "social": 4,
+    "affection": 4,
+    "playfulness": 2,
+    "personality": [
+      "calm",
+      "affectionate",
+      "social"
+    ],
+    "lifespan": "12–15 years",
+    "grooming": "medium",
+    "shedding": "medium",
+    "vocality": "low",
+    "goodWith": ["Apartments", "Calm households", "Families", "First-time owners"],
+    "funFact": "The Exotic Shorthair is often called \"the lazy person's Persian\" because it has the Persian's face without the daily coat care.",
+    "healthNote": "Their flat faces can lead to breathing and tear-duct problems, and the breed is commonly screened for polycystic kidney disease.",
+    "about": "Created by crossing Persians with American Shorthairs, the Exotic keeps the round, sweet-faced Persian look in a dense, plush, easy-care coat. They are quiet, affectionate homebodies who like a predictable day.",
+    "description": "A gentle, low-key companion with a teddy-bear face.",
+    "vibe": "Grumpy face. Soft heart.",
+    "halloweenRole": {
+      "title": "The Sleepy Gargoyle",
+      "tagline": "Guards the house without ever getting up."
+    },
+    "image": "images/exotic-shorthair.png"
+  },
+
+  {
+    "id": "norwegian-forest",
+    "name": "Norwegian Forest Cat",
+    "origin": "Norway",
+    "size": "large",
+    "coat": "long",
+    "energy": 3,
+    "social": 4,
+    "affection": 4,
+    "playfulness": 3,
+    "personality": [
+      "calm",
+      "social",
+      "independent"
+    ],
+    "lifespan": "13–16 years",
+    "grooming": "medium",
+    "shedding": "high",
+    "vocality": "low",
+    "goodWith": ["Families", "Kids", "Dogs", "Cold climates"],
+    "funFact": "Known in Norway as the \"skogkatt\", this breed appears in Norse legend as the giant cats that pulled the goddess Freya's chariot.",
+    "healthNote": "The breed is sometimes screened for hypertrophic cardiomyopathy, hip dysplasia and glycogen storage disease type IV.",
+    "about": "Shaped by centuries of Scandinavian winters, the Norwegian Forest Cat has a water-shedding double coat, tufted ears and strong climbing claws. They are calm, confident and affectionate on their own terms, happy to watch the household from a high shelf.",
+    "description": "A hardy, even-tempered climber built for the cold.",
+    "vibe": "Mountain cat energy. Indoor address.",
+    "halloweenRole": {
+      "title": "The Forest Guardian",
+      "tagline": "Older than the woods, calmer than the storm."
+    },
+    "image": "images/norweigan-forest.png"
+  },
+
+  {
+    "id": "oriental-shorthair",
+    "name": "Oriental Shorthair",
+    "origin": "Thailand",
+    "size": "medium",
+    "coat": "short",
+    "energy": 5,
+    "social": 5,
+    "affection": 5,
+    "playfulness": 5,
+    "personality": [
+      "social",
+      "playful",
+      "affectionate"
+    ],
+    "lifespan": "12–15 years",
+    "grooming": "low",
+    "shedding": "low",
+    "vocality": "high",
+    "goodWith": ["Attention-seekers", "Active owners", "Multi-pet homes", "Experienced owners"],
+    "funFact": "The Oriental Shorthair comes in over 300 colour and pattern combinations, more than almost any other breed.",
+    "healthNote": "As a close relative of the Siamese, the breed can be prone to dental disease, and some lines are screened for progressive retinal atrophy and heart conditions.",
+    "about": "A Siamese in every way but colour, the Oriental Shorthair is a sleek, angular cat with enormous ears and a bottomless need for attention. They talk constantly, open cupboards for sport and fall apart if left alone too long.",
+    "description": "A loud, clever extrovert that never runs out of things to say.",
+    "vibe": "Commentary track for your entire life.",
+    "halloweenRole": {
+      "title": "The Town Crier",
+      "tagline": "Announces every ghost, loudly, at 3am."
+    },
+    "image": "images/oriental-shorthair.png"
+  },
+
+  {
+    "id": "russian-blue",
+    "name": "Russian Blue",
+    "origin": "Russia",
+    "size": "medium",
+    "coat": "short",
+    "energy": 3,
+    "social": 3,
+    "affection": 4,
+    "playfulness": 3,
+    "personality": [
+      "calm",
+      "independent",
+      "affectionate"
+    ],
+    "lifespan": "15–20 years",
+    "grooming": "low",
+    "shedding": "low",
+    "vocality": "low",
+    "goodWith": ["Calm households", "Apartments", "Singles", "Working owners"],
+    "funFact": "Legend says the Russian Blue's ancestors were ship cats from the port of Arkhangelsk, sailed to Britain in the 1860s.",
+    "healthNote": "The breed is one of the healthier pedigrees, though it can be prone to weight gain and benefits from measured feeding.",
+    "about": "Cloaked in a dense, silvery double coat that seems to shimmer, the Russian Blue is reserved with strangers and quietly devoted to its own people. They keep a tidy routine, dislike noise and chaos, and greet you the same way every day.",
+    "description": "A reserved, elegant cat that bonds deeply with a chosen few.",
+    "vibe": "Shy at the door. Attached at the couch.",
+    "halloweenRole": {
+      "title": "The Silver Phantom",
+      "tagline": "Seen for a second, then gone in the mist."
+    },
+    "image": "images/russian-blue.png"
+  },
+
+  {
+    "id": "scottish-fold",
+    "name": "Scottish Fold",
+    "origin": "United Kingdom",
+    "size": "medium",
+    "coat": "short",
+    "energy": 3,
+    "social": 4,
+    "affection": 4,
+    "playfulness": 3,
+    "personality": [
+      "calm",
+      "affectionate",
+      "social"
+    ],
+    "lifespan": "11–15 years",
+    "grooming": "low",
+    "shedding": "medium",
+    "vocality": "low",
+    "goodWith": ["Families", "Kids", "Apartments", "Other pets"],
+    "funFact": "Every Scottish Fold traces back to Susie, a white barn cat found in Perthshire in 1961 with unusual folded ears.",
+    "healthNote": "The gene that folds the ears also affects cartilage throughout the body and can cause a painful degenerative joint disease, so responsible breeding and vet monitoring matter.",
+    "about": "Famous for ears that fold forward into a rounded, owl-like head, the Scottish Fold is a placid, sweet-natured cat that likes to sit in odd flat poses. They are affectionate without being clingy and settle easily into calm homes.",
+    "description": "A mellow, owl-faced companion that enjoys quiet company.",
+    "vibe": "Folded ears. Unfolded affection.",
+    "halloweenRole": {
+      "title": "The Owl Familiar",
+      "tagline": "Perches by the cauldron, blinks slowly, judges softly."
+    },
+    "image": "images/scottish-fold.png"
+  },
+
+  {
+    "id": "siberian",
+    "name": "Siberian",
+    "origin": "Russia",
+    "size": "large",
+    "coat": "long",
+    "energy": 3,
+    "social": 4,
+    "affection": 4,
+    "playfulness": 4,
+    "personality": [
+      "social",
+      "playful",
+      "calm"
+    ],
+    "lifespan": "12–18 years",
+    "grooming": "medium",
+    "shedding": "high",
+    "vocality": "low",
+    "goodWith": ["Families", "Kids", "Dogs", "Cold climates"],
+    "funFact": "Siberians are slow to mature, often taking up to five years to reach their full size and weight.",
+    "healthNote": "The breed is generally robust but is sometimes screened for hypertrophic cardiomyopathy given its size and build.",
+    "about": "Russia's national cat, the Siberian spent centuries as a farm and monastery cat, developing a thick triple coat and a fearless, dog-like temperament. They are strong, agile and playful, often fascinated by water and happy to greet visitors.",
+    "description": "A powerful, friendly breed with a playful, dog-like streak.",
+    "vibe": "Big floof. Bold heart.",
+    "halloweenRole": {
+      "title": "The Snow Sentinel",
+      "tagline": "Trudges through the storm to check on you."
+    },
+    "image": "images/siberian.png"
+  },
+
+  {
+    "id": "tonkinese",
+    "name": "Tonkinese",
+    "origin": "Canada",
+    "size": "medium",
+    "coat": "short",
+    "energy": 4,
+    "social": 5,
+    "affection": 5,
+    "playfulness": 5,
+    "personality": [
+      "social",
+      "playful",
+      "affectionate"
+    ],
+    "lifespan": "12–16 years",
+    "grooming": "low",
+    "shedding": "low",
+    "vocality": "medium",
+    "goodWith": ["Families", "Kids", "Multi-pet homes", "Attention-seekers"],
+    "funFact": "The Tonkinese is a deliberate cross of the Siamese and Burmese, blending the look and voice of both.",
+    "healthNote": "The breed can inherit dental issues and, in some lines, is screened for the heart and eye conditions seen in its parent breeds.",
+    "about": "A mid-century blend of Siamese and Burmese, the Tonkinese keeps the best of both: aqua eyes, a soft mink coat and a chatty, affectionate personality. They are busy, curious and love a good game of fetch.",
+    "description": "A sociable, playful breed that splits the difference between its parents.",
+    "vibe": "Half diplomat. Half chaos gremlin.",
+    "halloweenRole": {
+      "title": "The Mischief Twin",
+      "tagline": "Two breeds' worth of trouble in one coat."
+    },
+    "image": "images/tonkinese.png"
+  },
+
+  {
+    "id": "turkish-angora",
+    "name": "Turkish Angora",
+    "origin": "Turkey",
+    "size": "medium",
+    "coat": "medium",
+    "energy": 4,
+    "social": 4,
+    "affection": 4,
+    "playfulness": 5,
+    "personality": [
+      "playful",
+      "social",
+      "independent"
+    ],
+    "lifespan": "12–18 years",
+    "grooming": "medium",
+    "shedding": "medium",
+    "vocality": "medium",
+    "goodWith": ["Active owners", "Families", "Experienced owners", "Multi-pet homes"],
+    "funFact": "White Turkish Angoras often have odd-coloured eyes, one blue and one amber, and the breed is a national treasure protected by Ankara Zoo.",
+    "healthNote": "White, blue-eyed Angoras can carry hereditary deafness, and the breed is sometimes screened for hypertrophic cardiomyopathy and a rare hereditary ataxia.",
+    "about": "One of the oldest natural semi-longhair breeds, the Turkish Angora has a fine, silky single coat with no heavy undercoat, a plumed tail and a lithe, dancer's build. They are bright, athletic and determined to be in charge of the household.",
+    "description": "A graceful, energetic breed that runs the house on its own terms.",
+    "vibe": "Prima ballerina. Zero notes taken.",
+    "halloweenRole": {
+      "title": "The Pale Enchantress",
+      "tagline": "Moonlit, mismatched eyes that miss nothing."
+    },
+    "image": "images/turkish-angora.png"
   }
 ]
