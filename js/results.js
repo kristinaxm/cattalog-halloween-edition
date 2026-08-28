@@ -55,8 +55,6 @@ function renderResults(matches) {
                 decoding="async">
         </div>
 
-        <img src="images/bite-marks.png" alt="" aria-hidden="true" class="page-decor decor-match-bitemarks" loading="lazy">
-
         <h2>
             ${bestMatch.name}
         </h2>

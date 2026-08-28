@@ -36,6 +36,8 @@ function renderFavorites() {
     });
 
     clearFavoritesButton.hidden = favoriteBreeds.length === 0;
+
+    placeBiteMarksOnRandomCard(favoritesGrid);
 }
 
 
