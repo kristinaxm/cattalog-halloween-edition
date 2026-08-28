@@ -85,6 +85,11 @@ const mainNav = document.querySelector("#main-nav");
 
 if (navToggle && mainNav) {
 
+    const closeNav = () => {
+        mainNav.classList.remove("is-open");
+        setToggleState(false);
+    };
+
     navToggle.addEventListener("click", () => {
         const isOpen = mainNav.classList.toggle("is-open");
 
@@ -93,8 +98,26 @@ if (navToggle && mainNav) {
 
     mainNav.addEventListener("click", event => {
         if (event.target.tagName === "A") {
-            mainNav.classList.remove("is-open");
-            setToggleState(false);
+            closeNav();
+        }
+    });
+
+    // Close on Escape
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && mainNav.classList.contains("is-open")) {
+            closeNav();
+            navToggle.focus();
+        }
+    });
+
+    // Close when tapping outside the menu
+    document.addEventListener("click", event => {
+        if (
+            mainNav.classList.contains("is-open") &&
+            !mainNav.contains(event.target) &&
+            !navToggle.contains(event.target)
+        ) {
+            closeNav();
         }
     });
 

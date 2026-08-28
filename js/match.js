@@ -54,6 +54,7 @@ const questions = [
 
 
 let currentQuestion = 0;
+let quizSubmitted = false;
 const answers = {};
 
 const progress = document.querySelector("#quiz-progress");
@@ -69,6 +70,8 @@ const clearHistoryButton = document.querySelector("#clear-history-button");
 
 renderQuestion();
 setupMatchHistoryToggle(historyToggle, historyPanel, historyList, clearHistoryButton);
+
+scrollToContent(".quiz-body", 32);
 
 
 function renderQuestion() {
@@ -107,7 +110,7 @@ function renderQuestion() {
 
 
 fieldset.addEventListener("click", event => {
-    if (event.target.name !== "quiz-answer") {
+    if (event.target.name !== "quiz-answer" || quizSubmitted) {
         return;
     }
 
@@ -119,7 +122,9 @@ fieldset.addEventListener("click", event => {
     if (currentQuestion < questions.length - 1) {
         currentQuestion++;
         renderQuestion();
+        scrollToContent(".quiz-body", 32, { force: true });
     } else {
+        quizSubmitted = true;
         saveQuizAnswers(answers);
         finishQuiz(answers);
     }
@@ -148,8 +153,9 @@ function finishQuiz(answers) {
 
 
 backButton.addEventListener("click", () => {
-    if (currentQuestion > 0) {
+    if (currentQuestion > 0 && !quizSubmitted) {
         currentQuestion--;
         renderQuestion();
+        scrollToContent(".quiz-body", 32, { force: true });
     }
 });

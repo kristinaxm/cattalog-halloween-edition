@@ -1,4 +1,5 @@
 let breeds = [];
+let bittenBreedId = null;
 
 const favoritesGrid =
     document.querySelector("#favorites-grid");
@@ -11,6 +12,8 @@ loadBreeds(
     data => {
         breeds = data;
         renderFavorites();
+
+        scrollToContent("#favorites-grid", 100);
     },
     () => {
         favoritesGrid.innerHTML = `
@@ -27,6 +30,11 @@ function renderFavorites() {
     const favoriteBreeds =
         breeds.filter(breed => favorites.includes(breed.id));
 
+    // Keep the bite on the same card unless it's no longer shown.
+    if (!favoriteBreeds.some(breed => breed.id === bittenBreedId)) {
+        bittenBreedId = pickRandomBreedId(favoriteBreeds);
+    }
+
     renderBreedGrid(favoritesGrid, favoriteBreeds, {
         emptyMessage: "You haven't saved any favorites yet.",
         emptyClassName: "empty-favorites",
@@ -37,7 +45,7 @@ function renderFavorites() {
 
     clearFavoritesButton.hidden = favoriteBreeds.length === 0;
 
-    placeBiteMarksOnRandomCard(favoritesGrid);
+    placeBiteMarks(favoritesGrid, bittenBreedId);
 }
 
 

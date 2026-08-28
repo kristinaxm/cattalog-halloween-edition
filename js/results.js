@@ -119,7 +119,17 @@ function renderResults(matches) {
         bestMatch.name
     );
 
-    renderBreedGrid(resultsContainer, matches.slice(1, 4), {
+    scrollToContent(bestMatchContainer, 28);
+
+    const otherMatches = matches.slice(1, 4);
+    const moreMatchesSection = document.querySelector(".more-matches");
+
+    if (otherMatches.length === 0) {
+        moreMatchesSection.hidden = true;
+        return;
+    }
+
+    renderBreedGrid(resultsContainer, otherMatches, {
         getCardOptions: breed => ({
             subtitle: `<span class="card-match-score">${breed.match}% Match</span>`
         })
