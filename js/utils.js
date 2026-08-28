@@ -451,27 +451,49 @@ function compareNumber(breedValue, answerValue) {
 }
 
 
+const MATCH_TRAITS = [
+    { key: "energy", label: "Energy" },
+    { key: "social", label: "Social" },
+    { key: "affection", label: "Affection" },
+    { key: "playfulness", label: "Playfulness" }
+];
+
+
 function calculateMatches(breeds, answers) {
     return breeds
         .map(breed => {
             let score = 0;
             let maximumScore = 0;
 
-            score += compareNumber(breed.energy, answers.energy);
-            score += compareNumber(breed.social, answers.social);
-            score += compareNumber(breed.affection, answers.affection);
-            score += compareNumber(breed.playfulness, answers.playfulness);
-            maximumScore += 16;
+            const breakdown = MATCH_TRAITS.map(trait => {
+                const points = compareNumber(breed[trait.key], answers[trait.key]);
 
-            if (answers.coat === "all" || breed.coat === answers.coat) {
+                score += points;
+                maximumScore += 4;
+
+                return {
+                    label: trait.label,
+                    percentage: Math.round((points / 4) * 100)
+                };
+            });
+
+            const coatMatches =
+                answers.coat === "all" || breed.coat === answers.coat;
+
+            if (coatMatches) {
                 score += 2;
             }
 
             maximumScore += 2;
 
+            breakdown.push({
+                label: "Coat",
+                percentage: coatMatches ? 100 : 0
+            });
+
             const percentage = Math.round((score / maximumScore) * 100);
 
-            return { ...breed, match: percentage };
+            return { ...breed, match: percentage, breakdown };
         })
         .sort((a, b) => b.match - a.match);
 }
@@ -767,7 +789,10 @@ function renderStatBar(label, value, max = 5) {
 
     return `
         <div class="stat-row">
-            <p class="stat-label">${label}</p>
+            <div class="stat-head">
+                <p class="stat-label">${label}</p>
+                <p class="stat-value">${value}<span>/${max}</span></p>
+            </div>
 
             <div class="stat-track">
                 <div class="stat-fill" style="width: ${percent}%"></div>
@@ -808,6 +833,12 @@ function getBreedPreviewModal() {
         </div>
 
         <div class="preview-body">
+            <img
+                src="images/spider-web.svg"
+                alt=""
+                aria-hidden="true"
+                class="preview-web">
+
             <p class="section-label">Quick Look</p>
 
             <h3 class="preview-name"></h3>

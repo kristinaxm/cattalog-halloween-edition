@@ -12,7 +12,7 @@
     <title>Breed | CATTALOG — Halloween Edition</title>
 </head>
 
-<body>
+<body class="breed-page">
 
 <header class="site-header" id="site-header">
 </header>
@@ -69,125 +69,161 @@
     </section>
 
 
-    <!-- ABOUT -->
-    <section class="breed-about">
+    <!-- OVERVIEW: ABOUT + BASICS -->
+    <section class="breed-overview">
 
-        <h2>
-            About.
-        </h2>
+        <div class="breed-about">
 
-        <p id="breed-about">
-            Loading breed background...
-        </p>
+            <h2>About.</h2>
 
-    </section>
+            <p id="breed-about">
+                Loading breed background...
+            </p>
 
+            <div class="fun-fact">
+                <p class="fun-fact-label">Fun Fact</p>
+                <p class="fun-fact-text" id="breed-fun-fact">—</p>
+            </div>
 
-    <!-- BASICS -->
-    <section class="breed-basics">
-
-        <h2>
-            The Basics.
-        </h2>
-
-        <div class="basics-grid">
-
-            <article>
-                <h3>Origin</h3>
-                <p id="breed-origin">—</p>
-            </article>
-
-            <article>
-                <h3>Size</h3>
-                <p id="breed-size">—</p>
-            </article>
-
-            <article>
-                <h3>Coat</h3>
-                <p id="breed-coat">—</p>
-            </article>
-
-            <article>
-                <h3>Lifespan</h3>
-                <p id="breed-lifespan">—</p>
-            </article>
-
-            <article>
-                <h3>Grooming</h3>
-                <p id="breed-grooming">—</p>
-            </article>
-
-            <article>
-                <h3>Shedding</h3>
-                <p id="breed-shedding">—</p>
-            </article>
-
-            <article>
-                <h3>Vocality</h3>
-                <p id="breed-vocality">—</p>
-            </article>
+            <div class="health-note">
+                <p class="health-note-label">Health Note</p>
+                <p class="health-note-text" id="breed-health-note">—</p>
+            </div>
 
         </div>
 
-        <div class="fun-fact">
-            <p class="fun-fact-label">Fun Fact</p>
-            <p class="fun-fact-text" id="breed-fun-fact">—</p>
-        </div>
 
-        <div class="health-note">
-            <p class="health-note-label">Health Note</p>
-            <p class="health-note-text" id="breed-health-note">—</p>
-        </div>
+        <div class="breed-basics">
 
-    </section>
+            <h2>The Basics.</h2>
 
+            <div class="basics-list">
 
-    <!-- PERSONALITY -->
-    <section class="personality-section">
+                <div class="basics-row">
+                    <h3>Origin</h3>
+                    <p id="breed-origin">—</p>
+                </div>
 
-        <h2>
-            Personality.
-        </h2>
+                <div class="basics-row">
+                    <h3>Size</h3>
+                    <p id="breed-size">—</p>
+                </div>
 
-        <div
-                class="personality-traits"
-                id="personality-traits">
-            <!-- JavaScript adds score bars here -->
+                <div class="basics-row">
+                    <h3>Coat</h3>
+                    <p id="breed-coat">—</p>
+                </div>
+
+                <div class="basics-row">
+                    <h3>Lifespan</h3>
+                    <p id="breed-lifespan">—</p>
+                </div>
+
+                <div class="basics-row">
+                    <h3>Grooming</h3>
+                    <p id="breed-grooming">—</p>
+                </div>
+
+                <div class="basics-row">
+                    <h3>Shedding</h3>
+                    <p id="breed-shedding">—</p>
+                </div>
+
+                <div class="basics-row">
+                    <h3>Vocality</h3>
+                    <p id="breed-vocality">—</p>
+                </div>
+
+            </div>
+
         </div>
 
     </section>
 
 
-    <!-- GOOD WITH -->
-    <section class="breed-good-with">
+    <!-- CHARACTER: PERSONALITY + GOOD WITH -->
+    <section class="breed-character">
 
-        <h2>
-            Good With.
-        </h2>
+        <img src="images/spider.png" alt="" aria-hidden="true" class="page-decor decor-character-spider" loading="lazy">
 
-        <div class="tag-list" id="breed-good-with">
-            <!-- JavaScript adds tags here -->
+        <div class="personality-section">
+
+            <h2>Personality.</h2>
+
+            <div
+                    class="personality-traits"
+                    id="personality-traits">
+                <!-- JavaScript adds score bars here -->
+            </div>
+
+        </div>
+
+
+        <div class="character-side">
+
+            <div class="breed-good-with">
+
+                <h2>Good With.</h2>
+
+                <div class="tag-list" id="breed-good-with">
+                    <!-- JavaScript adds tags here -->
+                </div>
+
+            </div>
+
+            <blockquote class="breed-vibe">
+
+                <p class="section-label">
+                    The Vibe
+                </p>
+
+                <p class="breed-vibe-quote" id="breed-vibe">
+                    Loading...
+                </p>
+
+            </blockquote>
+
         </div>
 
     </section>
 
 
-    <!-- VIBE -->
-    <section class="breed-vibe">
+    <!-- QUIZ CTA -->
+    <section class="match-cta">
 
-        <p class="section-label">
-            The Vibe
-        </p>
+        <img src="images/spider2.png" alt="" aria-hidden="true" class="page-decor decor-cta-spider" loading="lazy">
 
-        <h2 id="breed-vibe">
-            Loading...
-        </h2>
+        <div class="match-content">
+
+            <img src="images/spider-web.svg" alt="" aria-hidden="true" class="match-web">
+
+            <p class="section-label">
+                Find Your Match
+            </p>
+
+            <h2>
+                Think you're a match?
+            </h2>
+
+            <p>
+                Answer a few quick questions about your lifestyle
+                and find the character that fits you.
+            </p>
+
+            <a href="match.html" class="button button-large match-start">
+                Start the Quiz
+                <span aria-hidden="true">→</span>
+            </a>
+
+        </div>
 
     </section>
 
 
-    <!-- RATING -->
-    <section class="breed-rating">
+    <!-- RATING + COMMENTS -->
+    <section class="breed-feedback">
+
+      <div class="breed-rating">
 
         <h2>
             Rate This Breed.
@@ -210,11 +246,10 @@
 
         <img src="images/skeleton.png" alt="" aria-hidden="true" class="page-decor decor-rating-skeleton" loading="lazy">
 
-    </section>
+      </div>
 
 
-    <!-- COMMENTS -->
-    <section class="breed-comments">
+      <div class="breed-comments">
 
         <h2>
             Comments.
@@ -276,21 +311,7 @@
             <!-- JavaScript adds saved comments here -->
         </div>
 
-    </section>
-
-
-    <!-- QUIZ CTA -->
-    <section class="match-cta">
-
-        <img src="images/spider2.png" alt="" aria-hidden="true" class="page-decor decor-cta-spider" loading="lazy">
-
-        <h2>
-            Think you're a match?
-        </h2>
-
-        <a href="match.html" class="button">
-            Find Your Match
-        </a>
+      </div>
 
     </section>
 

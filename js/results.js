@@ -43,43 +43,73 @@ function renderResults(matches) {
 
     const role = bestMatch.halloweenRole;
 
-    bestMatchContainer.innerHTML = `
-        <p class="match-label">
-            Your Halloween Familiar
-        </p>
+    const breakdownRows = bestMatch.breakdown
+        .map(trait => `
+            <li class="match-bar">
+                <span class="match-bar-label">${trait.label}</span>
+                <span class="match-bar-track">
+                    <span class="match-bar-fill" style="width: ${trait.percentage}%"></span>
+                </span>
+                <span class="match-bar-value">${trait.percentage}%</span>
+            </li>
+        `)
+        .join("");
 
-        <div class="match-image">
-            <img
-                src="${bestMatch.image}"
-                alt="${bestMatch.name}"
-                decoding="async">
+    bestMatchContainer.innerHTML = `
+        <div class="best-match-media">
+            <div class="match-image">
+                <img
+                    src="${bestMatch.image}"
+                    alt="${bestMatch.name}"
+                    decoding="async">
+
+                <img
+                    src="images/gimme-candy.svg"
+                    alt=""
+                    aria-hidden="true"
+                    class="decor-candy">
+            </div>
+
+            <p class="match-score">
+                ${bestMatch.match}%<span>match</span>
+            </p>
         </div>
 
-        <h2>
-            ${bestMatch.name}
-        </h2>
+        <div class="best-match-body">
+            <p class="match-label">
+                Your Halloween Familiar
+            </p>
 
-        ${role ? `<p class="breed-halloween-role">${role.title}</p>` : ""}
+            <h2>
+                ${bestMatch.name}
+            </h2>
 
-        <p>
-            ${role ? role.tagline : bestMatch.personality.map(capitalize).join(" · ")}
-        </p>
+            ${role ? `<p class="breed-halloween-role">${role.title}</p>` : ""}
 
-        <p class="match-score">
-            ${bestMatch.match}% Match
-        </p>
+            <p class="best-match-tagline">
+                ${role ? role.tagline : bestMatch.personality.map(capitalize).join(" · ")}
+            </p>
 
-        <div class="match-actions">
-            <a href="breed.html?id=${bestMatch.id}" class="button">
-                Discover ${bestMatch.name}
-            </a>
+            <div class="match-breakdown">
+                <p class="match-breakdown-title">How you match</p>
 
-            <button
-                type="button"
-                class="favorite-button"
-                data-id="${bestMatch.id}">
-                ♡
-            </button>
+                <ul>
+                    ${breakdownRows}
+                </ul>
+            </div>
+
+            <div class="match-actions">
+                <a href="breed.html?id=${bestMatch.id}" class="button">
+                    Discover ${bestMatch.name}
+                </a>
+
+                <button
+                    type="button"
+                    class="favorite-button"
+                    data-id="${bestMatch.id}">
+                    ♡
+                </button>
+            </div>
         </div>
     `;
 
@@ -90,7 +120,9 @@ function renderResults(matches) {
     );
 
     renderBreedGrid(resultsContainer, matches.slice(1, 4), {
-        getCardOptions: breed => ({ subtitle: `${breed.match}% Match` })
+        getCardOptions: breed => ({
+            subtitle: `<span class="card-match-score">${breed.match}% Match</span>`
+        })
     });
 }
 

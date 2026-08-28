@@ -132,6 +132,12 @@ function setupRatingWidget(breedId) {
             : "You haven't rated this breed yet.";
     }
 
+    function paintStars(upTo) {
+        widget.querySelectorAll(".rating-star").forEach(star => {
+            star.textContent = Number(star.dataset.value) <= upTo ? "★" : "☆";
+        });
+    }
+
     widget.addEventListener("click", event => {
         const button = event.target.closest(".rating-star");
 
@@ -142,6 +148,26 @@ function setupRatingWidget(breedId) {
         setRating(breedId, Number(button.dataset.value));
         render();
     });
+
+    widget.addEventListener("mouseover", event => {
+        const button = event.target.closest(".rating-star");
+
+        if (button) {
+            paintStars(Number(button.dataset.value));
+        }
+    });
+
+    widget.addEventListener("mouseleave", render);
+
+    widget.addEventListener("focusin", event => {
+        const button = event.target.closest(".rating-star");
+
+        if (button) {
+            paintStars(Number(button.dataset.value));
+        }
+    });
+
+    widget.addEventListener("focusout", render);
 
     render();
 }
