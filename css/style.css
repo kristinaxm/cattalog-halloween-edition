@@ -834,7 +834,7 @@ section {
 .breed-preview .preview-body {
     position: relative;
 
-    padding: 32px;
+    padding: 24px;
 
     overflow: hidden;
 }
@@ -866,11 +866,11 @@ section {
 }
 
 .breed-preview .preview-name {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
 }
 
 .breed-preview .preview-vibe {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 
     color: var(--color-text);
     font-style: italic;
@@ -879,13 +879,13 @@ section {
 .preview-basics {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 8px;
 
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 }
 
 .preview-basic {
-    padding: 12px 14px;
+    padding: 10px 12px;
 
     background-color: var(--color-surface-soft);
 
@@ -913,7 +913,11 @@ section {
 }
 
 .preview-personality {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
+}
+
+.preview-personality .stat-row {
+    margin-bottom: 12px;
 }
 
 .breed-preview .preview-link {
