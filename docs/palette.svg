@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="130" viewBox="0 0 1000 130" role="img" aria-label="Color palette">
+
+  <rect x="0" y="0" width="166.66666666666666" height="130" fill="#f7f3ef"/>
+  <text x="83.33333333333333" y="60" font-size="15" font-family="Georgia,serif" letter-spacing="1" text-anchor="middle" fill="#4a3a36">Background</text>
+  <text x="83.33333333333333" y="84" font-size="13" font-family="'Courier New',monospace" text-anchor="middle" fill="#4a3a36">#f7f3ef</text>
+  <rect x="166.66666666666666" y="0" width="166.66666666666666" height="130" fill="#fbf9f6"/>
+  <text x="250" y="60" font-size="15" font-family="Georgia,serif" letter-spacing="1" text-anchor="middle" fill="#4a3a36">Surface</text>
+  <text x="250" y="84" font-size="13" font-family="'Courier New',monospace" text-anchor="middle" fill="#4a3a36">#fbf9f6</text>
+  <rect x="333.3333333333333" y="0" width="166.66666666666666" height="130" fill="#171515"/>
+  <text x="416.66666666666663" y="60" font-size="15" font-family="Georgia,serif" letter-spacing="1" text-anchor="middle" fill="#e9e2d8">Text</text>
+  <text x="416.66666666666663" y="84" font-size="13" font-family="'Courier New',monospace" text-anchor="middle" fill="#e9e2d8">#171515</text>
+  <rect x="500" y="0" width="166.66666666666666" height="130" fill="#8f3038"/>
+  <text x="583.3333333333334" y="60" font-size="15" font-family="Georgia,serif" letter-spacing="1" text-anchor="middle" fill="#f7f3ef">Accent</text>
+  <text x="583.3333333333334" y="84" font-size="13" font-family="'Courier New',monospace" text-anchor="middle" fill="#f7f3ef">#8f3038</text>
+  <rect x="666.6666666666666" y="0" width="166.66666666666666" height="130" fill="#6c526d"/>
+  <text x="750" y="60" font-size="15" font-family="Georgia,serif" letter-spacing="1" text-anchor="middle" fill="#f7f3ef">Purple</text>
+  <text x="750" y="84" font-size="13" font-family="'Courier New',monospace" text-anchor="middle" fill="#f7f3ef">#6c526d</text>
+  <rect x="833.3333333333333" y="0" width="166.66666666666666" height="130" fill="#d48a32"/>
+  <text x="916.6666666666666" y="60" font-size="15" font-family="Georgia,serif" letter-spacing="1" text-anchor="middle" fill="#171515">Pumpkin</text>
+  <text x="916.6666666666666" y="84" font-size="13" font-family="'Courier New',monospace" text-anchor="middle" fill="#171515">#d48a32</text>
+  <rect x="0" y="0" width="1000" height="130" fill="none" stroke="#ddd0c8" stroke-width="1"/>
+</svg>
