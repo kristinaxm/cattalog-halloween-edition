@@ -111,7 +111,8 @@ a {
 
     overflow: hidden;
 
-    clip: rect(0, 0, 0, 0);
+    clip: rect(0, 0, 0, 0);          /* legacy */
+    clip-path: inset(50%);           /* modern replacement */
     white-space: nowrap;
 
     border: 0;
@@ -2206,7 +2207,8 @@ fieldset input[type="radio"] {
 
     overflow: hidden;
 
-    clip: rect(0, 0, 0, 0);
+    clip: rect(0, 0, 0, 0);          /* legacy */
+    clip-path: inset(50%);           /* modern replacement */
 
     border: 0;
 
