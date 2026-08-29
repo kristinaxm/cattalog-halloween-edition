@@ -275,18 +275,18 @@ function renderBreedFilterUI(container, idPrefix = "") {
                     </select>
                 </div>
             `).join("")}
+        </div>
 
-            <div class="filter-group">
-                <label for="${id("sort")}">
-                    Sort by
-                </label>
+        <div class="filter-group breed-sort">
+            <label for="${id("sort")}">
+                Sort by
+            </label>
 
-                <select id="${id("sort")}">
-                    ${SORT_OPTIONS
-                        .map(option => `<option value="${option.value}">${option.label}</option>`)
-                        .join("")}
-                </select>
-            </div>
+            <select id="${id("sort")}">
+                ${SORT_OPTIONS
+                    .map(option => `<option value="${option.value}">${option.label}</option>`)
+                    .join("")}
+            </select>
         </div>
 
         <button
@@ -723,6 +723,9 @@ function setupMatchHistoryToggle(toggle, panel, historyListEl, clearButton) {
 }
 
 
+const HISTORY_VISIBLE_COUNT = 3;
+
+
 function renderMatchHistoryEntries(historyListEl, clearButton, history) {
     if (history.length === 0) {
         historyListEl.innerHTML = `
@@ -737,21 +740,50 @@ function renderMatchHistoryEntries(historyListEl, clearButton, history) {
     }
 
     historyListEl.innerHTML = history
-        .map(entry => `
-            <article class="history-entry">
-                <div class="history-entry-info">
-                    <p class="history-entry-name">${entry.breedName}</p>
-                    <p class="history-entry-date">${formatHistoryDate(entry.date)}</p>
-                </div>
+        .map((entry, index) => {
+            const extra = index >= HISTORY_VISIBLE_COUNT;
 
-                <p class="history-entry-score">${entry.match}%</p>
+            return `
+                <article class="history-entry${extra ? " history-entry-extra" : ""}"${extra ? " hidden" : ""}>
+                    <div class="history-entry-info">
+                        <p class="history-entry-name">${entry.breedName}</p>
+                        <p class="history-entry-date">${formatHistoryDate(entry.date)}</p>
+                    </div>
 
-                <a href="breed.html?id=${entry.breedId}">
-                    View →
-                </a>
-            </article>
-        `)
+                    <p class="history-entry-score">${entry.match}%</p>
+
+                    <a href="breed.html?id=${entry.breedId}">
+                        View →
+                    </a>
+                </article>
+            `;
+        })
         .join("");
+
+    if (history.length > HISTORY_VISIBLE_COUNT) {
+        const moreButton = document.createElement("button");
+        moreButton.type = "button";
+        moreButton.className = "history-more";
+        moreButton.textContent = `Show all ${history.length}`;
+
+        moreButton.addEventListener("click", () => {
+            const expanding = moreButton.dataset.expanded !== "true";
+
+            historyListEl
+                .querySelectorAll(".history-entry-extra")
+                .forEach(entry => {
+                    entry.hidden = !expanding;
+                });
+
+            moreButton.textContent = expanding
+                ? "Show fewer"
+                : `Show all ${history.length}`;
+
+            moreButton.dataset.expanded = String(expanding);
+        });
+
+        historyListEl.appendChild(moreButton);
+    }
 
     clearButton.hidden = false;
 }
