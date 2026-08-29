@@ -2977,6 +2977,7 @@ fieldset label:has(input:focus-visible) {
 
     .breed-filter-bar {
         flex-direction: column;
+        align-items: stretch;
     }
 
     .breed-search {
@@ -2986,6 +2987,7 @@ fieldset label:has(input:focus-visible) {
 
     .breed-filters {
         grid-template-columns: repeat(2, 1fr);
+        min-width: 0;
     }
 
 
