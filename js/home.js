@@ -30,6 +30,16 @@ loadBreeds(
 setupBreedFilterUI(filterElements, applyHomeFilters);
 
 
+// Favorites live in Local Storage, so every part of the page that shows a
+// heart or reads the saved list has to refresh when one is added or removed —
+// not just the card that was clicked.
+function handleFavoritesChanged() {
+    applyHomeFilters(getFilterValues(filterElements));
+    renderFavoritesPreview();
+    renderTonightsCat(breeds);
+}
+
+
 function applyHomeFilters(filters) {
     const matches = sortBreeds(filterBreeds(breeds, filters), filters.sort);
 
@@ -55,14 +65,58 @@ function updateViewAll(filters, matchCount) {
 }
 
 
+/*
+   Once the visitor has saved favorites (kept in Local Storage), "Tonight's Cat"
+   becomes a recommendation: a breed they haven't saved that shares a personality
+   trait with the ones they have, picked at random on each visit / favorite change.
+   With no favorites yet, it falls back to a breed that rotates by the day.
+*/
+function pickTonightsCat(breedList) {
+    const favoriteIds = getFavorites();
+    const favoriteBreeds = breedList.filter(breed => favoriteIds.includes(breed.id));
+
+    if (favoriteBreeds.length > 0) {
+        const likedTraits = [
+            ...new Set(favoriteBreeds.flatMap(breed => breed.personality))
+        ];
+
+        // Start from a random trait they like so the suggestion (and its reason)
+        // varies between visits instead of always landing on the same one. If a
+        // trait has no unsaved breeds to offer, fall through to the next.
+        const start = Math.floor(Math.random() * likedTraits.length);
+
+        for (let offset = 0; offset < likedTraits.length; offset++) {
+            const trait = likedTraits[(start + offset) % likedTraits.length];
+
+            const suggestions = breedList.filter(breed =>
+                !favoriteIds.includes(breed.id) &&
+                breed.personality.includes(trait)
+            );
+
+            if (suggestions.length > 0) {
+                const breed = suggestions[Math.floor(Math.random() * suggestions.length)];
+
+                return { breed, label: `Because you like ${trait} cats` };
+            }
+        }
+    }
+
+    const startOfYear = new Date(new Date().getFullYear(), 0, 0);
+    const dayOfYear = Math.floor((new Date() - startOfYear) / 86400000);
+
+    return {
+        breed: breedList[dayOfYear % breedList.length],
+        label: "Tonight's Cat"
+    };
+}
+
+
 function renderTonightsCat(breedList) {
     if (!tonightsCatCard || breedList.length === 0) {
         return;
     }
 
-    const startOfYear = new Date(new Date().getFullYear(), 0, 0);
-    const dayOfYear = Math.floor((new Date() - startOfYear) / 86400000);
-    const breed = breedList[dayOfYear % breedList.length];
+    const { breed, label } = pickTonightsCat(breedList);
     const role = breed.halloweenRole;
 
     tonightsCatCard.innerHTML = `
@@ -71,7 +125,7 @@ function renderTonightsCat(breedList) {
         </div>
 
         <div>
-            <p class="tonight-cat-label">Tonight's Cat</p>
+            <p class="tonight-cat-label">${label}</p>
 
             <h2>${breed.name}</h2>
 
@@ -95,7 +149,7 @@ function renderBreeds(breedList) {
 
     renderBreedGrid(breedResults, breedList, {
         emptyMessage: "No breeds match your filters.",
-        getCardOptions: () => ({ onFavoriteToggle: renderFavoritesPreview })
+        getCardOptions: () => ({ onFavoriteToggle: handleFavoritesChanged })
     });
 
     placeBiteMarks(breedResults, bittenBreedId);
@@ -110,6 +164,6 @@ function renderFavoritesPreview() {
 
     renderBreedGrid(favoritesPreview, favoriteBreeds, {
         emptyMessage: "You haven't saved any favorites yet.",
-        getCardOptions: () => ({ onFavoriteToggle: renderFavoritesPreview })
+        getCardOptions: () => ({ onFavoriteToggle: handleFavoritesChanged })
     });
 }
