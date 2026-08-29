@@ -691,9 +691,9 @@ function setupMatchHistoryToggle(toggle, panel, historyListEl, clearButton) {
         toggle.hidden = false;
 
         const expanded = toggle.getAttribute("aria-expanded") === "true";
-        toggle.textContent = expanded
-            ? "Hide Past Matches"
-            : `View Past Matches (${history.length})`;
+        toggle.textContent = expanded ?
+            "Hide Past Matches" :
+            `View Past Matches (${history.length})`;
 
         renderMatchHistoryEntries(historyListEl, clearButton, history);
     }
@@ -775,9 +775,9 @@ function renderMatchHistoryEntries(historyListEl, clearButton, history) {
                     entry.hidden = !expanding;
                 });
 
-            moreButton.textContent = expanding
-                ? "Show fewer"
-                : `Show all ${history.length}`;
+            moreButton.textContent = expanding ?
+                "Show fewer" :
+                `Show all ${history.length}`;
 
             moreButton.dataset.expanded = String(expanding);
         });
@@ -1095,9 +1095,9 @@ function renderBreedGrid(container, breeds, { emptyMessage, emptyClassName, getC
 
     if (breeds.length === 0) {
         if (emptyMessage) {
-            container.innerHTML = emptyClassName
-                ? `<p class="${emptyClassName}">${emptyMessage}</p>`
-                : `<p>${emptyMessage}</p>`;
+            container.innerHTML = emptyClassName ?
+                `<p class="${emptyClassName}">${emptyMessage}</p>` :
+                `<p>${emptyMessage}</p>`;
         }
 
         return;
