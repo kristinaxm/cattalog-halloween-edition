@@ -75,6 +75,7 @@ body {
 }
 
 main {
+    width: 100%;
     flex: 1 0 auto;
 }
 
@@ -299,10 +300,6 @@ h1 span {
 /* ==================================================
    GENERAL LAYOUT
    ================================================== */
-
-main {
-    width: 100%;
-}
 
 section {
     padding: 80px 5%;
@@ -590,13 +587,10 @@ section {
 }
 
 /* Sort trails the attribute filters on desktop; on tablet it pairs up
-   with the search box (see the max-width: 900px block). */
+   with the search box (see the max-width: 900px block). Its label keeps the
+   shared .filter-group label styling. */
 .breed-sort {
     flex: 0 1 130px;
-}
-
-.breed-sort.filter-group label {
-    font-size: 0.75rem;
 }
 
 .breed-search label {

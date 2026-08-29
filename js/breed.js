@@ -144,9 +144,9 @@ function setupRatingWidget(breedId) {
             star.setAttribute("aria-pressed", String(Number(star.dataset.value) === rating));
         });
 
-        summary.textContent = rating
-            ? `Your rating: ${rating} / 5`
-            : "You haven't rated this breed yet.";
+        summary.textContent = rating ?
+            `Your rating: ${rating} / 5` :
+            "You haven't rated this breed yet.";
 
         clearButton.hidden = rating === null;
     }
@@ -286,9 +286,9 @@ function renderComments(breedId) {
                     comment.hidden = !expanding;
                 });
 
-            toggleButton.textContent = expanding
-                ? "Show fewer comments"
-                : `Show all ${comments.length} comments`;
+            toggleButton.textContent = expanding ?
+                "Show fewer comments" :
+                `Show all ${comments.length} comments`;
 
             toggleButton.dataset.expanded = String(expanding);
         });
