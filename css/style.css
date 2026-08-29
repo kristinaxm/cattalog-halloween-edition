@@ -3122,23 +3122,23 @@ fieldset label:has(input:focus-visible) {
         max-width: 100%;
     }
 
+    /* Drop the overlapping collage for a plain row of three */
     .hero-images {
-        aspect-ratio: 333 / 420;
+        aspect-ratio: auto;
+        max-width: 100%;
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
     }
 
-    .hero-image-main {
-        top: 0;
-        right: 0;
-
-        width: 80%;
-    }
-
-    .hero-image-secondary {
-        width: 42%;
-    }
-
+    .hero-image-main,
+    .hero-image-secondary,
     .hero-image-small {
-        width: 32%;
+        position: static;
+        width: auto;
+        aspect-ratio: 3 / 4;
+        animation: none;
     }
 
 
