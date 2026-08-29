@@ -55,6 +55,9 @@
 
 * {
     box-sizing: border-box;
+
+    /* No blue tap-highlight flash on touch devices */
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -2167,6 +2170,11 @@ fieldset label:hover {
     box-shadow: 0 10px 30px rgb(0 0 0 / 8%);
 }
 
+/* Touch feedback that matches the palette instead of the browser default */
+fieldset label:active {
+    background-color: var(--color-accent-light);
+}
+
 fieldset label:has(input:checked) {
     background-color: var(--color-accent-light);
     color: var(--color-accent-dark);
@@ -2910,6 +2918,34 @@ fieldset label:has(input:focus-visible) {
 
     section {
         padding: 60px 5%;
+    }
+
+
+    /* Typography — smaller headings and tighter body copy on tablet */
+
+    body {
+        font-size: 0.95rem;
+        line-height: 1.55;
+    }
+
+    h1 {
+        font-size: 3.5rem;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+    }
+
+    legend {
+        font-size: 1.75rem;
+    }
+
+    .logo {
+        font-size: 1.25rem;
     }
 
 
