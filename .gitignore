@@ -5,3 +5,6 @@
 # OS files
 .DS_Store
 Thumbs.db
+
+# Local docs / screenshots for the lab report (kept out of the repo)
+docs/

@@ -588,6 +588,16 @@ section {
     max-width: 280px;
 }
 
+/* Sort trails the attribute filters on desktop; on tablet it pairs up
+   with the search box (see the max-width: 900px block). */
+.breed-sort {
+    flex: 0 1 130px;
+}
+
+.breed-sort.filter-group label {
+    font-size: 0.75rem;
+}
+
 .breed-search label {
     display: block;
 
@@ -627,11 +637,11 @@ section {
 
 .breed-filters {
     display: grid;
-    grid-template-columns: repeat(5, minmax(70px, 1fr));
+    grid-template-columns: repeat(4, minmax(70px, 1fr));
     gap: 8px;
 
     flex: 1 1 0;
-    min-width: 300px;
+    min-width: 260px;
 }
 
 .filter-group label {
@@ -1352,8 +1362,11 @@ section {
     color: var(--color-text);
 
     font-family: "Cinzel", Georgia, "Times New Roman", serif;
-    font-size: 1.4rem;
+    font-size: clamp(0.95rem, 4.2cqw, 1.4rem);
     font-weight: 700;
+
+    /* Keep the trait list off an orphaned last word when it has to wrap */
+    text-wrap: balance;
 }
 
 
@@ -2520,6 +2533,34 @@ fieldset label:has(input:focus-visible) {
     margin-bottom: 40px;
 }
 
+.history-entry[hidden] {
+    display: none;
+}
+
+.history-more {
+    align-self: flex-start;
+
+    margin-top: 4px;
+    padding: 0;
+
+    background: none;
+    color: var(--color-accent-dark);
+
+    border: 0;
+
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+
+    transition: color 0.2s ease;
+}
+
+.history-more:hover {
+    color: var(--color-text);
+}
+
 .clear-history-button {
     padding: 0;
 
@@ -2946,6 +2987,11 @@ fieldset label:has(input:focus-visible) {
         font-size: 3.5rem;
     }
 
+    /* Hero heading shares a narrow 2-col row here — let it scale with the column */
+    .hero h1 {
+        font-size: clamp(1.75rem, 9cqw, 3rem);
+    }
+
     h2 {
         font-size: 2.4rem;
     }
@@ -2989,19 +3035,37 @@ fieldset label:has(input:focus-visible) {
 
     /* Filters */
 
+    /* Search + Sort share the top row; the attribute filters fill the next */
     .breed-filter-bar {
-        flex-direction: column;
-        align-items: stretch;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: end;
+        column-gap: 16px;
+        row-gap: 14px;
     }
 
     .breed-search {
-        flex-basis: auto;
+        grid-row: 1;
+        grid-column: 1;
+        min-width: 0;
+        max-width: none;
+    }
+
+    .breed-sort {
+        grid-row: 1;
+        grid-column: 2;
+        min-width: 0;
         max-width: none;
     }
 
     .breed-filters {
+        grid-column: 1 / -1;
         grid-template-columns: repeat(2, 1fr);
         min-width: 0;
+    }
+
+    .clear-filters-button {
+        grid-column: 1 / -1;
     }
 
 
@@ -3019,10 +3083,13 @@ fieldset label:has(input:focus-visible) {
     }
 
 
-    /* Compact breed sections stack */
+    /* Keep About|Basics and Personality|Good-With side by side on tablet */
 
     .breed-overview,
-    .breed-character,
+    .breed-character {
+        gap: 32px;
+    }
+
     .breed-feedback {
         grid-template-columns: 1fr;
         gap: 36px;
@@ -3156,7 +3223,17 @@ fieldset label:has(input:focus-visible) {
     }
 
 
-    /* Filters */
+    /* Filters — stack everything again on phones */
+
+    .breed-filter-bar {
+        grid-template-columns: 1fr;
+    }
+
+    .breed-search,
+    .breed-sort {
+        grid-row: auto;
+        grid-column: 1 / -1;
+    }
 
     .breed-filters {
         grid-template-columns: 1fr;
@@ -3231,10 +3308,17 @@ fieldset label:has(input:focus-visible) {
     }
 
 
-    /* Breed detail */
+    /* Breed detail — everything stacks on a phone */
 
-    .breed-detail {
+    .breed-detail,
+    .breed-overview,
+    .breed-character {
         grid-template-columns: 1fr;
+    }
+
+    .breed-overview,
+    .breed-character {
+        gap: 32px;
     }
 
 
