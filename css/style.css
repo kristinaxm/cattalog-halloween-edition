@@ -143,6 +143,7 @@ h1 {
     letter-spacing: 0.02em;
 
     text-transform: uppercase;
+    text-wrap: balance;
     overflow-wrap: break-word;
 }
 
@@ -2871,10 +2872,10 @@ fieldset label:has(input:focus-visible) {
 }
 
 .decor-card-bitemarks {
-    top: 15%;
-    left: 48px;
+    top: 6%;
+    left: 8px;
 
-    width: 54px;
+    width: 44px;
 
     opacity: 0.9;
     filter: none;
@@ -2885,6 +2886,14 @@ fieldset label:has(input:focus-visible) {
 
 #favorites-grid .decor-card-bitemarks {
     left: 18px;
+}
+
+/* Wider cards on desktop: nudge the bite further in and scale it up a touch */
+@media (min-width: 1200px) {
+    .decor-card-bitemarks {
+        left: 30px;
+        width: 50px;
+    }
 }
 
 @keyframes decor-bob {
@@ -2906,6 +2915,11 @@ fieldset label:has(input:focus-visible) {
 @media (max-width: 900px) {
     .page-decor {
         display: none;
+    }
+
+    /* The card bite mark belongs to a card, not the page — keep it visible */
+    .decor-card-bitemarks {
+        display: block;
     }
 }
 
@@ -2991,10 +3005,10 @@ fieldset label:has(input:focus-visible) {
     }
 
 
-    /* Cards */
+    /* Cards — keep three across on tablet, just a tighter gap */
 
     .breed-grid {
-        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
     }
 
 
@@ -3165,10 +3179,35 @@ fieldset label:has(input:focus-visible) {
     }
 
 
-    /* Cards */
+    /* Cards — a compact, even two-up grid */
 
     .breed-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .breed-info {
+        padding: 14px;
+    }
+
+    .breed-card .breed-card-header {
+        gap: 10px;
+    }
+
+    .breed-card h3 {
+        font-size: 1.05rem;
+    }
+
+    .breed-info p {
+        margin-bottom: 12px;
+        font-size: 0.82rem;
+    }
+
+    /* Preview rows: show a clean two and leave the rest behind the button/link */
+    .breed-discovery .breed-grid > .breed-card:nth-child(n + 3),
+    .favorites-preview .breed-grid > .breed-card:nth-child(n + 3),
+    .more-matches .breed-grid > .breed-card:nth-child(n + 3) {
+        display: none;
     }
 
 
