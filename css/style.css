@@ -3291,16 +3291,47 @@ fieldset label:has(input:focus-visible) {
         max-height: 90vh;
     }
 
+    /* Phone layout: stack the panels and let the body scroll on its
+       own, so the "View Breed" action can stay pinned in view. A plain
+       stacked grid pushes the link below the fold on shorter phones. */
     .breed-preview[open] {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
     }
 
     .breed-preview .preview-image {
+        flex: none;
+
         aspect-ratio: 3 / 2;
+        max-height: 34vh;
     }
 
     .breed-preview .preview-body {
-        padding: 24px;
+        flex: 1 1 auto;
+        min-height: 0;
+
+        display: flex;
+        flex-direction: column;
+
+        padding-bottom: 0;
+
+        overflow: hidden auto;
+    }
+
+    /* Keep the primary action in view while the rest of the body
+       scrolls under it. The selector matches the specificity of the
+       `.preview-body > *` rule above, which otherwise forces
+       position: relative and breaks the sticky. */
+    .breed-preview .preview-body > .preview-link {
+        position: sticky;
+        bottom: 0;
+
+        margin: auto -24px 0;
+        padding: 18px 24px;
+
+        text-align: center;
+
+        box-shadow: 0 -16px 20px -4px var(--color-surface);
     }
 
 
